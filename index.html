@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. O's 4th Grade General Knowledge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app-container">
+
+    <div id="welcome-screen">
+        <div class="welcome-header">
+            <h1>🌟 Mr. O's 4th Grade General Knowledge Hub 🌟</h1>
+            <p>Select a subject below to start your extra credit quiz!</p>
+        </div>
+        
+        <div class="subject-buttons">
+            <button class="btn btn-geo" onclick="startQuiz('geography')">🌍 Geography</button>
+            <button class="btn btn-civics" onclick="startQuiz('civics')">🏛️ Civics & Gov</button>
+            <button class="btn btn-math" onclick="startQuiz('math')">➕ Math</button>
+            <button class="btn btn-ela" onclick="startQuiz('ela')">📚 Language Arts</button>
+        </div>
+
+        <button class="btn btn-home" style="margin-top: 25px;" onclick="toggleScores()">🏆 View Past Scores</button>
+
+        <div id="score-history" class="score-board" style="display: none;">
+            <h3>🏆 Your Past Scores</h3>
+            <ul id="score-list"></ul>
+            <button class="btn btn-ela" style="padding: 8px 15px; font-size: 14px; margin-top: 10px;" onclick="clearScores()">Teacher: Clear Scores</button>
+        </div>
+    </div>
+
+    <div id="quiz-screen">
+        <h2 id="quiz-title">Quiz</h2>
+        <button id="read-aloud-btn" class="btn btn-read" onclick="readAloud()">🔊 Read Aloud</button>
+        
+        <h3 id="question-text">Question goes here</h3>
+        
+        <button id="show-hint-btn" class="btn btn-hint" onclick="showHint()">💡 Need a Hint?</button>
+        <div id="hint-container" class="hint-box" style="display: none;">
+            <button id="read-hint-btn" class="btn btn-read-small" onclick="readHint()">🔊 Read Hint</button>
+            <p id="hint-text" style="margin: 0; font-weight: bold;"></p>
+        </div>
+        
+        <div id="options-container"></div>
+        
+        <button id="submit-btn" class="btn btn-submit" style="display:none;" onclick="submitAnswer()">Submit Answer</button>
+        <p id="feedback"></p>
+        <button id="next-btn" class="btn btn-next" style="display:none;" onclick="nextQuestion()">Next Question</button>
+    </div>
+
+    <div id="result-screen">
+        <h2>🎉 Quiz Complete! 🎉</h2>
+        <p id="final-score" style="font-size: 24px; font-weight: bold;"></p>
+        <button class="btn btn-home" onclick="goHome()">🏠 Back to Home</button>
+    </div>
+</div>
+
+<script src="data/geography.js"></script>
+<script src="data/civics.js"></script>
+<script src="data/math.js"></script>
+<script src="data/ela.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
