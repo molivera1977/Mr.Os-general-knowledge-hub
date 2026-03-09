@@ -16,11 +16,18 @@
             <p>Select a subject below to start your extra credit quiz!</p>
         </div>
         
+        <!-- NEW: Resume Section -->
+        <div id="resume-section" style="display: none; background: #f1c40f; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #f39c12;">
+            <p style="margin: 0 0 10px 0; font-weight: bold; color: #2c3e50;">📚 You have an unfinished quiz!</p>
+            <button id="resume-btn" class="btn btn-submit" style="width: auto; margin: 0; padding: 10px 20px;" onclick="resumeQuiz()">Resume My Quiz</button>
+            <button class="btn btn-ela" style="width: auto; margin: 0; padding: 10px 20px; background: #7f8c8d;" onclick="deleteProgress()">Start Fresh Instead</button>
+        </div>
+
         <div class="subject-buttons">
-            <button class="btn btn-geo" onclick="startQuiz('geography')">🌍 Geography</button>
-            <button class="btn btn-civics" onclick="startQuiz('civics')">🏛️ Civics & Gov</button>
-            <button class="btn btn-math" onclick="startQuiz('math')">➕ Math</button>
-            <button class="btn btn-ela" onclick="startQuiz('ela')">📚 Language Arts</button>
+            <button class="btn btn-geo" onclick="confirmStart('geography')">🌍 Geography</button>
+            <button class="btn btn-civics" onclick="confirmStart('civics')">🏛️ Civics & Gov</button>
+            <button class="btn btn-math" onclick="confirmStart('math')">➕ Math</button>
+            <button class="btn btn-ela" onclick="confirmStart('ela')">📚 Language Arts</button>
         </div>
 
         <button class="btn btn-home" style="margin-top: 25px;" onclick="toggleScores()">🏆 View Past Scores</button>
@@ -32,20 +39,17 @@
         </div>
     </div>
 
+    <!-- ... rest of the HTML (Quiz Screen & Result Screen) stays exactly the same ... -->
     <div id="quiz-screen">
         <h2 id="quiz-title">Quiz</h2>
         <button id="read-aloud-btn" class="btn btn-read" onclick="readAloud()">🔊 Read Aloud</button>
-        
         <h3 id="question-text">Question goes here</h3>
-        
         <button id="show-hint-btn" class="btn btn-hint" onclick="showHint()">💡 Need a Hint?</button>
         <div id="hint-container" class="hint-box" style="display: none;">
             <button id="read-hint-btn" class="btn btn-read-small" onclick="readHint()">🔊 Read Hint</button>
             <p id="hint-text" style="margin: 0; font-weight: bold;"></p>
         </div>
-        
         <div id="options-container"></div>
-        
         <button id="submit-btn" class="btn btn-submit" style="display:none;" onclick="submitAnswer()">Submit Answer</button>
         <p id="feedback"></p>
         <button id="next-btn" class="btn btn-next" style="display:none;" onclick="nextQuestion()">Next Question</button>
