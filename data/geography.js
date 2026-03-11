@@ -1,4 +1,5 @@
 const geographyData = [
+  // ... Questions 1 through 22 remain exactly the same ...
   {
     "questionNumber": 1,
     "question": "What is the capital city of our home state of Connecticut?",
@@ -239,6 +240,73 @@ const geographyData = [
       { "text": "Florida and Texas", "rationale": "Explanation: Both of these states are connected to the main body of the country.", "isCorrect": false },
       { "text": "California and New York", "rationale": "Explanation: These states are on opposite coasts, but they are both attached to the rest of the country.", "isCorrect": false },
       { "text": "Connecticut and Rhode Island", "rationale": "Explanation: These two states are right next to each other in New England.", "isCorrect": false }
+    ]
+  },
+  // --- NEW MUST-HAVES ---
+  {
+    "questionNumber": 23,
+    "question": "Which massive river is known as the longest and most important river for transportation in the United States?",
+    "hint": "It is often called the 'Big Muddy' and flows south into the Gulf of Mexico.",
+    "answerOptions": [
+      { "text": "The Mississippi River", "rationale": "Explanation: The Mississippi River is a major 'highway' for boats and runs through the center of the country.", "isCorrect": true },
+      { "text": "The Connecticut River", "rationale": "Explanation: This is the longest river in New England, but not the whole country.", "isCorrect": false },
+      { "text": "The Nile River", "rationale": "Explanation: This is the longest river in the world, located in Africa.", "isCorrect": false },
+      { "text": "The Amazon River", "rationale": "Explanation: This is a massive river located in South America.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 24,
+    "question": "What kind of map shows man-made boundaries, such as the borders between different states and countries?",
+    "hint": "These maps often use different colors to show where one state ends and another begins.",
+    "answerOptions": [
+      { "text": "A political map", "rationale": "Explanation: Political maps focus on government boundaries and where cities and capitals are located.", "isCorrect": true },
+      { "text": "A physical map", "rationale": "Explanation: Physical maps show natural landforms like mountains and rivers.", "isCorrect": false },
+      { "text": "A treasure map", "rationale": "Explanation: This is a map used to find hidden items, not a type of geography map.", "isCorrect": false },
+      { "text": "A weather map", "rationale": "Explanation: These show temperature and rain patterns.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 25,
+    "question": "What kind of map is used to show natural features like mountains, rivers, deserts, and plains?",
+    "hint": "These maps show you what the Earth's surface actually looks like naturally.",
+    "answerOptions": [
+      { "text": "A physical map", "rationale": "Explanation: Physical maps use colors and shading to show things like elevation (height) and nature.", "isCorrect": true },
+      { "text": "A political map", "rationale": "Explanation: Political maps show boundaries made by people.", "isCorrect": false },
+      { "text": "A street map", "rationale": "Explanation: Street maps show roads and neighborhoods.", "isCorrect": false },
+      { "text": "A population map", "rationale": "Explanation: These maps show where people live.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 26,
+    "question": "How many major oceans are there on Earth?",
+    "hint": "Think of the Pacific, Atlantic, Indian, Arctic, and Southern oceans.",
+    "answerOptions": [
+      { "text": "5", "rationale": "Explanation: There are 5 major oceans that cover most of the Earth's surface.", "isCorrect": true },
+      { "text": "7", "rationale": "Explanation: There are 7 continents, but only 5 major oceans.", "isCorrect": false },
+      { "text": "3", "rationale": "Explanation: There are more than 3 oceans on Earth.", "isCorrect": false },
+      { "text": "50", "rationale": "Explanation: There are 50 states, not 50 oceans!", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 27,
+    "question": "Why is it 8:00 AM in Connecticut when it is only 5:00 AM in California?",
+    "hint": "The United States is divided into different sections because the sun rises at different times across the country.",
+    "answerOptions": [
+      { "text": "Because they are in different Time Zones.", "rationale": "Explanation: Time zones help keep time consistent with the sun as it moves across our large country.", "isCorrect": true },
+      { "text": "Because California is in another country.", "rationale": "Explanation: California is a state in the same country as Connecticut.", "isCorrect": false },
+      { "text": "Because the clocks in California are broken.", "rationale": "Explanation: The clocks are working fine; they are just set to their own local time zone.", "isCorrect": false },
+      { "text": "Because the sun only shines on the East Coast.", "rationale": "Explanation: The sun shines everywhere, just at different times!", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 28,
+    "question": "Which massive, jagged mountain range is located in the Western United States?",
+    "hint": "These mountains are much taller and 'younger' than the Appalachian Mountains in the East.",
+    "answerOptions": [
+      { "text": "The Rocky Mountains", "rationale": "Explanation: The Rockies stretch through the West from New Mexico all the way up through Canada.", "isCorrect": true },
+      { "text": "The Appalachian Mountains", "rationale": "Explanation: These are in the East, closer to Connecticut.", "isCorrect": false },
+      { "text": "The Alps", "rationale": "Explanation: The Alps are located in Europe.", "isCorrect": false },
+      { "text": "Mount Everest", "rationale": "Explanation: Everest is a single peak (the tallest) in the Himalayas in Asia.", "isCorrect": false }
     ]
   }
 ];

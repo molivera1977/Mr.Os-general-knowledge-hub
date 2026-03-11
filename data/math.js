@@ -1,4 +1,5 @@
 const mathData = [
+  // ... Questions 1 through 20 remain exactly the same ...
   {
     "questionNumber": 1,
     "question": "What do we call an imaginary line that divides a shape perfectly into two matching, mirror-image halves?",
@@ -217,6 +218,150 @@ const mathData = [
       { "text": "100 meters", "rationale": "Explanation: There are 100 centimeters in a meter.", "isCorrect": false },
       { "text": "10 meters", "rationale": "Explanation: A kilometer is much larger.", "isCorrect": false },
       { "text": "10,000 meters", "rationale": "Explanation: There are exactly 1,000 meters in a kilometer.", "isCorrect": false }
+    ]
+  },
+  // --- NEW GEOMETRY ADDITIONS ---
+  {
+    "questionNumber": 21,
+    "question": "What do we call an angle that looks like a perfect 'L' and measures exactly 90 degrees?",
+    "hint": "You can find this angle in the corners of a square or a piece of paper.",
+    "answerOptions": [
+      { "text": "A right angle", "rationale": "Explanation: A right angle is exactly 90 degrees, like the corner of a room.", "isCorrect": true },
+      { "text": "An acute angle", "rationale": "Explanation: Acute angles are smaller than 90 degrees.", "isCorrect": false },
+      { "text": "An obtuse angle", "rationale": "Explanation: Obtuse angles are wider than 90 degrees.", "isCorrect": false },
+      { "text": "A straight angle", "rationale": "Explanation: A straight angle is a flat line (180 degrees).", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 22,
+    "question": "What do we call an angle that is smaller than 90 degrees?",
+    "hint": "Think of it as a 'small and cute' little angle.",
+    "answerOptions": [
+      { "text": "An acute angle", "rationale": "Explanation: Acute angles are 'sharp' and smaller than a right angle.", "isCorrect": true },
+      { "text": "An obtuse angle", "rationale": "Explanation: Obtuse angles are larger than 90 degrees.", "isCorrect": false },
+      { "text": "A right angle", "rationale": "Explanation: A right angle is exactly 90 degrees.", "isCorrect": false },
+      { "text": "A reflex angle", "rationale": "Explanation: This is an angle that is larger than 180 degrees.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 23,
+    "question": "What do we call an angle that is wider than a right angle (more than 90 degrees)?",
+    "hint": "This angle is wide and spread out.",
+    "answerOptions": [
+      { "text": "An obtuse angle", "rationale": "Explanation: Obtuse means 'blunt' or 'wide'. These angles are larger than 90 degrees.", "isCorrect": true },
+      { "text": "An acute angle", "rationale": "Explanation: Acute angles are smaller than 90 degrees.", "isCorrect": false },
+      { "text": "A right angle", "rationale": "Explanation: Right angles are exactly 90 degrees.", "isCorrect": false },
+      { "text": "A triangle", "rationale": "Explanation: A triangle is a shape made of three angles.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 24,
+    "question": "What do we call two lines that stay the same distance apart and NEVER cross or touch, like train tracks?",
+    "hint": "Think of the two 'L's in the middle of the word itself!",
+    "answerOptions": [
+      { "text": "Parallel lines", "rationale": "Explanation: Parallel lines run in the same direction and will never intersect.", "isCorrect": true },
+      { "text": "Perpendicular lines", "rationale": "Explanation: Perpendicular lines cross each other at a 90-degree angle.", "isCorrect": false },
+      { "text": "Intersecting lines", "rationale": "Explanation: These are any lines that cross each other.", "isCorrect": false },
+      { "text": "Vertical lines", "rationale": "Explanation: Vertical only means the lines go up and down.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 25,
+    "question": "What do we call two lines that cross each other to form a perfect 90-degree right angle?",
+    "hint": "They form a perfect '+' or 'T' shape.",
+    "answerOptions": [
+      { "text": "Perpendicular lines", "rationale": "Explanation: Perpendicular lines intersect to create four right angles.", "isCorrect": true },
+      { "text": "Parallel lines", "rationale": "Explanation: Parallel lines never cross.", "isCorrect": false },
+      { "text": "Straight lines", "rationale": "Explanation: All lines in this quiz are straight lines.", "isCorrect": false },
+      { "text": "Horizontal lines", "rationale": "Explanation: Horizontal lines only go from left to right.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 26,
+    "question": "How many sides does a triangle have?",
+    "hint": "Think of a 'tricycle' or a 'tripod'.",
+    "answerOptions": [
+      { "text": "3", "rationale": "Explanation: Every triangle has exactly 3 sides and 3 angles.", "isCorrect": true },
+      { "text": "4", "rationale": "Explanation: A 4-sided shape is a quadrilateral.", "isCorrect": false },
+      { "text": "5", "rationale": "Explanation: A 5-sided shape is a pentagon.", "isCorrect": false },
+      { "text": "6", "rationale": "Explanation: A 6-sided shape is a hexagon.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 27,
+    "question": "What is the general name for ANY closed shape that has exactly 4 sides, like a square or rectangle?",
+    "hint": "The prefix 'quad-' means four.",
+    "answerOptions": [
+      { "text": "A quadrilateral", "rationale": "Explanation: Any polygon with 4 sides is a quadrilateral.", "isCorrect": true },
+      { "text": "A pentagon", "rationale": "Explanation: A pentagon has 5 sides.", "isCorrect": false },
+      { "text": "A hexagon", "rationale": "Explanation: A hexagon has 6 sides.", "isCorrect": false },
+      { "text": "A triangle", "rationale": "Explanation: A triangle has 3 sides.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 28,
+    "question": "How many sides does a Pentagon have?",
+    "hint": "The building in Washington D.C. where the military works is this shape!",
+    "answerOptions": [
+      { "text": "5", "rationale": "Explanation: A pentagon is a polygon with 5 sides.", "isCorrect": true },
+      { "text": "6", "rationale": "Explanation: A hexagon has 6 sides.", "isCorrect": false },
+      { "text": "8", "rationale": "Explanation: An octagon has 8 sides.", "isCorrect": false },
+      { "text": "4", "rationale": "Explanation: A quadrilateral has 4 sides.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 29,
+    "question": "How many sides does a Hexagon have?",
+    "hint": "The word has an 'X' in it, just like the number it represents.",
+    "answerOptions": [
+      { "text": "6", "rationale": "Explanation: A hexagon has 6 sides.", "isCorrect": true },
+      { "text": "5", "rationale": "Explanation: A pentagon has 5 sides.", "isCorrect": false },
+      { "text": "8", "rationale": "Explanation: An octagon has 8 sides.", "isCorrect": false },
+      { "text": "10", "rationale": "Explanation: A decagon has 10 sides.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 30,
+    "question": "How many sides does an Octagon have?",
+    "hint": "Think of an 'octopus' and how many legs it has.",
+    "answerOptions": [
+      { "text": "8", "rationale": "Explanation: An octagon (like a stop sign) has exactly 8 sides.", "isCorrect": true },
+      { "text": "6", "rationale": "Explanation: A hexagon has 6 sides.", "isCorrect": false },
+      { "text": "10", "rationale": "Explanation: A decagon has 10 sides.", "isCorrect": false },
+      { "text": "12", "rationale": "Explanation: A dodecagon has 12 sides.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 31,
+    "question": "What do we call a triangle where ALL three sides are exactly the same length?",
+    "hint": "The word sounds like 'equal'.",
+    "answerOptions": [
+      { "text": "An equilateral triangle", "rationale": "Explanation: In an equilateral triangle, all sides and all angles are equal.", "isCorrect": true },
+      { "text": "An isosceles triangle", "rationale": "Explanation: This triangle only has 2 equal sides.", "isCorrect": false },
+      { "text": "A scalene triangle", "rationale": "Explanation: This triangle has no equal sides.", "isCorrect": false },
+      { "text": "A right triangle", "rationale": "Explanation: A right triangle must have one 90-degree angle.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 32,
+    "question": "What do we call a triangle that has at least TWO sides that are the same length?",
+    "hint": "It has 'two' matching sides, like your two eyes!",
+    "answerOptions": [
+      { "text": "An isosceles triangle", "rationale": "Explanation: An isosceles triangle has 2 sides of equal length.", "isCorrect": true },
+      { "text": "An equilateral triangle", "rationale": "Explanation: This triangle has 3 equal sides.", "isCorrect": false },
+      { "text": "A scalene triangle", "rationale": "Explanation: This triangle has zero equal sides.", "isCorrect": false },
+      { "text": "A square", "rationale": "Explanation: A square has 4 sides, not 3.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 33,
+    "question": "What do we call a triangle where NONE of the sides are the same length?",
+    "hint": "Every side is a different size.",
+    "answerOptions": [
+      { "text": "A scalene triangle", "rationale": "Explanation: In a scalene triangle, all three sides have different lengths.", "isCorrect": true },
+      { "text": "An equilateral triangle", "rationale": "Explanation: This triangle has all sides the same.", "isCorrect": false },
+      { "text": "An isosceles triangle", "rationale": "Explanation: This triangle has 2 sides the same.", "isCorrect": false },
+      { "text": "A pentagon", "rationale": "Explanation: A pentagon has 5 sides.", "isCorrect": false }
     ]
   }
 ];

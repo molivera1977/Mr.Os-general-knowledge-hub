@@ -1,4 +1,5 @@
 const civicsData = [
+  // ... Questions 1 through 22 remain exactly the same ...
   {
     "questionNumber": 1,
     "question": "What title is given to the person elected to be the leader of a city, like Bridgeport?",
@@ -239,6 +240,40 @@ const civicsData = [
       { "text": "The US Constitution", "rationale": "Explanation: The Constitution created the rules for the new government, but the Declaration is what made them free.", "isCorrect": false },
       { "text": "The Bill of Rights", "rationale": "Explanation: The Bill of Rights protects personal freedoms, but it came after the country was already free.", "isCorrect": false },
       { "text": "The Emancipation Proclamation", "rationale": "Explanation: This document was written much later during the Civil War.", "isCorrect": false }
+    ]
+  },
+  // --- NEW ADDITIONS ---
+  {
+    "questionNumber": 23,
+    "question": "What do the 13 red and white stripes on the United States flag represent?",
+    "hint": "Think about the very beginning of the country.",
+    "answerOptions": [
+      { "text": "The 13 original colonies.", "rationale": "Explanation: The stripes represent the 13 original colonies that first declared independence.", "isCorrect": true },
+      { "text": "The 13 states we have today.", "rationale": "Explanation: We have 50 states today, not 13.", "isCorrect": false },
+      { "text": "The 13 presidents.", "rationale": "Explanation: We have had many more than 13 presidents.", "isCorrect": false },
+      { "text": "The 13 stars.", "rationale": "Explanation: There are 50 stars on the flag, not 13.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 24,
+    "question": "In which building in Washington, D.C., does the U.S. Congress meet to make laws?",
+    "hint": "It has a large white dome on top.",
+    "answerOptions": [
+      { "text": "The U.S. Capitol Building", "rationale": "Explanation: The Capitol is where the Senate and the House of Representatives work to write and vote on laws.", "isCorrect": true },
+      { "text": "The White House", "rationale": "Explanation: The White House is where the President lives, not where laws are made.", "isCorrect": false },
+      { "text": "The Supreme Court", "rationale": "Explanation: This is where judges work to interpret the law.", "isCorrect": false },
+      { "text": "The Lincoln Memorial", "rationale": "Explanation: This is a monument to honor Abraham Lincoln, not a government building for making laws.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 25,
+    "question": "Where does the President of the United States live and work?",
+    "hint": "It is a famous house located at 1600 Pennsylvania Avenue.",
+    "answerOptions": [
+      { "text": "The White House", "rationale": "Explanation: The White House has been the home of every US President except George Washington.", "isCorrect": true },
+      { "text": "The U.S. Capitol", "rationale": "Explanation: Congress works in the Capitol Building.", "isCorrect": false },
+      { "text": "The Pentagon", "rationale": "Explanation: The Pentagon is where the Department of Defense is located.", "isCorrect": false },
+      { "text": "The Empire State Building", "rationale": "Explanation: This is a famous skyscraper in New York City.", "isCorrect": false }
     ]
   }
 ];
