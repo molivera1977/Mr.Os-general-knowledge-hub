@@ -7,7 +7,7 @@
 // ============================================================
 // CONFIGURATION
 // ============================================================
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbywgDpNv3rwivcfqg4jvSW8C34HKe0sjhrfuBqJjB_41op7W98wtCOI1g88Zd55D10/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyvYUXLVw0c_C5Iy-xkT0lDH2SqJog0nK2JgN9nI_wOWDwHzmdop-oJW6EzzzgA4KYM/exec";
 // ============================================================
 
 const quizData = {
