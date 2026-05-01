@@ -10,13 +10,14 @@
 
 <div id="app-container">
 
+    <!-- WELCOME / SUBJECT SELECTION SCREEN — shown first -->
     <div id="welcome-screen">
         <div class="welcome-header">
             <h1>🌟 Mr. O's 4th Grade General Knowledge Hub 🌟</h1>
             <p>Select a subject below to start your extra credit quiz!</p>
         </div>
-        
-        <!-- NEW: Resume Section -->
+
+        <!-- Resume Section -->
         <div id="resume-section" style="display: none; background: #f1c40f; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #f39c12;">
             <p style="margin: 0 0 10px 0; font-weight: bold; color: #2c3e50;">📚 You have an unfinished quiz!</p>
             <button id="resume-btn" class="btn btn-submit" style="width: auto; margin: 0; padding: 10px 20px;" onclick="resumeQuiz()">Resume My Quiz</button>
@@ -39,8 +40,48 @@
         </div>
     </div>
 
-    <!-- ... rest of the HTML (Quiz Screen & Result Screen) stays exactly the same ... -->
-    <div id="quiz-screen">
+    <!-- NAME ENTRY SCREEN — shown after subject is picked -->
+    <div id="name-screen" style="display: none;">
+        <div class="welcome-header">
+            <h1>🌟 Mr. O's 4th Grade General Knowledge Hub 🌟</h1>
+            <p id="name-screen-subtitle">Almost ready! Enter your name to begin.</p>
+        </div>
+        <div class="name-entry-box">
+            <label for="student-name-input" style="font-size: 20px; font-weight: bold; display: block; margin-bottom: 12px; color: #2c3e50;">
+                👤 What is your first and last name?
+            </label>
+            <input
+                type="text"
+                id="student-name-input"
+                placeholder="e.g. Maria Rodriguez"
+                autocomplete="off"
+                style="
+                    width: 90%;
+                    padding: 14px 18px;
+                    font-size: 20px;
+                    border: 3px solid #0984e3;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                    font-family: inherit;
+                    text-align: center;
+                    outline: none;
+                    box-sizing: border-box;
+                "
+            />
+            <p id="name-error" style="display:none; color: #d63031; font-weight: bold; font-size: 16px; margin: 0 0 10px 0;">
+                ⚠️ Please enter your name before continuing.
+            </p>
+            <button class="btn btn-submit" style="width: 100%; font-size: 22px; margin-top: 5px;" onclick="submitName()">
+                ✅ Start Quiz!
+            </button>
+            <button class="btn btn-home" style="width: 100%; font-size: 16px; margin-top: 10px;" onclick="cancelName()">
+                ← Back to Subjects
+            </button>
+        </div>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen" style="display: none;">
         <h2 id="quiz-title">Quiz</h2>
         <button id="read-aloud-btn" class="btn btn-read" onclick="readAloud()">🔊 Read Aloud</button>
         <h3 id="question-text">Question goes here</h3>
@@ -55,11 +96,13 @@
         <button id="next-btn" class="btn btn-next" style="display:none;" onclick="nextQuestion()">Next Question</button>
     </div>
 
-    <div id="result-screen">
+    <!-- RESULT SCREEN -->
+    <div id="result-screen" style="display: none;">
         <h2>🎉 Quiz Complete! 🎉</h2>
         <p id="final-score" style="font-size: 24px; font-weight: bold;"></p>
         <button class="btn btn-home" onclick="goHome()">🏠 Back to Home</button>
     </div>
+
 </div>
 
 <script src="data/geography.js"></script>

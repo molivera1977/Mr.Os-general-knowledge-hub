@@ -167,3 +167,20 @@ body {
     font-weight: bold;
     color: #2d3436;
 }
+/* --- Name Entry Screen --- */
+#name-screen {
+    display: block;
+}
+.name-entry-box {
+    background: #f8f9fa;
+    border: 2px solid #0984e3;
+    border-radius: 15px;
+    padding: 30px 25px;
+    margin: 20px auto;
+    max-width: 520px;
+    text-align: center;
+}
+#student-name-input:focus {
+    border-color: #d63031;
+    box-shadow: 0 0 0 3px rgba(214,48,49,0.15);
+}

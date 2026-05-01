@@ -1,7 +1,14 @@
 /**
  * Mr. O's 4th Grade General Knowledge Hub - Logic Engine
- * Features: Shuffling, TTS Highlighting, Progress Saving, and Grading
+ * Features: Shuffling, TTS Highlighting, Progress Saving, Grading,
+ *           Student Name Entry (after subject pick), Silent Google Sheets Reporting
  */
+
+// ============================================================
+// CONFIGURATION
+// ============================================================
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbywgDpNv3rwivcfqg4jvSW8C34HKe0sjhrfuBqJjB_41op7W98wtCOI1g88Zd55D10/exec";
+// ============================================================
 
 const quizData = {
     geography: typeof geographyData !== 'undefined' ? geographyData : [],
@@ -12,21 +19,57 @@ const quizData = {
 
 let currentQuiz = [];
 let currentSubjectName = "";
+let pendingSubject = "";        // holds the subject chosen before name is entered
 let currentQuestionIndex = 0;
 let score = 0;
 let selectedOptionObj = null;
 let selectedButton = null;
+let studentName = "";
 
 // Variables for Text-to-Speech (TTS) mapping
-let ttsMap = []; 
+let ttsMap = [];
 let currentTextForTTS = "";
 
-window.onload = function() {
+window.onload = function () {
     displayScores();
-    checkForProgress(); 
+    checkForProgress();
 };
 
-// --- 1. Randomization ---
+// Allow pressing Enter on the name input to submit
+document.addEventListener('DOMContentLoaded', function () {
+    const nameInput = document.getElementById('student-name-input');
+    if (nameInput) {
+        nameInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') submitName();
+        });
+    }
+});
+
+// --- 1. Student Name (shown after subject is picked) ---
+
+function submitName() {
+    const input = document.getElementById('student-name-input').value.trim();
+    if (!input) {
+        document.getElementById('name-error').style.display = 'block';
+        return;
+    }
+    studentName = input;
+    document.getElementById('name-screen').style.display = 'none';
+
+    // Now actually start the quiz with the subject that was chosen
+    startQuiz(pendingSubject);
+}
+
+function cancelName() {
+    // Back button — return to subject selection without starting
+    document.getElementById('name-screen').style.display = 'none';
+    document.getElementById('welcome-screen').style.display = 'block';
+    document.getElementById('student-name-input').value = '';
+    document.getElementById('name-error').style.display = 'none';
+    pendingSubject = "";
+}
+
+// --- 2. Randomization ---
 
 function shuffleArray(array) {
     let shuffled = [...array];
@@ -34,7 +77,6 @@ function shuffleArray(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    // Also shuffle the options inside every question
     shuffled.forEach(q => {
         q.answerOptions = [...q.answerOptions];
         for (let i = q.answerOptions.length - 1; i > 0; i--) {
@@ -45,7 +87,7 @@ function shuffleArray(array) {
     return shuffled;
 }
 
-// --- 2. Progress & Resume Logic ---
+// --- 3. Progress & Resume Logic ---
 
 function checkForProgress() {
     const saved = JSON.parse(localStorage.getItem('savedQuizProgress'));
@@ -53,6 +95,9 @@ function checkForProgress() {
     if (saved) {
         resumeSection.style.display = 'block';
         document.getElementById('resume-btn').innerText = `Resume ${saved.subject} Quiz (Q${saved.index + 1})`;
+        if (!studentName && saved.studentName) {
+            studentName = saved.studentName;
+        }
     } else {
         resumeSection.style.display = 'none';
     }
@@ -61,9 +106,10 @@ function checkForProgress() {
 function saveProgress() {
     const progress = {
         subject: currentSubjectName,
-        quizArray: currentQuiz, 
+        quizArray: currentQuiz,
         index: currentQuestionIndex,
-        currentScore: score
+        currentScore: score,
+        studentName: studentName
     };
     localStorage.setItem('savedQuizProgress', JSON.stringify(progress));
 }
@@ -87,11 +133,17 @@ function resumeQuiz() {
     currentQuiz = saved.quizArray;
     currentQuestionIndex = saved.index;
     score = saved.currentScore;
+    if (saved.studentName) studentName = saved.studentName;
 
     document.getElementById('welcome-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
-    
-    const titles = { "Geography": "🌍 Geography Quiz", "Civics": "🏛️ Civics & Government Quiz", "Math": "➕ Math Quiz", "Language Arts": "📚 Language Arts Quiz" };
+
+    const titles = {
+        "Geography": "🌍 Geography Quiz",
+        "Civics": "🏛️ Civics & Government Quiz",
+        "Math": "➕ Math Quiz",
+        "Language Arts": "📚 Language Arts Quiz"
+    };
     document.getElementById('quiz-title').innerText = titles[currentSubjectName] || "Quiz";
 
     loadQuestion();
@@ -102,16 +154,40 @@ function confirmStart(subject) {
         const pin = prompt("You have an unfinished quiz! Teacher PIN required to start a new one:");
         if (pin === "9377") {
             localStorage.removeItem('savedQuizProgress');
-            startQuiz(subject);
+            showNameScreen(subject);
         } else if (pin !== null) {
             alert("Incorrect PIN. Please resume your current quiz.");
         }
     } else {
-        startQuiz(subject);
+        showNameScreen(subject);
     }
 }
 
-// --- 3. Core Quiz Engine ---
+function showNameScreen(subject) {
+    pendingSubject = subject;
+
+    // Update subtitle to show which quiz they picked
+    const labels = {
+        geography: "🌍 Geography Quiz",
+        civics: "🏛️ Civics & Government Quiz",
+        math: "➕ Math Quiz",
+        ela: "📚 Language Arts Quiz"
+    };
+    document.getElementById('name-screen-subtitle').innerText =
+        `You picked: ${labels[subject]} — Enter your name to begin!`;
+
+    // Clear any previous input
+    document.getElementById('student-name-input').value = studentName; // pre-fill if they already entered it
+    document.getElementById('name-error').style.display = 'none';
+
+    document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('name-screen').style.display = 'block';
+
+    // Auto-focus the input
+    setTimeout(() => document.getElementById('student-name-input').focus(), 100);
+}
+
+// --- 4. Core Quiz Engine ---
 
 function startQuiz(subject) {
     if (!quizData[subject] || quizData[subject].length === 0) {
@@ -122,40 +198,45 @@ function startQuiz(subject) {
     currentQuiz = shuffleArray(quizData[subject]);
     currentQuestionIndex = 0;
     score = 0;
-    
+
     const titles = { geography: "Geography", civics: "Civics", math: "Math", ela: "Language Arts" };
     currentSubjectName = titles[subject];
 
     document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('name-screen').style.display = 'none';
     document.getElementById('result-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
-    
-    const displayTitles = { geography: "🌍 Geography Quiz", civics: "🏛️ Civics & Government Quiz", math: "➕ Math Quiz", ela: "📚 Language Arts Quiz" };
+
+    const displayTitles = {
+        geography: "🌍 Geography Quiz",
+        civics: "🏛️ Civics & Government Quiz",
+        math: "➕ Math Quiz",
+        ela: "📚 Language Arts Quiz"
+    };
     document.getElementById('quiz-title').innerText = displayTitles[subject];
 
     loadQuestion();
 }
 
 function loadQuestion() {
-    window.speechSynthesis.cancel(); 
+    window.speechSynthesis.cancel();
     document.getElementById('feedback').innerText = "";
     document.getElementById('submit-btn').style.display = 'none';
     document.getElementById('next-btn').style.display = 'none';
     document.getElementById('show-hint-btn').style.display = 'inline-block';
     document.getElementById('hint-container').style.display = 'none';
-    
+
     selectedOptionObj = null;
     selectedButton = null;
-    
+
     const q = currentQuiz[currentQuestionIndex];
-    
-    // Wrap words in spans for highlighting
+
     const qHTML = q.question.split(/\s+/).map(word => `<span class="tts-word">${word}</span>`).join(' ');
     document.getElementById('question-text').innerHTML = `${currentQuestionIndex + 1}. ${qHTML}`;
-    
+
     const hHTML = q.hint.split(/\s+/).map(word => `<span class="tts-word">${word}</span>`).join(' ');
     document.getElementById('hint-text').innerHTML = hHTML;
-    
+
     const container = document.getElementById('options-container');
     container.innerHTML = "";
 
@@ -179,9 +260,9 @@ function selectOption(option, btn) {
 
 function submitAnswer() {
     document.getElementById('submit-btn').style.display = 'none';
-    window.speechSynthesis.cancel(); 
+    window.speechSynthesis.cancel();
     document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
-    
+
     const feedback = document.getElementById('feedback');
     if (selectedOptionObj.isCorrect) {
         selectedButton.style.backgroundColor = '#2ecc71';
@@ -194,9 +275,9 @@ function submitAnswer() {
         selectedButton.style.color = 'white';
         feedback.innerText = "❌ Incorrect. " + selectedOptionObj.rationale;
         feedback.style.color = '#c0392b';
-        
+
         document.querySelectorAll('.option-btn').forEach(btn => {
-            if(btn.innerText.trim() === currentQuiz[currentQuestionIndex].answerOptions.find(o => o.isCorrect).text.trim()) {
+            if (btn.innerText.trim() === currentQuiz[currentQuestionIndex].answerOptions.find(o => o.isCorrect).text.trim()) {
                 btn.style.border = "4px solid #2ecc71";
             }
         });
@@ -210,12 +291,12 @@ function nextQuestion() {
         saveProgress();
         loadQuestion();
     } else {
-        deleteProgressSilently(); 
+        deleteProgressSilently();
         showResults();
     }
 }
 
-// --- 4. Scoring & Results ---
+// --- 5. Scoring & Results ---
 
 function getLetterGrade(percentage) {
     if (percentage >= 97) return "A+";
@@ -235,14 +316,49 @@ function getLetterGrade(percentage) {
 function showResults() {
     document.getElementById('quiz-screen').style.display = 'none';
     document.getElementById('result-screen').style.display = 'block';
-    
+
     let percentage = Math.round((score / currentQuiz.length) * 100);
     let grade = getLetterGrade(percentage);
-    
-    document.getElementById('final-score').innerText = `You scored ${score} out of ${currentQuiz.length}!\n(${percentage}% - Grade: ${grade})`;
-    
+
+    document.getElementById('final-score').innerText =
+        `You scored ${score} out of ${currentQuiz.length}!\n(${percentage}% - Grade: ${grade})`;
+
     saveScoreToHistory(percentage, grade);
+    reportScoreSilently(percentage, grade);
 }
+
+// --- 6. Silent Google Sheets Reporting ---
+
+function reportScoreSilently(percentage, grade) {
+    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === "PASTE_YOUR_APPS_SCRIPT_URL_HERE") return;
+
+    const now = new Date();
+    const timestamp = now.toLocaleString('en-US', {
+        month: '2-digit', day: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', hour12: true
+    });
+
+    const payload = {
+        studentName: studentName || "Unknown",
+        subject: currentSubjectName,
+        score: score,
+        total: currentQuiz.length,
+        percentage: percentage,
+        grade: grade,
+        timestamp: timestamp
+    };
+
+    fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    }).catch(() => {
+        // Fail silently — student never sees this
+    });
+}
+
+// --- 7. Local Score History ---
 
 function saveScoreToHistory(percentage, grade) {
     let history = JSON.parse(localStorage.getItem('quizScores')) || [];
@@ -281,7 +397,7 @@ function clearScores() {
 function goHome() {
     document.getElementById('result-screen').style.display = 'none';
     document.getElementById('welcome-screen').style.display = 'block';
-    document.getElementById('score-history').style.display = 'none'; 
+    document.getElementById('score-history').style.display = 'none';
     checkForProgress();
 }
 
@@ -289,7 +405,7 @@ function deleteProgressSilently() {
     localStorage.removeItem('savedQuizProgress');
 }
 
-// --- 5. Accessibility & Hints ---
+// --- 8. Accessibility & Hints ---
 
 function showHint() {
     document.getElementById('show-hint-btn').style.display = 'none';
@@ -309,7 +425,7 @@ function readAloud() {
 
     document.getElementById('question-text').querySelectorAll('.tts-word').forEach(span => addTTSMap(span, span.innerText));
     document.querySelectorAll('.option-btn').forEach((btn, i) => {
-        currentTextForTTS += `Option ${i + 1}. `; 
+        currentTextForTTS += `Option ${i + 1}. `;
         btn.querySelectorAll('.tts-word').forEach(span => addTTSMap(span, span.innerText));
     });
 
@@ -321,14 +437,14 @@ function readHint() {
     ttsMap = [];
     currentTextForTTS = "";
     document.getElementById('hint-text').querySelectorAll('.tts-word').forEach(span => addTTSMap(span, span.innerText));
-    executeTTS("Hint. " + currentTextForTTS, 6); // 6 offset for "Hint. "
+    executeTTS("Hint. " + currentTextForTTS, 6);
 }
 
 function executeTTS(text, offset) {
     let utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.85; 
+    utterance.rate = 0.85;
     utterance.onboundary = (e) => {
-        if(e.name === 'word') {
+        if (e.name === 'word') {
             document.querySelectorAll('.highlighted-word').forEach(el => el.classList.remove('highlighted-word'));
             let match = ttsMap.find(m => (e.charIndex - offset) >= m.start && (e.charIndex - offset) < m.end);
             if (match && match.el) match.el.classList.add('highlighted-word');
