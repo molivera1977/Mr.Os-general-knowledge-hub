@@ -111,8 +111,9 @@ function resumeQuiz() {
     currentQuestionIndex = saved.index;
     score = saved.currentScore;
     if (saved.studentName) signIn(saved.studentName);
-    gkSession = saved.gkSession || null;
+    gkSession = saved.gkSession ? { ...saved.gkSession, activeSince: null } : null;
     if (!gkSession) gkBeginSession(SUBJECT_KEYS[currentSubjectName]);
+    else gkResumeClock();
 
     document.getElementById('welcome-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';

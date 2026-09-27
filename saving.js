@@ -54,7 +54,7 @@ const GUEST_SLOTS = {
     '937710': 'Guest 10'
 };
 
-let gkSession = null; // { id, subject, started, missed, answered, sent }
+let gkSession = null; // { id, subject, started, missed, answered, sent, activeMs, activeSince }
 
 (function buildRoster() {
     const sel = document.getElementById('name-select');
@@ -151,9 +151,51 @@ function gkBeginSession(subjectKey) {
         started,
         missed: [],
         answered: 0,
-        sent: false
+        sent: false,
+        activeMs: 0,                                // time on the page only
+        activeSince: document.hidden ? null : started
     };
 }
+
+// ── Elapsed = time the quiz page was actually visible ──
+// Pauses on tab switch / close; a resumed quiz picks up where it left off.
+function gkPauseClock() {
+    if (gkSession && gkSession.activeSince != null) {
+        gkSession.activeMs = (gkSession.activeMs || 0) + (Date.now() - gkSession.activeSince);
+        gkSession.activeSince = null;
+    }
+}
+
+function gkResumeClock() {
+    if (gkSession && !gkSession.sent && gkSession.activeSince == null && !document.hidden) {
+        gkSession.activeSince = Date.now();
+    }
+}
+
+function gkActiveSeconds() {
+    if (!gkSession) return 0;
+    const live = gkSession.activeSince != null ? Date.now() - gkSession.activeSince : 0;
+    return Math.round(((gkSession.activeMs || 0) + live) / 1000);
+}
+
+// Store the paused clock in the saved progress so a resume keeps the right total.
+function gkPersistClock() {
+    try {
+        const saved = JSON.parse(localStorage.getItem('savedQuizProgress'));
+        if (!saved || !saved.gkSession || !gkSession || saved.gkSession.id !== gkSession.id) return;
+        saved.gkSession = { ...saved.gkSession, activeMs: gkSession.activeMs, activeSince: null };
+        localStorage.setItem('savedQuizProgress', JSON.stringify(saved));
+    } catch (e) {}
+}
+
+function quizIsOpen() {
+    return document.getElementById('quiz-screen').style.display === 'block';
+}
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { gkPauseClock(); gkPersistClock(); }
+    else if (quizIsOpen()) gkResumeClock();
+});
 
 function gkRecordAnswer(isCorrect, question, pickedText) {
     if (!gkSession) return;
@@ -168,7 +210,7 @@ function gkRecordAnswer(isCorrect, question, pickedText) {
 
 function gkSubmit(done) {
     if (!gkSession || gkSession.sent || !studentName || gkSession.answered === 0) return;
-    if (done) gkSession.sent = true;
+    if (done) { gkPauseClock(); gkSession.sent = true; }
     const total = currentQuiz.length;
     fetch(SHEET_URL, {
         method: 'POST', mode: 'no-cors', keepalive: true,
@@ -185,7 +227,7 @@ function gkSubmit(done) {
             maxScore:       total,
             percent:        total ? Math.round((score / total) * 100) : 0,
             done:           done,
-            elapsed:        Math.round((Date.now() - gkSession.started) / 1000),
+            elapsed:        gkActiveSeconds(),
             tabSwitches:    0,
             wrongQuestions: gkSession.missed.join(' | ')
         })
@@ -195,7 +237,10 @@ function gkSubmit(done) {
 // Closing the tab mid-quiz still saves what they did (as in-progress,
 // so resuming later keeps updating the same row).
 window.addEventListener('pagehide', () => {
-    if (document.getElementById('quiz-screen').style.display === 'block') gkSubmit(false);
+    if (!quizIsOpen()) return;
+    gkPauseClock();
+    gkPersistClock();
+    gkSubmit(false);
 });
 
 // ── Stay signed in for this tab ──
