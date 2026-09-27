@@ -1,14 +1,9 @@
 /**
  * Mr. O's 4th Grade General Knowledge Hub - Logic Engine
  * Features: Shuffling, TTS Highlighting, Progress Saving, Grading,
- *           Student Name Entry (after subject pick), Silent Google Sheets Reporting
+ *           Student Sign-In (after subject pick) + saving to Mr. O's
+ *           Google Sheet — see saving.js
  */
-
-// ============================================================
-// CONFIGURATION
-// ============================================================
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyvYUXLVw0c_C5Iy-xkT0lDH2SqJog0nK2JgN9nI_wOWDwHzmdop-oJW6EzzzgA4KYM/exec";
-// ============================================================
 
 const quizData = {
     geography: typeof geographyData !== 'undefined' ? geographyData : [],
@@ -35,25 +30,10 @@ window.onload = function () {
     checkForProgress();
 };
 
-// Allow pressing Enter on the name input to submit
-document.addEventListener('DOMContentLoaded', function () {
-    const nameInput = document.getElementById('student-name-input');
-    if (nameInput) {
-        nameInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') submitName();
-        });
-    }
-});
-
-// --- 1. Student Name (shown after subject is picked) ---
+// --- 1. Student Sign-In (shown after subject is picked) ---
 
 function submitName() {
-    const input = document.getElementById('student-name-input').value.trim();
-    if (!input) {
-        document.getElementById('name-error').style.display = 'block';
-        return;
-    }
-    studentName = input;
+    if (!attemptLogin()) return;
     document.getElementById('name-screen').style.display = 'none';
 
     // Now actually start the quiz with the subject that was chosen
@@ -64,8 +44,7 @@ function cancelName() {
     // Back button — return to subject selection without starting
     document.getElementById('name-screen').style.display = 'none';
     document.getElementById('welcome-screen').style.display = 'block';
-    document.getElementById('student-name-input').value = '';
-    document.getElementById('name-error').style.display = 'none';
+    resetLoginForm();
     pendingSubject = "";
 }
 
@@ -95,9 +74,6 @@ function checkForProgress() {
     if (saved) {
         resumeSection.style.display = 'block';
         document.getElementById('resume-btn').innerText = `Resume ${saved.subject} Quiz (Q${saved.index + 1})`;
-        if (!studentName && saved.studentName) {
-            studentName = saved.studentName;
-        }
     } else {
         resumeSection.style.display = 'none';
     }
@@ -109,7 +85,8 @@ function saveProgress() {
         quizArray: currentQuiz,
         index: currentQuestionIndex,
         currentScore: score,
-        studentName: studentName
+        studentName: studentName,
+        gkSession: gkSession
     };
     localStorage.setItem('savedQuizProgress', JSON.stringify(progress));
 }
@@ -133,7 +110,9 @@ function resumeQuiz() {
     currentQuiz = saved.quizArray;
     currentQuestionIndex = saved.index;
     score = saved.currentScore;
-    if (saved.studentName) studentName = saved.studentName;
+    if (saved.studentName) signIn(saved.studentName);
+    gkSession = saved.gkSession || null;
+    if (!gkSession) gkBeginSession(SUBJECT_KEYS[currentSubjectName]);
 
     document.getElementById('welcome-screen').style.display = 'none';
     document.getElementById('quiz-screen').style.display = 'block';
@@ -164,6 +143,11 @@ function confirmStart(subject) {
 }
 
 function showNameScreen(subject) {
+    // Already signed in this tab — go straight to the quiz
+    if (studentName) {
+        startQuiz(subject);
+        return;
+    }
     pendingSubject = subject;
 
     // Update subtitle to show which quiz they picked
@@ -174,11 +158,9 @@ function showNameScreen(subject) {
         ela: "📚 Language Arts Quiz"
     };
     document.getElementById('name-screen-subtitle').innerText =
-        `You picked: ${labels[subject]} — Enter your name to begin!`;
+        `You picked: ${labels[subject]} — Sign in so Mr. O can see your score!`;
 
-    // Clear any previous input
-    document.getElementById('student-name-input').value = studentName; // pre-fill if they already entered it
-    document.getElementById('name-error').style.display = 'none';
+    resetLoginForm();
 
     document.getElementById('welcome-screen').style.display = 'none';
     document.getElementById('name-screen').style.display = 'block';
@@ -201,6 +183,7 @@ function startQuiz(subject) {
 
     const titles = { geography: "Geography", civics: "Civics", math: "Math", ela: "Language Arts" };
     currentSubjectName = titles[subject];
+    gkBeginSession(subject);
 
     document.getElementById('welcome-screen').style.display = 'none';
     document.getElementById('name-screen').style.display = 'none';
@@ -270,7 +253,9 @@ function submitAnswer() {
         feedback.innerText = "✅ Correct! " + selectedOptionObj.rationale;
         feedback.style.color = '#27ae60';
         score++;
+        gkRecordAnswer(true, currentQuiz[currentQuestionIndex], selectedOptionObj.text);
     } else {
+        gkRecordAnswer(false, currentQuiz[currentQuestionIndex], selectedOptionObj.text);
         selectedButton.style.backgroundColor = '#e74c3c';
         selectedButton.style.color = 'white';
         feedback.innerText = "❌ Incorrect. " + selectedOptionObj.rationale;
@@ -324,57 +309,35 @@ function showResults() {
         `You scored ${score} out of ${currentQuiz.length}!\n(${percentage}% - Grade: ${grade})`;
 
     saveScoreToHistory(percentage, grade);
-    reportScoreSilently(percentage, grade);
-}
-
-// --- 6. Silent Google Sheets Reporting ---
-
-function reportScoreSilently(percentage, grade) {
-    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === "PASTE_YOUR_APPS_SCRIPT_URL_HERE") return;
-
-    const now = new Date();
-    const timestamp = now.toLocaleString('en-US', {
-        month: '2-digit', day: '2-digit', year: 'numeric',
-        hour: '2-digit', minute: '2-digit', hour12: true
-    });
-
-    const payload = {
-        studentName: studentName || "Unknown",
-        subject: currentSubjectName,
-        score: score,
-        total: currentQuiz.length,
-        percentage: percentage,
-        grade: grade,
-        timestamp: timestamp
-    };
-
-    fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    }).catch(() => {
-        // Fail silently — student never sees this
-    });
+    gkSubmit(true);
 }
 
 // --- 7. Local Score History ---
 
+// Each student sees only their own scores (kept on this computer).
+const HISTORY_PER_STUDENT = 20;
+
 function saveScoreToHistory(percentage, grade) {
-    let history = JSON.parse(localStorage.getItem('quizScores')) || [];
-    let today = new Date().toLocaleDateString();
-    history.unshift({ subject: currentSubjectName, score, total: currentQuiz.length, percentage, grade, date: today });
-    if (history.length > 10) history.pop();
-    localStorage.setItem('quizScores', JSON.stringify(history));
+    const history = JSON.parse(localStorage.getItem('quizScores')) || [];
+    const today = new Date().toLocaleDateString();
+    const entry = { name: studentName, subject: currentSubjectName, score, total: currentQuiz.length, percentage, grade, date: today };
+    const mine = [entry, ...history.filter(h => h.name === studentName)].slice(0, HISTORY_PER_STUDENT);
+    const others = history.filter(h => h.name && h.name !== studentName);
+    localStorage.setItem('quizScores', JSON.stringify([...mine, ...others]));
     displayScores();
 }
 
 function displayScores() {
-    let history = JSON.parse(localStorage.getItem('quizScores')) || [];
-    let list = document.getElementById('score-list');
-    list.innerHTML = history.length === 0 ? "<li>No scores yet.</li>" : "";
-    history.forEach(item => {
-        let li = document.createElement('li');
+    const history = JSON.parse(localStorage.getItem('quizScores')) || [];
+    const list = document.getElementById('score-list');
+    if (!studentName) {
+        list.innerHTML = "<li>Pick a subject and sign in to see your scores.</li>";
+        return;
+    }
+    const mine = history.filter(h => h.name === studentName);
+    list.innerHTML = mine.length === 0 ? "<li>No scores yet — take a quiz!</li>" : "";
+    mine.forEach(item => {
+        const li = document.createElement('li');
         li.innerText = `${item.date} - ${item.subject}: ${item.score}/${item.total} (${item.percentage}% - ${item.grade})`;
         list.appendChild(li);
     });

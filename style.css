@@ -184,3 +184,20 @@ body {
     border-color: #d63031;
     box-shadow: 0 0 0 3px rgba(214,48,49,0.15);
 }
+/* --- Student sign-in (roster + student number, same as Math Fact Review) --- */
+.login-box { text-align: left; }
+.login-box label { display: block; font-size: 18px; font-weight: bold; color: #2c3e50; margin: 14px 0 6px; }
+.login-box select,
+.login-box input[type="password"],
+.login-box input[type="text"] {
+    width: 100%; box-sizing: border-box; font-size: 18px; padding: 12px 14px;
+    border: 3px solid #0984e3; border-radius: 10px; outline: none; font-family: inherit; background: #fff;
+}
+.login-box select:focus, .login-box input:focus { border-color: #d63031; }
+.login-error { color: #d63031; font-weight: bold; font-size: 16px; min-height: 22px; margin: 12px 0 6px; text-align: center; }
+.student-bar {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    background: #f8f9fa; border: 2px solid #0984e3; border-radius: 50px;
+    padding: 8px 12px 8px 20px; margin: 0 0 20px; color: #2c3e50; font-weight: 500; text-align: left;
+}
+.btn-switch { background: none; border: none; color: #636e72; cursor: pointer; font-size: 15px; text-decoration: underline; font-family: inherit; white-space: nowrap; }
