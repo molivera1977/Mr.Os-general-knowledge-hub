@@ -201,3 +201,46 @@ body {
     padding: 8px 12px 8px 20px; margin: 0 0 20px; color: #2c3e50; font-weight: 500; text-align: left;
 }
 .btn-switch { background: none; border: none; color: #636e72; cursor: pointer; font-size: 15px; text-decoration: underline; font-family: inherit; white-space: nowrap; }
+
+/* --- Teacher Mode (answer key) --- */
+.btn-teacher-link {
+    display: block; margin: 30px auto 0; background: none; border: none;
+    color: #636e72; font-size: 15px; font-family: inherit; text-decoration: underline; cursor: pointer;
+}
+.btn-teacher-link:hover { color: #2c3e50; }
+.teacher-toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
+.teacher-toolbar h2 { margin: 0; color: #2c3e50; font-size: 24px; }
+.teacher-actions { display: flex; gap: 8px; }
+.btn-teacher-small {
+    background: #2d3436; color: #fff; border: none; border-radius: 8px; padding: 8px 14px;
+    font-size: 15px; font-family: inherit; font-weight: bold; cursor: pointer;
+}
+.btn-teacher-small:hover { background: #0984e3; }
+.teacher-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.teacher-tab {
+    flex: 1 1 140px; padding: 10px 12px; border: 2px solid #0984e3; border-radius: 10px;
+    background: #fff; color: #0984e3; font-size: 16px; font-weight: bold; font-family: inherit; cursor: pointer;
+}
+.teacher-tab.active { background: #0984e3; color: #fff; }
+.teacher-toggle { display: block; text-align: left; font-size: 15px; color: #2c3e50; margin: 6px 0; cursor: pointer; }
+.teacher-count { text-align: left; color: #636e72; font-weight: bold; margin: 6px 0 14px; }
+.teacher-card {
+    text-align: left; background: #fff; border: 2px solid #dfe6e9; border-left: 6px solid #0984e3;
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; break-inside: avoid;
+}
+.teacher-qnum { display: inline-block; background: #0984e3; color: #fff; font-weight: bold; font-size: 13px; border-radius: 6px; padding: 2px 8px; }
+.teacher-question { font-size: 18px; font-weight: bold; color: #2c3e50; margin: 8px 0 10px; }
+.teacher-options { list-style: none; padding: 0; margin: 0; }
+.teacher-options li { padding: 7px 10px; border-radius: 8px; margin-bottom: 5px; font-size: 16px; }
+.teacher-options li.correct { background: #e8f8ef; border: 2px solid #2ecc71; font-weight: bold; }
+.teacher-options li.wrong { background: #f8f9fa; border: 1px solid #eee; color: #444; }
+.teacher-mark { margin-right: 8px; }
+.teacher-rationale { font-size: 14px; font-weight: normal; color: #555; margin: 4px 0 0 28px; }
+.teacher-hint { font-size: 14px; color: #8e6c00; background: #fff8e1; border-radius: 8px; padding: 6px 10px; margin: 10px 0 0; }
+
+@media print {
+    body { background: #fff; padding: 0; }
+    #app-container { box-shadow: none; max-width: none; padding: 0; }
+    .teacher-actions, .teacher-tabs, .teacher-toggle { display: none; }
+    .teacher-card { border: 1px solid #999; border-left: 4px solid #333; }
+}
