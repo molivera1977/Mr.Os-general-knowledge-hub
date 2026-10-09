@@ -1,5 +1,4 @@
 const geographyData = [
-  // ... Questions 1 through 22 remain exactly the same ...
   {
     "questionNumber": 1,
     "question": "What is the capital city of our home state of Connecticut?",
@@ -123,28 +122,6 @@ const geographyData = [
   },
   {
     "questionNumber": 12,
-    "question": "On most maps, you will find a tool that shows the cardinal directions (North, South, East, West). What is this tool called?",
-    "hint": "It has 'compass' in its name, followed by a type of flower.",
-    "answerOptions": [
-      { "text": "A compass rose", "rationale": "Explanation: This important map feature indicates orientation and direction so map readers know which way they are looking.", "isCorrect": true },
-      { "text": "A map scale", "rationale": "Explanation: This tool is used to measure distance on a map.", "isCorrect": false },
-      { "text": "A map legend", "rationale": "Explanation: This feature explains what the different symbols and colors on the map represent.", "isCorrect": false },
-      { "text": "A grid system", "rationale": "Explanation: This is a network of lines used to find exact locations.", "isCorrect": false }
-    ]
-  },
-  {
-    "questionNumber": 13,
-    "question": "The state of Florida sticks out into the ocean and has water on three of its sides. What geographical term describes this type of landform?",
-    "hint": "The word starts with a 'P' and describes any piece of land that is almost entirely surrounded by water.",
-    "answerOptions": [
-      { "text": "A peninsula", "rationale": "Explanation: A peninsula is a piece of land that juts out into a body of water and is surrounded by water on the majority of its border.", "isCorrect": true },
-      { "text": "An island", "rationale": "Explanation: An island must be completely surrounded by water on all sides.", "isCorrect": false },
-      { "text": "An isthmus", "rationale": "Explanation: This is a narrow strip of land connecting two larger landmasses.", "isCorrect": false },
-      { "text": "A plateau", "rationale": "Explanation: This refers to an area of relatively level high ground.", "isCorrect": false }
-    ]
-  },
-  {
-    "questionNumber": 14,
     "question": "Which of the following statements best describes the difference between a map and a globe?",
     "hint": "Think about the shape of the Earth and which tool represents it most accurately.",
     "answerOptions": [
@@ -155,7 +132,7 @@ const geographyData = [
     ]
   },
   {
-    "questionNumber": 15,
+    "questionNumber": 13,
     "question": "Which of these places correctly lists a city, then a state, and then a country?",
     "hint": "Start with where you go to school, then the wider area around it, and finally the whole nation.",
     "answerOptions": [
@@ -166,40 +143,7 @@ const geographyData = [
     ]
   },
   {
-    "questionNumber": 16,
-    "question": "Which major mountain range stretches along the eastern side of the United States, running all the way from Georgia up into Maine?",
-    "hint": "This heavily forested mountain range includes the mountains found in northwestern Connecticut.",
-    "answerOptions": [
-      { "text": "The Appalachian Mountains", "rationale": "Explanation: This old, rounded mountain range dominates the eastern United States and is known for its famous hiking trail.", "isCorrect": true },
-      { "text": "The Rocky Mountains", "rationale": "Explanation: These are tall, jagged mountains located in the western United States.", "isCorrect": false },
-      { "text": "The Andes Mountains", "rationale": "Explanation: This massive mountain range runs along the western coast of South America.", "isCorrect": false },
-      { "text": "The Himalayas", "rationale": "Explanation: This range contains the highest peaks in the world, located in Asia.", "isCorrect": false }
-    ]
-  },
-  {
-    "questionNumber": 17,
-    "question": "Bridgeport is considered the most 'populated' city in Connecticut. What does the word 'populated' mean in Geography?",
-    "hint": "Think about what is being counted when cities talk about their population.",
-    "answerOptions": [
-      { "text": "Having the highest number of people living there.", "rationale": "Explanation: Population refers to the number of human inhabitants in a specific area.", "isCorrect": true },
-      { "text": "Having the largest amount of land area.", "rationale": "Explanation: The amount of space a city takes up is its area, which is different from how many people live there.", "isCorrect": false },
-      { "text": "Having the most parks and trees.", "rationale": "Explanation: While Bridgeport is the 'Park City,' population refers specifically to people.", "isCorrect": false },
-      { "text": "Being the oldest city in the state.", "rationale": "Explanation: The age of a city is its history; population only refers to the current number of residents.", "isCorrect": false }
-    ]
-  },
-  {
-    "questionNumber": 18,
-    "question": "Which famous natural landmark in the United States is a massive, deep gorge carved by the Colorado River?",
-    "hint": "It is located in the state of Arizona and 'Grand' is in its name.",
-    "answerOptions": [
-      { "text": "The Grand Canyon", "rationale": "Explanation: This immense canyon is one of the most famous geographical features in the American Southwest.", "isCorrect": true },
-      { "text": "Mount Rushmore", "rationale": "Explanation: This is a famous mountain in South Dakota featuring carved faces.", "isCorrect": false },
-      { "text": "Niagara Falls", "rationale": "Explanation: This is a massive set of waterfalls on the border of NY and Canada.", "isCorrect": false },
-      { "text": "The Everglades", "rationale": "Explanation: This is a large tropical wetland ecosystem located in southern Florida.", "isCorrect": false }
-    ]
-  },
-  {
-    "questionNumber": 19,
+    "questionNumber": 14,
     "question": "Which large country borders the United States directly to the North?",
     "hint": "This country is famous for maple syrup and ice hockey.",
     "answerOptions": [
@@ -210,7 +154,7 @@ const geographyData = [
     ]
   },
   {
-    "questionNumber": 20,
+    "questionNumber": 15,
     "question": "Which country borders the United States directly to the South?",
     "hint": "This country shares a southern border with states like Texas, Arizona, and California.",
     "answerOptions": [
@@ -221,7 +165,7 @@ const geographyData = [
     ]
   },
   {
-    "questionNumber": 21,
+    "questionNumber": 16,
     "question": "How many individual states make up the entire United States of America today?",
     "hint": "It is a nice, even number that is exactly half of one hundred.",
     "answerOptions": [
@@ -232,7 +176,7 @@ const geographyData = [
     ]
   },
   {
-    "questionNumber": 22,
+    "questionNumber": 17,
     "question": "Which two states are NOT physically connected to the other 48 states?",
     "hint": "One is an island in the ocean, and the other is way up north attached to Canada.",
     "answerOptions": [
@@ -242,9 +186,8 @@ const geographyData = [
       { "text": "Connecticut and Rhode Island", "rationale": "Explanation: These two states are right next to each other in New England.", "isCorrect": false }
     ]
   },
-  // --- NEW MUST-HAVES ---
   {
-    "questionNumber": 23,
+    "questionNumber": 18,
     "question": "Which massive river is known as the longest and most important river for transportation in the United States?",
     "hint": "It is often called the 'Big Muddy' and flows south into the Gulf of Mexico.",
     "answerOptions": [
@@ -255,29 +198,7 @@ const geographyData = [
     ]
   },
   {
-    "questionNumber": 24,
-    "question": "What kind of map shows man-made boundaries, such as the borders between different states and countries?",
-    "hint": "These maps often use different colors to show where one state ends and another begins.",
-    "answerOptions": [
-      { "text": "A political map", "rationale": "Explanation: Political maps focus on government boundaries and where cities and capitals are located.", "isCorrect": true },
-      { "text": "A physical map", "rationale": "Explanation: Physical maps show natural landforms like mountains and rivers.", "isCorrect": false },
-      { "text": "A treasure map", "rationale": "Explanation: This is a map used to find hidden items, not a type of geography map.", "isCorrect": false },
-      { "text": "A weather map", "rationale": "Explanation: These show temperature and rain patterns.", "isCorrect": false }
-    ]
-  },
-  {
-    "questionNumber": 25,
-    "question": "What kind of map is used to show natural features like mountains, rivers, deserts, and plains?",
-    "hint": "These maps show you what the Earth's surface actually looks like naturally.",
-    "answerOptions": [
-      { "text": "A physical map", "rationale": "Explanation: Physical maps use colors and shading to show things like elevation (height) and nature.", "isCorrect": true },
-      { "text": "A political map", "rationale": "Explanation: Political maps show boundaries made by people.", "isCorrect": false },
-      { "text": "A street map", "rationale": "Explanation: Street maps show roads and neighborhoods.", "isCorrect": false },
-      { "text": "A population map", "rationale": "Explanation: These maps show where people live.", "isCorrect": false }
-    ]
-  },
-  {
-    "questionNumber": 26,
+    "questionNumber": 19,
     "question": "How many major oceans are there on Earth?",
     "hint": "Think of the Pacific, Atlantic, Indian, Arctic, and Southern oceans.",
     "answerOptions": [
@@ -288,25 +209,36 @@ const geographyData = [
     ]
   },
   {
-    "questionNumber": 27,
-    "question": "Why is it 8:00 AM in Connecticut when it is only 5:00 AM in California?",
-    "hint": "The United States is divided into different sections because the sun rises at different times across the country.",
+    "questionNumber": 20,
+    "question": "What city do we live in?",
+    "hint": "Our city is called the Park City. It is next to the water.",
     "answerOptions": [
-      { "text": "Because they are in different Time Zones.", "rationale": "Explanation: Time zones help keep time consistent with the sun as it moves across our large country.", "isCorrect": true },
-      { "text": "Because California is in another country.", "rationale": "Explanation: California is a state in the same country as Connecticut.", "isCorrect": false },
-      { "text": "Because the clocks in California are broken.", "rationale": "Explanation: The clocks are working fine; they are just set to their own local time zone.", "isCorrect": false },
-      { "text": "Because the sun only shines on the East Coast.", "rationale": "Explanation: The sun shines everywhere, just at different times!", "isCorrect": false }
+      { "text": "Bridgeport", "rationale": "Explanation: We live in Bridgeport, Connecticut. It is the biggest city in our state.", "isCorrect": true },
+      { "text": "Hartford", "rationale": "Explanation: Hartford is the capital of Connecticut. We do not live there.", "isCorrect": false },
+      { "text": "New Haven", "rationale": "Explanation: New Haven is a city near us, but we do not live there.", "isCorrect": false },
+      { "text": "New York City", "rationale": "Explanation: New York City is in the state of New York. We live in Connecticut.", "isCorrect": false }
     ]
   },
   {
-    "questionNumber": 28,
-    "question": "Which massive, jagged mountain range is located in the Western United States?",
-    "hint": "These mountains are much taller and 'younger' than the Appalachian Mountains in the East.",
+    "questionNumber": 21,
+    "question": "What is the full name of our country?",
+    "hint": "Our country has 50 states. They are joined together, or united.",
     "answerOptions": [
-      { "text": "The Rocky Mountains", "rationale": "Explanation: The Rockies stretch through the West from New Mexico all the way up through Canada.", "isCorrect": true },
-      { "text": "The Appalachian Mountains", "rationale": "Explanation: These are in the East, closer to Connecticut.", "isCorrect": false },
-      { "text": "The Alps", "rationale": "Explanation: The Alps are located in Europe.", "isCorrect": false },
-      { "text": "Mount Everest", "rationale": "Explanation: Everest is a single peak (the tallest) in the Himalayas in Asia.", "isCorrect": false }
+      { "text": "The United States of America", "rationale": "Explanation: The full name of our country is the United States of America. For short, we say the U.S. or the USA.", "isCorrect": true },
+      { "text": "North America", "rationale": "Explanation: North America is our continent, not our country. Canada and Mexico are on it too.", "isCorrect": false },
+      { "text": "Connecticut", "rationale": "Explanation: Connecticut is our state. It is one of the 50 states in our country.", "isCorrect": false },
+      { "text": "The United Kingdom", "rationale": "Explanation: The United Kingdom is a different country. It is far away in Europe.", "isCorrect": false }
+    ]
+  },
+  {
+    "questionNumber": 22,
+    "question": "What is the difference between a city and a town?",
+    "hint": "Think about how many people live there. Bridgeport is a city. Trumbull, next to us, is a town.",
+    "answerOptions": [
+      { "text": "A city is bigger and has more people. A town is smaller and has fewer people.", "rationale": "Explanation: Cities are big places with lots of people, like Bridgeport. Towns are smaller places with fewer people, like Trumbull.", "isCorrect": true },
+      { "text": "A town is bigger and has more people. A city is smaller and has fewer people.", "rationale": "Explanation: This is backwards. A city is bigger than a town.", "isCorrect": false },
+      { "text": "A city has houses, but a town has no houses.", "rationale": "Explanation: Cities and towns both have houses where people live.", "isCorrect": false },
+      { "text": "A town is a kind of country.", "rationale": "Explanation: A town is much smaller than a country. A country has many cities and towns in it.", "isCorrect": false }
     ]
   }
 ];
