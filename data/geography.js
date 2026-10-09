@@ -1,210 +1,210 @@
 const geographyData = [
   {
     "questionNumber": 1,
-    "question": "What is the capital city of our home state of Connecticut?",
-    "hint": "This city is located right in the middle of the state and its name starts with an 'H'.",
+    "question": "The capital is the city where state leaders work. What is the capital of Connecticut?",
+    "hint": "This city is on the Connecticut River.",
     "answerOptions": [
-      { "text": "Hartford", "rationale": "Explanation: Hartford is the capital of Connecticut, where our state government makes its laws.", "isCorrect": true },
-      { "text": "Bridgeport", "rationale": "Explanation: Bridgeport is the largest city in Connecticut by population, but it is not the capital.", "isCorrect": false },
-      { "text": "New Haven", "rationale": "Explanation: New Haven used to share capital duties with Hartford a long time ago, but Hartford is now the only capital.", "isCorrect": false },
-      { "text": "Stamford", "rationale": "Explanation: Stamford is a major city in southern Connecticut, but it is not the state capital.", "isCorrect": false }
+      { "text": "Hartford", "rationale": "Explanation: Hartford is the capital. Our state leaders make laws there.", "isCorrect": true },
+      { "text": "Bridgeport", "rationale": "Explanation: Bridgeport is our biggest city. But it is not the capital.", "isCorrect": false },
+      { "text": "New Haven", "rationale": "Explanation: New Haven is a big city. But it is not the capital.", "isCorrect": false },
+      { "text": "Stamford", "rationale": "Explanation: Stamford is a big city. But it is not the capital.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 2,
-    "question": "Which of the following best explains the difference between a city (like Bridgeport) and a state (like Connecticut)?",
-    "hint": "Think about which one is bigger and fits inside the other one.",
+    "question": "How is a city different from a state?",
+    "hint": "Which one is bigger? Which one fits inside the other?",
     "answerOptions": [
-      { "text": "A city is a smaller local area with its own mayor, while a state is a large territory made up of many cities and towns.", "rationale": "Explanation: Cities are local municipalities that exist within the much larger borders of a state.", "isCorrect": true },
-      { "text": "A state is a smaller local area, and a city is a large territory that holds many states.", "rationale": "Explanation: This is backwards; a state is much larger than a city.", "isCorrect": false },
-      { "text": "Cities only have buildings, and states only have nature and parks.", "rationale": "Explanation: Both cities and states contain a mix of buildings, roads, parks, and nature.", "isCorrect": false },
-      { "text": "A city is ruled by a president, and a state is ruled by a king.", "rationale": "Explanation: Cities are typically run by mayors, states by governors, and the whole country by a president.", "isCorrect": false }
+      { "text": "A city is small. A state is big and has many cities and towns in it.", "rationale": "Explanation: A state is much bigger. Bridgeport is one city in the state of Connecticut.", "isCorrect": true },
+      { "text": "A state is small. A city is big and has many states in it.", "rationale": "Explanation: This is backwards. A state is bigger than a city.", "isCorrect": false },
+      { "text": "A city has only buildings. A state has only parks and trees.", "rationale": "Explanation: Cities and states both have buildings, roads, parks, and trees.", "isCorrect": false },
+      { "text": "A president runs a city. A king runs a state.", "rationale": "Explanation: A mayor runs a city. A governor runs a state. We have no king.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 3,
-    "question": "If you are in Connecticut and you travel straight North, which state's border will you cross into?",
-    "hint": "The capital of this state to our north is Boston.",
+    "question": "You are in Connecticut. You go north. What state do you come to?",
+    "hint": "The capital of this state is Boston.",
     "answerOptions": [
-      { "text": "Massachusetts", "rationale": "Explanation: Massachusetts sits directly on top of Connecticut, sharing our entire northern border.", "isCorrect": true },
-      { "text": "New York", "rationale": "Explanation: New York is located to the west of Connecticut, not the north.", "isCorrect": false },
-      { "text": "Rhode Island", "rationale": "Explanation: Rhode Island is located to the east of Connecticut.", "isCorrect": false },
-      { "text": "New Jersey", "rationale": "Explanation: New Jersey does not border Connecticut at all; it is south of New York.", "isCorrect": false }
+      { "text": "Massachusetts", "rationale": "Explanation: Massachusetts is right above Connecticut, to the north.", "isCorrect": true },
+      { "text": "New York", "rationale": "Explanation: New York is to the west of Connecticut.", "isCorrect": false },
+      { "text": "Rhode Island", "rationale": "Explanation: Rhode Island is to the east of Connecticut.", "isCorrect": false },
+      { "text": "New Jersey", "rationale": "Explanation: New Jersey does not touch Connecticut.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 4,
-    "question": "Which state borders Connecticut to the East?",
-    "hint": "It is the smallest state in the entire United States.",
+    "question": "What state is to the east of Connecticut?",
+    "hint": "It is the smallest state in our country.",
     "answerOptions": [
-      { "text": "Rhode Island", "rationale": "Explanation: Rhode Island shares Connecticut's eastern border.", "isCorrect": true },
-      { "text": "Massachusetts", "rationale": "Explanation: Massachusetts is the state to our north.", "isCorrect": false },
-      { "text": "New York", "rationale": "Explanation: New York is the state to our west.", "isCorrect": false },
-      { "text": "Maine", "rationale": "Explanation: Maine is the northernmost state in New England and does not border Connecticut.", "isCorrect": false }
+      { "text": "Rhode Island", "rationale": "Explanation: Rhode Island is right next to us, to the east.", "isCorrect": true },
+      { "text": "Massachusetts", "rationale": "Explanation: Massachusetts is to the north.", "isCorrect": false },
+      { "text": "New York", "rationale": "Explanation: New York is to the west.", "isCorrect": false },
+      { "text": "Maine", "rationale": "Explanation: Maine is far away. It does not touch Connecticut.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 5,
-    "question": "What is the name of the large body of water that forms the southern border of Connecticut?",
-    "hint": "It separates our state's beaches from a large piece of land in New York.",
+    "question": "Our beaches are on the south side of Connecticut. What is the name of the water there?",
+    "hint": "Go to the beach at Seaside Park. This is the water you see.",
     "answerOptions": [
-      { "text": "Long Island Sound", "rationale": "Explanation: This tidal estuary lies immediately south of Connecticut.", "isCorrect": true },
-      { "text": "The Atlantic Ocean", "rationale": "Explanation: While the Sound flows into the Atlantic, the open ocean does not directly touch Connecticut.", "isCorrect": false },
-      { "text": "The Connecticut River", "rationale": "Explanation: This river flows south through the state and empties into the Sound, but it is not our southern border.", "isCorrect": false },
-      { "text": "Lake Erie", "rationale": "Explanation: This is one of the Great Lakes, located much further west.", "isCorrect": false }
+      { "text": "Long Island Sound", "rationale": "Explanation: Long Island Sound is the water by our beaches. Long Island, New York, is on the other side.", "isCorrect": true },
+      { "text": "The Atlantic Ocean", "rationale": "Explanation: The Sound flows into the Atlantic Ocean. But our beaches are on the Sound.", "isCorrect": false },
+      { "text": "The Connecticut River", "rationale": "Explanation: The Connecticut River flows into the Sound. It is a river, not the water by our beaches.", "isCorrect": false },
+      { "text": "Lake Erie", "rationale": "Explanation: Lake Erie is a lake. It is far to the west.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 6,
-    "question": "What is the capital city of the entire United States of America?",
-    "hint": "It is a special district named after our very first president.",
+    "question": "What is the capital of the whole United States?",
+    "hint": "The President lives and works in this city, in the White House.",
     "answerOptions": [
-      { "text": "Washington, D.C.", "rationale": "Explanation: Washington, D.C. is the nation's capital, where the President lives and Congress makes federal laws.", "isCorrect": true },
-      { "text": "New York City", "rationale": "Explanation: New York City is the largest city in the US, but it is not the nation's capital.", "isCorrect": false },
-      { "text": "Philadelphia", "rationale": "Explanation: Philadelphia is where the Declaration of Independence was signed, but the capital moved to D.C.", "isCorrect": false },
+      { "text": "Washington, D.C.", "rationale": "Explanation: Washington, D.C. is our country's capital. The President lives there.", "isCorrect": true },
+      { "text": "New York City", "rationale": "Explanation: New York City is our biggest city. But it is not the capital.", "isCorrect": false },
+      { "text": "Philadelphia", "rationale": "Explanation: Philadelphia was the capital long ago. Now the capital is Washington, D.C.", "isCorrect": false },
       { "text": "Hartford", "rationale": "Explanation: Hartford is the capital of our state, not the whole country.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 7,
-    "question": "The world's land is divided into massive areas called continents. How many continents are there on Earth?",
-    "hint": "The number is exactly one more than a half-dozen.",
+    "question": "A continent is a very big piece of land. How many continents are on Earth?",
+    "hint": "Count them: North America, South America, Europe, Asia, Africa, Australia, Antarctica.",
     "answerOptions": [
-      { "text": "7", "rationale": "Explanation: There are exactly 7 continents on Earth: North America, South America, Europe, Asia, Africa, Australia, and Antarctica.", "isCorrect": true },
-      { "text": "5", "rationale": "Explanation: While there are 5 major oceans, there are 7 continents.", "isCorrect": false },
-      { "text": "50", "rationale": "Explanation: There are 50 states in the United States, but only 7 continents in the world.", "isCorrect": false },
-      { "text": "3", "rationale": "Explanation: There are far more than 3 continents covering the globe.", "isCorrect": false }
+      { "text": "7", "rationale": "Explanation: There are 7 continents: North America, South America, Europe, Asia, Africa, Australia, and Antarctica.", "isCorrect": true },
+      { "text": "5", "rationale": "Explanation: There are 5 oceans. But there are 7 continents.", "isCorrect": false },
+      { "text": "50", "rationale": "Explanation: There are 50 states in our country. But there are 7 continents.", "isCorrect": false },
+      { "text": "3", "rationale": "Explanation: There are more than 3 continents.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 8,
-    "question": "Bridgeport, Connecticut, and the entire United States are all located on which continent?",
-    "hint": "Our continent is located in the Northern and Western Hemispheres and has 'America' in its name.",
+    "question": "What continent do we live on?",
+    "hint": "The United States, Canada, and Mexico are all on it.",
     "answerOptions": [
-      { "text": "North America", "rationale": "Explanation: The United States, Canada, and Mexico are all located on the continent of North America.", "isCorrect": true },
-      { "text": "South America", "rationale": "Explanation: South America is a different continent located entirely south of the United States.", "isCorrect": false },
-      { "text": "Europe", "rationale": "Explanation: Europe is a continent located across the Atlantic Ocean from us.", "isCorrect": false },
-      { "text": "Africa", "rationale": "Explanation: Africa is the second-largest continent in the world, located across the Atlantic Ocean.", "isCorrect": false }
+      { "text": "North America", "rationale": "Explanation: We live on North America. The United States, Canada, and Mexico are on it.", "isCorrect": true },
+      { "text": "South America", "rationale": "Explanation: South America is a different continent. It is south of us.", "isCorrect": false },
+      { "text": "Europe", "rationale": "Explanation: Europe is across the Atlantic Ocean from us.", "isCorrect": false },
+      { "text": "Africa", "rationale": "Explanation: Africa is across the Atlantic Ocean from us.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 9,
-    "question": "Which state shares a long land border with Connecticut to the West?",
-    "hint": "This state is famous for having the largest city in the United States, which shares its name.",
+    "question": "What state is to the west of Connecticut?",
+    "hint": "The biggest city in our country is in this state.",
     "answerOptions": [
-      { "text": "New York", "rationale": "Explanation: New York borders Connecticut all along its western side.", "isCorrect": true },
-      { "text": "Massachusetts", "rationale": "Explanation: Massachusetts is the state located to our north.", "isCorrect": false },
-      { "text": "Pennsylvania", "rationale": "Explanation: Pennsylvania is located further west, past New Jersey and New York.", "isCorrect": false },
-      { "text": "Vermont", "rationale": "Explanation: Vermont is located to our north, sitting on top of Massachusetts.", "isCorrect": false }
+      { "text": "New York", "rationale": "Explanation: New York is right next to us, to the west.", "isCorrect": true },
+      { "text": "Massachusetts", "rationale": "Explanation: Massachusetts is to the north.", "isCorrect": false },
+      { "text": "Pennsylvania", "rationale": "Explanation: Pennsylvania is farther west. It does not touch Connecticut.", "isCorrect": false },
+      { "text": "Vermont", "rationale": "Explanation: Vermont is farther north. It does not touch Connecticut.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 10,
-    "question": "What is the imaginary line that runs horizontally around the middle of the Earth, dividing it into the Northern and Southern Hemispheres?",
-    "hint": "It sounds like a word that means 'equal', because it sits exactly halfway between the North and South Poles.",
+    "question": "There is a pretend line around the middle of the Earth. It cuts the Earth into a north half and a south half. What is it called?",
+    "hint": "It is just as far from the North Pole as it is from the South Pole.",
     "answerOptions": [
-      { "text": "The Equator", "rationale": "Explanation: This line of latitude is at zero degrees and splits the globe perfectly into northern and southern halves.", "isCorrect": true },
-      { "text": "The Prime Meridian", "rationale": "Explanation: This imaginary line divides the Earth into the Eastern and Western Hemispheres, running vertically.", "isCorrect": false },
-      { "text": "The Tropic of Cancer", "rationale": "Explanation: This is a line of latitude north of the middle line.", "isCorrect": false },
-      { "text": "The Axis", "rationale": "Explanation: This is the imaginary pole that the Earth spins around.", "isCorrect": false }
+      { "text": "The Equator", "rationale": "Explanation: The Equator goes around the middle of the Earth. It cuts the Earth into north and south halves.", "isCorrect": true },
+      { "text": "The Prime Meridian", "rationale": "Explanation: The Prime Meridian goes from the North Pole to the South Pole. It cuts the Earth into east and west halves.", "isCorrect": false },
+      { "text": "The Tropic of Cancer", "rationale": "Explanation: The Tropic of Cancer is a line north of the middle.", "isCorrect": false },
+      { "text": "The Axis", "rationale": "Explanation: The axis is a pretend pole. The Earth spins around it.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 11,
-    "question": "Which major ocean borders the eastern coast of the United States, including the region where Connecticut is located?",
-    "hint": "Many early explorers crossed this ocean from Europe to reach North America.",
+    "question": "What ocean is on the east side of the United States?",
+    "hint": "Long ago, people sailed across this ocean from Europe.",
     "answerOptions": [
-      { "text": "The Atlantic Ocean", "rationale": "Explanation: The East Coast of the United States faces this vast ocean, which separates the Americas from Europe and Africa.", "isCorrect": true },
-      { "text": "The Pacific Ocean", "rationale": "Explanation: This ocean borders the West Coast of the United States.", "isCorrect": false },
-      { "text": "The Indian Ocean", "rationale": "Explanation: This ocean is located primarily between Africa, Asia, and Australia.", "isCorrect": false },
-      { "text": "The Arctic Ocean", "rationale": "Explanation: This freezing ocean surrounds the North Pole.", "isCorrect": false }
+      { "text": "The Atlantic Ocean", "rationale": "Explanation: The Atlantic Ocean is on our east side. Europe is on the other side of it.", "isCorrect": true },
+      { "text": "The Pacific Ocean", "rationale": "Explanation: The Pacific Ocean is on the west side of our country.", "isCorrect": false },
+      { "text": "The Indian Ocean", "rationale": "Explanation: The Indian Ocean is far away, near Africa, Asia, and Australia.", "isCorrect": false },
+      { "text": "The Arctic Ocean", "rationale": "Explanation: The Arctic Ocean is very cold. It is at the North Pole.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 12,
-    "question": "Which of the following statements best describes the difference between a map and a globe?",
-    "hint": "Think about the shape of the Earth and which tool represents it most accurately.",
+    "question": "How is a map different from a globe?",
+    "hint": "The Earth is round like a ball. Which one is round too?",
     "answerOptions": [
-      { "text": "A map is a flat drawing, while a globe is a 3D sphere.", "rationale": "Explanation: Maps are flat representations that often distort size or shape, while globes represent the true spherical shape of the Earth.", "isCorrect": true },
-      { "text": "A map shows only water, while a globe shows only land.", "rationale": "Explanation: Both tools are designed to show a combination of landmasses and bodies of water.", "isCorrect": false },
-      { "text": "A globe is always bigger than a map.", "rationale": "Explanation: Size varies greatly for both.", "isCorrect": false },
-      { "text": "A globe can fold up to fit in your pocket, but a map cannot.", "rationale": "Explanation: Maps fold, globes usually do not.", "isCorrect": false }
+      { "text": "A map is flat. A globe is round like a ball.", "rationale": "Explanation: A map is flat like paper. A globe is round, just like the Earth.", "isCorrect": true },
+      { "text": "A map shows only water. A globe shows only land.", "rationale": "Explanation: Maps and globes both show land and water.", "isCorrect": false },
+      { "text": "A globe is always bigger than a map.", "rationale": "Explanation: Maps and globes come in many sizes.", "isCorrect": false },
+      { "text": "You can fold a globe and put it in your pocket.", "rationale": "Explanation: You can fold a map. You cannot fold a globe.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 13,
-    "question": "Which of these places correctly lists a city, then a state, and then a country?",
-    "hint": "Start with where you go to school, then the wider area around it, and finally the whole nation.",
+    "question": "Which one is in the right order: city, then state, then country?",
+    "hint": "Start small. Then go bigger. Then go biggest.",
     "answerOptions": [
-      { "text": "Bridgeport, Connecticut, United States", "rationale": "Explanation: Bridgeport is a city, which is inside the state of Connecticut, which is inside the country of the United States.", "isCorrect": true },
-      { "text": "Connecticut, Bridgeport, United States", "rationale": "Explanation: This option incorrectly lists the state before the city.", "isCorrect": false },
-      { "text": "United States, Connecticut, Bridgeport", "rationale": "Explanation: This option goes in reverse order: from country to state to city.", "isCorrect": false },
-      { "text": "Bridgeport, United States, Connecticut", "rationale": "Explanation: This option incorrectly places the country between the city and the state.", "isCorrect": false }
+      { "text": "Bridgeport, Connecticut, United States", "rationale": "Explanation: Bridgeport is the city. Connecticut is the state. The United States is the country.", "isCorrect": true },
+      { "text": "Connecticut, Bridgeport, United States", "rationale": "Explanation: This puts the state first. The city should come first.", "isCorrect": false },
+      { "text": "United States, Connecticut, Bridgeport", "rationale": "Explanation: This is backwards. It starts with the country.", "isCorrect": false },
+      { "text": "Bridgeport, United States, Connecticut", "rationale": "Explanation: This puts the country in the middle. The state should be in the middle.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 14,
-    "question": "Which large country borders the United States directly to the North?",
-    "hint": "This country is famous for maple syrup and ice hockey.",
+    "question": "What country is to the north of the United States?",
+    "hint": "This country is known for hockey and maple syrup.",
     "answerOptions": [
-      { "text": "Canada", "rationale": "Explanation: Canada is the massive country located right above the northern border of the United States.", "isCorrect": true },
-      { "text": "Mexico", "rationale": "Explanation: Mexico is located to the south of the United States.", "isCorrect": false },
-      { "text": "England", "rationale": "Explanation: England is located across the Atlantic Ocean in Europe.", "isCorrect": false },
-      { "text": "Brazil", "rationale": "Explanation: Brazil is located far to the south in South America.", "isCorrect": false }
+      { "text": "Canada", "rationale": "Explanation: Canada is right above our country, to the north.", "isCorrect": true },
+      { "text": "Mexico", "rationale": "Explanation: Mexico is to the south of our country.", "isCorrect": false },
+      { "text": "England", "rationale": "Explanation: England is far away, across the ocean in Europe.", "isCorrect": false },
+      { "text": "Brazil", "rationale": "Explanation: Brazil is far to the south, in South America.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 15,
-    "question": "Which country borders the United States directly to the South?",
-    "hint": "This country shares a southern border with states like Texas, Arizona, and California.",
+    "question": "What country is to the south of the United States?",
+    "hint": "Texas and California touch this country.",
     "answerOptions": [
-      { "text": "Mexico", "rationale": "Explanation: Mexico is the country located directly below the southern border of the United States.", "isCorrect": true },
-      { "text": "Canada", "rationale": "Explanation: Canada is located to the north of the United States.", "isCorrect": false },
-      { "text": "Cuba", "rationale": "Explanation: Cuba is an island nation south of Florida, but it does not share a land border with the US.", "isCorrect": false },
-      { "text": "Spain", "rationale": "Explanation: Spain is located across the ocean in Europe.", "isCorrect": false }
+      { "text": "Mexico", "rationale": "Explanation: Mexico is right below our country, to the south.", "isCorrect": true },
+      { "text": "Canada", "rationale": "Explanation: Canada is to the north of our country.", "isCorrect": false },
+      { "text": "Cuba", "rationale": "Explanation: Cuba is an island near Florida. It does not touch our land.", "isCorrect": false },
+      { "text": "Spain", "rationale": "Explanation: Spain is far away, across the ocean in Europe.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 16,
-    "question": "How many individual states make up the entire United States of America today?",
-    "hint": "It is a nice, even number that is exactly half of one hundred.",
+    "question": "How many states are in the United States?",
+    "hint": "Look at our flag. It has one star for each state.",
     "answerOptions": [
-      { "text": "50 states", "rationale": "Explanation: There are exactly 50 states that make up the United States.", "isCorrect": true },
-      { "text": "48 states", "rationale": "Explanation: There are 48 connected states, but 50 states total.", "isCorrect": false },
-      { "text": "13 states", "rationale": "Explanation: There were 13 original colonies, but today there are 50 states.", "isCorrect": false },
-      { "text": "52 states", "rationale": "Explanation: There are 52 weeks in a year, but only 50 states.", "isCorrect": false }
+      { "text": "50 states", "rationale": "Explanation: There are 50 states. Our flag has 50 stars, one for each state.", "isCorrect": true },
+      { "text": "48 states", "rationale": "Explanation: 48 states touch each other. But there are 50 in all.", "isCorrect": false },
+      { "text": "13 states", "rationale": "Explanation: Long ago there were 13 colonies. Now there are 50 states.", "isCorrect": false },
+      { "text": "52 states", "rationale": "Explanation: There are 52 weeks in a year. But there are 50 states.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 17,
-    "question": "Which two states are NOT physically connected to the other 48 states?",
-    "hint": "One is an island in the ocean, and the other is way up north attached to Canada.",
+    "question": "Most of our states touch each other. Which two states do NOT touch the others?",
+    "hint": "One is a group of islands in the ocean. One is far up north, next to Canada.",
     "answerOptions": [
-      { "text": "Hawaii and Alaska", "rationale": "Explanation: Hawaii is a series of islands in the Pacific Ocean, and Alaska is attached to Canada. Neither touches the other 48 states.", "isCorrect": true },
-      { "text": "Florida and Texas", "rationale": "Explanation: Both of these states are connected to the main body of the country.", "isCorrect": false },
-      { "text": "California and New York", "rationale": "Explanation: These states are on opposite coasts, but they are both attached to the rest of the country.", "isCorrect": false },
-      { "text": "Connecticut and Rhode Island", "rationale": "Explanation: These two states are right next to each other in New England.", "isCorrect": false }
+      { "text": "Hawaii and Alaska", "rationale": "Explanation: Hawaii is islands in the Pacific Ocean. Alaska is next to Canada. They do not touch the other 48 states.", "isCorrect": true },
+      { "text": "Florida and Texas", "rationale": "Explanation: Florida and Texas both touch other states.", "isCorrect": false },
+      { "text": "California and New York", "rationale": "Explanation: California and New York are far apart. But they both touch other states.", "isCorrect": false },
+      { "text": "Connecticut and Rhode Island", "rationale": "Explanation: Connecticut and Rhode Island touch each other.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 18,
-    "question": "Which massive river is known as the longest and most important river for transportation in the United States?",
-    "hint": "It is often called the 'Big Muddy' and flows south into the Gulf of Mexico.",
+    "question": "This big river runs down the middle of our country. Boats carry lots of things on it. What river is it?",
+    "hint": "It flows south into the Gulf of Mexico.",
     "answerOptions": [
-      { "text": "The Mississippi River", "rationale": "Explanation: The Mississippi River is a major 'highway' for boats and runs through the center of the country.", "isCorrect": true },
-      { "text": "The Connecticut River", "rationale": "Explanation: This is the longest river in New England, but not the whole country.", "isCorrect": false },
-      { "text": "The Nile River", "rationale": "Explanation: This is the longest river in the world, located in Africa.", "isCorrect": false },
-      { "text": "The Amazon River", "rationale": "Explanation: This is a massive river located in South America.", "isCorrect": false }
+      { "text": "The Mississippi River", "rationale": "Explanation: The Mississippi River runs through the middle of our country. Many boats use it.", "isCorrect": true },
+      { "text": "The Connecticut River", "rationale": "Explanation: The Connecticut River is in our state. It is not in the middle of the country.", "isCorrect": false },
+      { "text": "The Nile River", "rationale": "Explanation: The Nile River is far away, in Africa.", "isCorrect": false },
+      { "text": "The Amazon River", "rationale": "Explanation: The Amazon River is far away, in South America.", "isCorrect": false }
     ]
   },
   {
     "questionNumber": 19,
-    "question": "How many major oceans are there on Earth?",
-    "hint": "Think of the Pacific, Atlantic, Indian, Arctic, and Southern oceans.",
+    "question": "How many oceans are on Earth?",
+    "hint": "Count them: Pacific, Atlantic, Indian, Arctic, Southern.",
     "answerOptions": [
-      { "text": "5", "rationale": "Explanation: There are 5 major oceans that cover most of the Earth's surface.", "isCorrect": true },
-      { "text": "7", "rationale": "Explanation: There are 7 continents, but only 5 major oceans.", "isCorrect": false },
-      { "text": "3", "rationale": "Explanation: There are more than 3 oceans on Earth.", "isCorrect": false },
+      { "text": "5", "rationale": "Explanation: There are 5 oceans: Pacific, Atlantic, Indian, Arctic, and Southern.", "isCorrect": true },
+      { "text": "7", "rationale": "Explanation: There are 7 continents. But there are 5 oceans.", "isCorrect": false },
+      { "text": "3", "rationale": "Explanation: There are more than 3 oceans.", "isCorrect": false },
       { "text": "50", "rationale": "Explanation: There are 50 states, not 50 oceans!", "isCorrect": false }
     ]
   },
