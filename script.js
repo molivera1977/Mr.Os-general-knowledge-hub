@@ -251,7 +251,7 @@ function submitAnswer() {
     if (selectedOptionObj.isCorrect) {
         selectedButton.style.backgroundColor = '#2ecc71';
         selectedButton.style.color = 'white';
-        feedback.innerText = "✅ Correct! " + selectedOptionObj.rationale;
+        showFeedback("✅", "Correct! " + selectedOptionObj.rationale);
         feedback.style.color = '#27ae60';
         score++;
         gkRecordAnswer(true, currentQuiz[currentQuestionIndex], selectedOptionObj.text);
@@ -259,7 +259,7 @@ function submitAnswer() {
         gkRecordAnswer(false, currentQuiz[currentQuestionIndex], selectedOptionObj.text);
         selectedButton.style.backgroundColor = '#e74c3c';
         selectedButton.style.color = 'white';
-        feedback.innerText = "❌ Incorrect. " + selectedOptionObj.rationale;
+        showFeedback("❌", "Incorrect. " + selectedOptionObj.rationale);
         feedback.style.color = '#c0392b';
 
         document.querySelectorAll('.option-btn').forEach(btn => {
@@ -402,6 +402,20 @@ function readHint() {
     currentTextForTTS = "";
     document.getElementById('hint-text').querySelectorAll('.tts-word').forEach(span => addTTSMap(span, span.innerText));
     executeTTS("Hint. " + currentTextForTTS, 6);
+}
+
+function showFeedback(icon, text) {
+    const words = text.split(/\s+/).map(word => `<span class="tts-word">${word}</span>`).join(' ');
+    document.getElementById('feedback').innerHTML =
+        `<button class="btn-read-small feedback-read" onclick="readFeedback()">🔊 Read</button> ${icon} <span id="feedback-text">${words}</span>`;
+}
+
+function readFeedback() {
+    window.speechSynthesis.cancel();
+    ttsMap = [];
+    currentTextForTTS = "";
+    document.getElementById('feedback-text').querySelectorAll('.tts-word').forEach(span => addTTSMap(span, span.innerText));
+    executeTTS(currentTextForTTS, 0);
 }
 
 function executeTTS(text, offset) {
