@@ -125,6 +125,7 @@ function signIn(name) {
 }
 
 function signOut() {
+    if (window.SHARE_MODE) return;   // a visitor never sees the name list
     studentName = '';
     try { sessionStorage.removeItem(LOGIN_KEY); } catch (e) {}
     document.getElementById('student-bar').style.display = 'none';
@@ -246,5 +247,9 @@ window.addEventListener('pagehide', () => {
     let saved = '';
     try { saved = sessionStorage.getItem(LOGIN_KEY) || ''; } catch (e) {}
     const known = ROSTER.some(s => s.name === saved) || saved.endsWith(' (Guest)');
-    if (saved && known) signIn(saved);
+    // Share mode (share.js): a colleague's link — no roster, no student number
+    if (window.SHARE_MODE) {
+        signIn('Visitor');
+        document.querySelectorAll('[onclick="signOut()"]').forEach(el => { el.style.display = 'none'; });
+    } else if (saved && known) signIn(saved);
 })();
