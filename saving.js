@@ -249,7 +249,7 @@ window.addEventListener('pagehide', () => {
     const known = ROSTER.some(s => s.name === saved) || saved.endsWith(' (Guest)');
     // Share mode (share.js): a colleague's link — no roster, no student number
     if (window.SHARE_MODE) {
-        signIn('Visitor');
+        signIn('Guest');
         document.querySelectorAll('[onclick="signOut()"]').forEach(el => { el.style.display = 'none'; });
     } else if (saved && known) signIn(saved);
 })();
