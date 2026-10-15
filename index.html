@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mr. O's 4th Grade General Knowledge</title>
-    <link rel="stylesheet" href="style.css?v=20261009c">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="style.css?v=gk-fresh1">
 </head>
 <body>
 
@@ -93,25 +96,40 @@
 
     <!-- QUIZ SCREEN -->
     <div id="quiz-screen" style="display: none;">
-        <h2 id="quiz-title">Quiz</h2>
-        <button id="read-aloud-btn" class="btn btn-read" onclick="readAloud()">🔊 Read Aloud</button>
-        <h3 id="question-text">Question goes here</h3>
-        <button id="show-hint-btn" class="btn btn-hint" onclick="showHint()">💡 Need a Hint?</button>
-        <div id="hint-container" class="hint-box" style="display: none;">
-            <button id="read-hint-btn" class="btn btn-read-small" onclick="readHint()">🔊 Read Hint</button>
-            <p id="hint-text" style="margin: 0; font-weight: bold;"></p>
+        <div class="quiz-banner">
+            <span class="quiz-icon" id="quiz-icon" aria-hidden="true">🌍</span>
+            <div class="quiz-banner-text">
+                <h2 id="quiz-title">Quiz</h2>
+                <p id="quiz-progress" class="quiz-progress">Question 1 of 1</p>
+                <div class="progress-track" aria-hidden="true"><div id="progress-fill" class="progress-fill"></div></div>
+            </div>
+            <span id="streak" class="streak" style="display: none;"></span>
         </div>
+
+        <div class="question-card">
+            <p class="speak-row question-row"><span id="question-text" class="say question-text"></span></p>
+        </div>
+
+        <button id="show-hint-btn" class="hint-toggle" onclick="toggleHint()">💡 Show a Hint</button>
+        <div id="hint-container" class="hint-box" style="display: none;">
+            <p class="speak-row"><span id="hint-text" class="say"></span></p>
+        </div>
+
         <div id="options-container"></div>
-        <button id="submit-btn" class="btn btn-submit" style="display:none;" onclick="submitAnswer()">Submit Answer</button>
-        <p id="feedback"></p>
-        <button id="next-btn" class="btn btn-next" style="display:none;" onclick="nextQuestion()">Next Question</button>
+        <button id="submit-btn" class="btn btn-submit" style="display:none;" onclick="submitAnswer()">✅ Check My Answer</button>
+        <div id="feedback" class="feedback" style="display: none;"></div>
+        <button id="next-btn" class="btn btn-next" style="display:none;" onclick="nextQuestion()">Next Question ➜</button>
     </div>
 
     <!-- RESULT SCREEN -->
     <div id="result-screen" style="display: none;">
-        <h2>🎉 Quiz Complete! 🎉</h2>
-        <p id="final-score" style="font-size: 24px; font-weight: bold;"></p>
-        <button class="btn btn-home" onclick="goHome()">🏠 Back to Home</button>
+        <div class="result-card">
+            <div class="result-stars" id="result-stars" aria-hidden="true"></div>
+            <h2 id="result-title">Quiz Complete!</h2>
+            <p id="final-score" class="final-score"></p>
+            <p id="final-grade" class="final-grade"></p>
+        </div>
+        <button class="btn btn-home" onclick="goHome()">📚 Back to the Subjects</button>
     </div>
 
 </div>
@@ -121,7 +139,8 @@
 <script src="data/civics.js?v=20261009d"></script>
 <script src="data/math.js?v=20261009d"></script>
 <script src="data/ela.js?v=20261009d"></script>
-<script src="script.js?v=20261009c-sh2"></script>
+<script src="speech.js?v=gk-fresh1"></script>
+<script src="script.js?v=gk-fresh1"></script>
 <script src="saving.js?v=20261013sh2"></script>
 <script src="teacher.js?v=20260928a"></script>
 

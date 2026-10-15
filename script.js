@@ -21,9 +21,16 @@ let selectedOptionObj = null;
 let selectedButton = null;
 let studentName = "";
 
-// Variables for Text-to-Speech (TTS) mapping
-let ttsMap = [];
-let currentTextForTTS = "";
+let answered = false;           // the current question has been checked
+let streak = 0;                 // right answers in a row (for the 🔥 badge)
+
+// Each subject's banner icon and color theme (style.css: [data-subject])
+const SUBJECT_ICONS = { geography: "🌍", civics: "🏛️", math: "➕", ela: "📚" };
+
+function setQuizTheme(subjectKey) {
+    document.getElementById('quiz-screen').dataset.subject = subjectKey || "";
+    document.getElementById('quiz-icon').textContent = SUBJECT_ICONS[subjectKey] || "⭐";
+}
 
 window.onload = function () {
     displayScores();
@@ -119,12 +126,14 @@ function resumeQuiz() {
     document.getElementById('quiz-screen').style.display = 'block';
 
     const titles = {
-        "Geography": "🌍 Geography Quiz",
-        "Civics": "🏛️ Civics & Government Quiz",
-        "Math": "➕ Math Quiz",
-        "Language Arts": "📚 Language Arts Quiz"
+        "Geography": "Geography Quiz",
+        "Civics": "Civics & Government Quiz",
+        "Math": "Math Quiz",
+        "Language Arts": "Language Arts Quiz"
     };
     document.getElementById('quiz-title').innerText = titles[currentSubjectName] || "Quiz";
+    setQuizTheme(SUBJECT_KEYS[currentSubjectName]);
+    streak = 0;
 
     loadQuestion();
 }
@@ -192,86 +201,146 @@ function startQuiz(subject) {
     document.getElementById('quiz-screen').style.display = 'block';
 
     const displayTitles = {
-        geography: "🌍 Geography Quiz",
-        civics: "🏛️ Civics & Government Quiz",
-        math: "➕ Math Quiz",
-        ela: "📚 Language Arts Quiz"
+        geography: "Geography Quiz",
+        civics: "Civics & Government Quiz",
+        math: "Math Quiz",
+        ela: "Language Arts Quiz"
     };
     document.getElementById('quiz-title').innerText = displayTitles[subject];
+    setQuizTheme(subject);
+    streak = 0;
 
     loadQuestion();
 }
 
+/* Put a 🔊 in front of a .say block (the question, the hint). */
+function addSpeaker(sayEl, label) {
+    const row = sayEl.parentElement;
+    const old = row.querySelector(':scope > .spk-btn');
+    if (old) old.remove();
+    row.insertBefore(makeSpeaker(sayEl, label), sayEl);
+}
+
 function loadQuestion() {
-    window.speechSynthesis.cancel();
-    document.getElementById('feedback').innerText = "";
+    gkSpeech.stop();
+    answered = false;
+    const feedback = document.getElementById('feedback');
+    feedback.innerHTML = "";
+    feedback.className = 'feedback';
+    feedback.style.display = 'none';
     document.getElementById('submit-btn').style.display = 'none';
     document.getElementById('next-btn').style.display = 'none';
-    document.getElementById('show-hint-btn').style.display = 'inline-block';
-    document.getElementById('hint-container').style.display = 'none';
+    document.getElementById('next-btn').innerText =
+        currentQuestionIndex === currentQuiz.length - 1 ? '🏁 See My Score' : 'Next Question ➜';
+    setHintOpen(false);
+    document.getElementById('show-hint-btn').style.display = '';
 
     selectedOptionObj = null;
     selectedButton = null;
 
     const q = currentQuiz[currentQuestionIndex];
+    const total = currentQuiz.length;
+    document.getElementById('quiz-progress').innerText = `Question ${currentQuestionIndex + 1} of ${total}`;
+    document.getElementById('progress-fill').style.width = `${Math.round((currentQuestionIndex / total) * 100)}%`;
+    showStreak();
 
-    const qHTML = q.question.split(/\s+/).map(word => `<span class="tts-word">${word}</span>`).join(' ');
-    document.getElementById('question-text').innerHTML = `${currentQuestionIndex + 1}. ${qHTML}`;
+    const questionEl = document.getElementById('question-text');
+    fillWords(questionEl, q.question);
+    addSpeaker(questionEl, 'Read the question to me');
 
-    const hHTML = q.hint.split(/\s+/).map(word => `<span class="tts-word">${word}</span>`).join(' ');
-    document.getElementById('hint-text').innerHTML = hHTML;
+    fillWords(document.getElementById('hint-text'), q.hint);
+    addSpeaker(document.getElementById('hint-text'), 'Read the hint to me');
 
     const container = document.getElementById('options-container');
     container.innerHTML = "";
+    container.classList.remove('locked');
+    container.classList.toggle('grid', q.answerOptions.every(o => o.text.length <= 28));
 
     q.answerOptions.forEach((option) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        const optHTML = option.text.split(/\s+/).map(word => `<span class="tts-word">${word}</span>`).join(' ');
-        btn.innerHTML = optHTML;
+        if (option.isCorrect) btn.dataset.correct = '1';
+        const words = document.createElement('span');
+        words.className = 'say';
+        fillWords(words, option.text);
+        btn.appendChild(makeSpeaker(words, 'Read this answer to me'));
+        btn.appendChild(words);
         btn.onclick = () => selectOption(option, btn);
         container.appendChild(btn);
     });
 }
 
 function selectOption(option, btn) {
+    if (answered) return;   // choices stay tappable after checking, so their 🔊 still works
     document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
     selectedOptionObj = option;
     selectedButton = btn;
-    document.getElementById('submit-btn').style.display = 'block';
+    const check = document.getElementById('submit-btn');
+    check.style.display = 'block';
+    // Questions with long answers can push the button below a Chromebook screen.
+    check.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function submitAnswer() {
+    if (answered || !selectedOptionObj) return;
+    answered = true;
+    gkSpeech.stop();
     document.getElementById('submit-btn').style.display = 'none';
-    window.speechSynthesis.cancel();
-    document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+    document.getElementById('show-hint-btn').style.display = 'none';
+    document.getElementById('options-container').classList.add('locked');
+    document.querySelectorAll('.option-btn').forEach(btn => btn.setAttribute('aria-disabled', 'true'));
 
-    const feedback = document.getElementById('feedback');
-    if (selectedOptionObj.isCorrect) {
-        selectedButton.style.backgroundColor = '#2ecc71';
-        selectedButton.style.color = 'white';
-        showFeedback("✅", "Correct! " + selectedOptionObj.rationale);
-        feedback.style.color = '#27ae60';
+    const right = selectedOptionObj.isCorrect;
+    gkRecordAnswer(right, currentQuiz[currentQuestionIndex], selectedOptionObj.text);
+    if (right) {
         score++;
-        gkRecordAnswer(true, currentQuiz[currentQuestionIndex], selectedOptionObj.text);
+        streak++;
+        selectedButton.classList.add('is-right');
+        starBurst(selectedButton);
     } else {
-        gkRecordAnswer(false, currentQuiz[currentQuestionIndex], selectedOptionObj.text);
-        selectedButton.style.backgroundColor = '#e74c3c';
-        selectedButton.style.color = 'white';
-        showFeedback("❌", "Incorrect. " + selectedOptionObj.rationale);
-        feedback.style.color = '#c0392b';
-
-        document.querySelectorAll('.option-btn').forEach(btn => {
-            if (btn.innerText.trim() === currentQuiz[currentQuestionIndex].answerOptions.find(o => o.isCorrect).text.trim()) {
-                btn.style.border = "4px solid #2ecc71";
-            }
-        });
+        streak = 0;
+        selectedButton.classList.add('is-wrong');
+        document.querySelectorAll('.option-btn[data-correct]').forEach(btn => btn.classList.add('show-right'));
     }
-    document.getElementById('next-btn').style.display = 'inline-block';
+    showFeedback(right, selectedOptionObj.rationale);
+    showStreak();
+    document.getElementById('progress-fill').style.width =
+        `${Math.round(((currentQuestionIndex + 1) / currentQuiz.length) * 100)}%`;
+    const next = document.getElementById('next-btn');
+    next.style.display = 'block';
+    // The explanation and Next sit under the choices; bring them on screen.
+    next.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function showStreak() {
+    const badge = document.getElementById('streak');
+    if (streak >= 2) {
+        badge.textContent = `🔥 ${streak} in a row!`;
+        badge.style.display = '';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+/* A quick burst of stars from a right answer. Decoration only. */
+function starBurst(btn) {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const burst = document.createElement('span');
+    burst.className = 'burst';
+    burst.setAttribute('aria-hidden', 'true');
+    ['⭐', '✨', '🌟', '⭐', '✨', '🌟'].forEach((s, i) => {
+        const star = document.createElement('span');
+        star.textContent = s;
+        star.style.setProperty('--angle', `${i * 60}deg`);
+        burst.appendChild(star);
+    });
+    btn.appendChild(burst);
+    setTimeout(() => burst.remove(), 900);
 }
 
 function nextQuestion() {
+    gkSpeech.stop();
     currentQuestionIndex++;
     if (currentQuestionIndex < currentQuiz.length) {
         saveProgress();
@@ -306,8 +375,21 @@ function showResults() {
     let percentage = Math.round((score / currentQuiz.length) * 100);
     let grade = getLetterGrade(percentage);
 
-    document.getElementById('final-score').innerText =
-        `You scored ${score} out of ${currentQuiz.length}!\n(${percentage}% - Grade: ${grade})`;
+    // 1 to 5 stars from the score; the stars pop in one by one (style.css)
+    const stars = Math.max(1, Math.min(5, Math.round(percentage / 20)));
+    const starRow = document.getElementById('result-stars');
+    starRow.innerHTML = '';
+    for (let i = 0; i < 5; i++) {
+        const s = document.createElement('span');
+        s.textContent = '⭐';
+        s.className = i < stars ? 'star on' : 'star';
+        s.style.animationDelay = `${i * 0.15}s`;
+        starRow.appendChild(s);
+    }
+    document.getElementById('result-title').innerText =
+        percentage >= 80 ? '🎉 Great job!' : percentage >= 60 ? '👍 Nice work!' : '💪 Keep practicing!';
+    document.getElementById('final-score').innerText = `You got ${score} out of ${currentQuiz.length} right.`;
+    document.getElementById('final-grade').innerText = `${percentage}% · Grade: ${grade}`;
 
     saveScoreToHistory(percentage, grade);
     gkSubmit(true);
@@ -371,63 +453,45 @@ function deleteProgressSilently() {
 
 // --- 8. Accessibility & Hints ---
 
-function showHint() {
-    document.getElementById('show-hint-btn').style.display = 'none';
-    document.getElementById('hint-container').style.display = 'flex';
+function setHintOpen(open) {
+    document.getElementById('hint-container').style.display = open ? 'block' : 'none';
+    const btn = document.getElementById('show-hint-btn');
+    btn.innerText = open ? '💡 Hide the Hint' : '💡 Show a Hint';
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
 
-function addTTSMap(element, text) {
-    let start = currentTextForTTS.length;
-    currentTextForTTS += text + " ";
-    ttsMap.push({ el: element, start, end: currentTextForTTS.length });
+/* One button opens and closes the hint. Opening it also reads it out loud:
+   the students who need a hint most are the ones who can't read it yet. */
+function toggleHint() {
+    const open = document.getElementById('hint-container').style.display === 'none';
+    setHintOpen(open);
+    const hint = document.getElementById('hint-text');
+    if (open) {
+        gkSpeech.say(hint, hint.parentElement.querySelector('.spk-btn'));
+    } else if (hint.contains(document.querySelector('.w.hl')) || gkSpeech.btn === hint.parentElement.querySelector('.spk-btn')) {
+        gkSpeech.stop();
+    }
 }
 
-function readAloud() {
-    window.speechSynthesis.cancel();
-    ttsMap = [];
-    currentTextForTTS = "";
-
-    document.getElementById('question-text').querySelectorAll('.tts-word').forEach(span => addTTSMap(span, span.innerText));
-    document.querySelectorAll('.option-btn').forEach((btn, i) => {
-        currentTextForTTS += `Option ${i + 1}. `;
-        btn.querySelectorAll('.tts-word').forEach(span => addTTSMap(span, span.innerText));
-    });
-
-    executeTTS(currentTextForTTS, 0);
-}
-
-function readHint() {
-    window.speechSynthesis.cancel();
-    ttsMap = [];
-    currentTextForTTS = "";
-    document.getElementById('hint-text').querySelectorAll('.tts-word').forEach(span => addTTSMap(span, span.innerText));
-    executeTTS("Hint. " + currentTextForTTS, 6);
-}
-
-function showFeedback(icon, text) {
-    const words = text.split(/\s+/).map(word => `<span class="tts-word">${word}</span>`).join(' ');
-    document.getElementById('feedback').innerHTML =
-        `<button class="btn-read-small feedback-read" onclick="readFeedback()">🔊 Read</button> ${icon} <span id="feedback-text">${words}</span>`;
-}
-
-function readFeedback() {
-    window.speechSynthesis.cancel();
-    ttsMap = [];
-    currentTextForTTS = "";
-    document.getElementById('feedback-text').querySelectorAll('.tts-word').forEach(span => addTTSMap(span, span.innerText));
-    executeTTS(currentTextForTTS, 0);
-}
-
-function executeTTS(text, offset) {
-    let utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.85;
-    utterance.onboundary = (e) => {
-        if (e.name === 'word') {
-            document.querySelectorAll('.highlighted-word').forEach(el => el.classList.remove('highlighted-word'));
-            let match = ttsMap.find(m => (e.charIndex - offset) >= m.start && (e.charIndex - offset) < m.end);
-            if (match && match.el) match.el.classList.add('highlighted-word');
-        }
-    };
-    utterance.onend = () => document.querySelectorAll('.highlighted-word').forEach(el => el.classList.remove('highlighted-word'));
-    window.speechSynthesis.speak(utterance);
+/* The box under the choices after "Check My Answer": a title (Correct! /
+   Not quite.) and the explanation, with its own 🔊. The title is spoken
+   first but is not one of the lit-up words. */
+function showFeedback(right, rationale) {
+    const box = document.getElementById('feedback');
+    box.className = 'feedback ' + (right ? 'feedback-right' : 'feedback-wrong');
+    box.innerHTML = '';
+    const title = document.createElement('p');
+    title.className = 'feedback-title';
+    title.textContent = right ? '✅ Correct!' : '❌ Not quite.';
+    const row = document.createElement('p');
+    row.className = 'speak-row';
+    const words = document.createElement('span');
+    words.className = 'say';
+    words.dataset.lead = right ? 'Correct!' : 'Not quite.';
+    fillWords(words, String(rationale || '').replace(/^Explanation:\s*/, ''));
+    row.appendChild(makeSpeaker(words, 'Read this to me'));
+    row.appendChild(words);
+    box.appendChild(title);
+    box.appendChild(row);
+    box.style.display = 'block';
 }
