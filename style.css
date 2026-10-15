@@ -114,8 +114,12 @@ body {
 .speak-row { display: flex; align-items: flex-start; gap: 12px; margin: 0; }
 
 /* Picture beside the question; tap it to see it big */
+.q-main { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.q-main .hint-toggle { margin: 0 0 0 54px; }
 .question-card.has-pic { display: flex; align-items: center; gap: 16px; }
-.question-card.has-pic .speak-row { flex: 1 1 auto; min-width: 0; }
+.question-card.has-pic .q-main { flex: 1 1 auto; min-width: 0; }
+/* Long answers stack one per row; a smaller picture keeps the question on one screen. */
+.question-card.compact-pic .q-pic { flex-basis: 200px; }
 .q-pic {
     position: relative; flex: 0 0 250px; padding: 0; margin: 0;
     background: #fff; border: 2px solid var(--theme); border-radius: 12px;
@@ -161,13 +165,13 @@ body {
 .hint-toggle {
     display: inline-flex; align-items: center; gap: 8px;
     background: #fff4d6; color: #7a4a00; border: 2px solid #f0b429; border-radius: 999px;
-    font-size: 18px; font-weight: 600; padding: 6px 18px; cursor: pointer; margin-bottom: 4px;
+    font-size: 18px; font-weight: 600; padding: 6px 18px; cursor: pointer;
     transition: background 0.15s;
 }
 .hint-toggle:hover { background: #ffe9a8; }
 .hint-box {
     background: #fff8e1; border: 3px dashed #f0b429; border-radius: 16px;
-    padding: 10px 16px; margin: 6px 0 4px; font-size: 21px; line-height: 1.45; color: #4a3400;
+    padding: 10px 16px; margin: 0 0 4px; font-size: 21px; line-height: 1.45; color: #4a3400;
     animation: drop-in 0.25s ease-out both;
 }
 

@@ -255,7 +255,9 @@ function loadQuestion() {
     const container = document.getElementById('options-container');
     container.innerHTML = "";
     container.classList.remove('locked');
-    container.classList.toggle('grid', q.answerOptions.every(o => o.text.length <= 28));
+    const grid = q.answerOptions.every(o => o.text.length <= 60);
+    container.classList.toggle('grid', grid);
+    document.querySelector('.question-card').classList.toggle('compact-pic', !grid);
 
     q.answerOptions.forEach((option) => {
         const btn = document.createElement('button');

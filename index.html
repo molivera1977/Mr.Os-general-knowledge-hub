@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="style.css?v=gk-pics1">
+    <link rel="stylesheet" href="style.css?v=gk-pics2">
 </head>
 <body>
 
@@ -107,10 +107,11 @@
         </div>
 
         <div class="question-card">
-            <p class="speak-row question-row"><span id="question-text" class="say question-text"></span></p>
+            <div class="q-main">
+                <p class="speak-row question-row"><span id="question-text" class="say question-text"></span></p>
+                <button id="show-hint-btn" class="hint-toggle" onclick="toggleHint()">💡 Show a Hint</button>
+            </div>
         </div>
-
-        <button id="show-hint-btn" class="hint-toggle" onclick="toggleHint()">💡 Show a Hint</button>
         <div id="hint-container" class="hint-box" style="display: none;">
             <p class="speak-row"><span id="hint-text" class="say"></span></p>
         </div>
@@ -143,11 +144,11 @@
 
 <script src="share.js?v=3"></script>
 <script src="data/geography.js?v=gk-pics1"></script>
-<script src="data/civics.js?v=20261009d"></script>
+<script src="data/civics.js?v=gk-pics2"></script>
 <script src="data/math.js?v=gk-pics1"></script>
-<script src="data/ela.js?v=20261009d"></script>
+<script src="data/ela.js?v=gk-pics2"></script>
 <script src="speech.js?v=gk-fresh1"></script>
-<script src="script.js?v=gk-pics1"></script>
+<script src="script.js?v=gk-pics2"></script>
 <script src="saving.js?v=20261013sh2"></script>
 <script src="teacher.js?v=gk-pics1"></script>
 

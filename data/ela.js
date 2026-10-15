@@ -3,6 +3,8 @@ const elaData = [
     "questionNumber": 1,
     "question": "A noun is a person, place, thing, or idea. Which word is a noun?",
     "hint": "Do not pick an action word. Do not pick a word that tells what something is like.",
+    "image": "img/questions/ela-noun.svg",
+    "imageAlt": "Pictures of a person, a place and a thing",
     "answerOptions": [
       { "text": "Library", "rationale": "Explanation: A library is a place. So it is a noun.", "isCorrect": true },
       { "text": "Running", "rationale": "Explanation: Running is an action. It is a verb.", "isCorrect": false },
@@ -14,6 +16,8 @@ const elaData = [
     "questionNumber": 2,
     "question": "A verb is an action word. Which word in this sentence is a verb? 'The happy dog jumped over the fence.'",
     "hint": "Ask: What did the dog do?",
+    "image": "img/questions/ela-verb.svg",
+    "imageAlt": "A dog jumping over a fence",
     "answerOptions": [
       { "text": "Happy", "rationale": "Explanation: Happy tells about the dog. It is an adjective.", "isCorrect": false },
       { "text": "Jumped", "rationale": "Explanation: Jumped is what the dog did. It is an action, so it is a verb.", "isCorrect": true },
@@ -25,6 +29,8 @@ const elaData = [
     "questionNumber": 3,
     "question": "What is the main idea of a story?",
     "hint": "Think of a big umbrella. It covers the whole book.",
+    "image": "img/questions/ela-main-idea.svg",
+    "imageAlt": "An umbrella over three small boxes",
     "answerOptions": [
       { "text": "The name of the person who wrote the book.", "rationale": "Explanation: That is the author.", "isCorrect": false },
       { "text": "The small facts on each page.", "rationale": "Explanation: Those are details. They help the main idea.", "isCorrect": false },
@@ -36,6 +42,8 @@ const elaData = [
     "questionNumber": 4,
     "question": "A fact is true. You can check it. Which sentence is a fact?",
     "hint": "Could some people say 'No, I do not think so'? Then it is not a fact.",
+    "image": "img/questions/ela-fact.svg",
+    "imageAlt": "A bird, a magnifying glass and a check mark",
     "answerOptions": [
       { "text": "Apples are the best fruit.", "rationale": "Explanation: This is an opinion. Some kids like grapes more.", "isCorrect": false },
       { "text": "School is the most fun place to be.", "rationale": "Explanation: This is an opinion. Not all kids feel the same way.", "isCorrect": false },
@@ -47,6 +55,8 @@ const elaData = [
     "questionNumber": 5,
     "question": "What are synonyms?",
     "hint": "Think of 'small' and 'tiny.' How are they alike?",
+    "image": "img/questions/ela-synonym.svg",
+    "imageAlt": "The words small and tiny with an equals sign",
     "answerOptions": [
       { "text": "Words that mean the same thing, or close to it.", "rationale": "Explanation: Synonyms mean the same thing. Small and tiny are synonyms.", "isCorrect": true },
       { "text": "Words that mean the opposite.", "rationale": "Explanation: Those are antonyms, like hot and cold.", "isCorrect": false },
@@ -58,6 +68,8 @@ const elaData = [
     "questionNumber": 6,
     "question": "What are antonyms?",
     "hint": "Think of 'hot' and 'cold.' How are they different?",
+    "image": "img/questions/ela-antonym.svg",
+    "imageAlt": "The words hot and cold with arrows",
     "answerOptions": [
       { "text": "Words that are spelled the same way.", "rationale": "Explanation: That is not what antonyms are. Antonyms are about meaning.", "isCorrect": false },
       { "text": "Words that mean the opposite.", "rationale": "Explanation: Antonyms are opposites, like big and small.", "isCorrect": true },
@@ -69,6 +81,8 @@ const elaData = [
     "questionNumber": 7,
     "question": "A simile compares two things. It uses the word 'like' or 'as.' Which one is a simile?",
     "hint": "Look for 'like' or 'as' in each one.",
+    "image": "img/questions/ela-simile.svg",
+    "imageAlt": "A moon and a cookie with the words like and as",
     "answerOptions": [
       { "text": "The stars are diamonds in the sky.", "rationale": "Explanation: This compares stars and diamonds. But it does not use 'like' or 'as.' It is a metaphor.", "isCorrect": false },
       { "text": "The classroom was a zoo.", "rationale": "Explanation: This does not use 'like' or 'as.' It is a metaphor.", "isCorrect": false },
@@ -80,6 +94,8 @@ const elaData = [
     "questionNumber": 8,
     "question": "What is the setting of a story?",
     "hint": "A story is about a dragon. He lives in a dark cave long ago. Is that who, where, or what?",
+    "image": "img/questions/ela-setting.svg",
+    "imageAlt": "A castle, a moon, a clock and a map pin",
     "answerOptions": [
       { "text": "The problem the character must fix.", "rationale": "Explanation: That is the conflict.", "isCorrect": false },
       { "text": "The people or animals in the story.", "rationale": "Explanation: Those are the characters.", "isCorrect": false },
@@ -91,6 +107,8 @@ const elaData = [
     "questionNumber": 9,
     "question": "What is the plot of a story?",
     "hint": "Think about the beginning, the middle, and the end.",
+    "image": "img/questions/ela-plot.svg",
+    "imageAlt": "Boxes 1, 2 and 3 with arrows between them",
     "answerOptions": [
       { "text": "The things that happen in the story, in order.", "rationale": "Explanation: The plot is what happens, from start to end.", "isCorrect": true },
       { "text": "The picture on the front of the book.", "rationale": "Explanation: That is the cover. It is not the plot.", "isCorrect": false },
@@ -102,6 +120,8 @@ const elaData = [
     "questionNumber": 10,
     "question": "What does it mean to make an inference?",
     "hint": "Think: Clues in the book + What you know = Inference.",
+    "image": "img/questions/ela-inference.svg",
+    "imageAlt": "Magnifying glass plus brain equals light bulb",
     "answerOptions": [
       { "text": "To read the story as fast as you can.", "rationale": "Explanation: Reading fast is not an inference.", "isCorrect": false },
       { "text": "To copy a sentence from the book.", "rationale": "Explanation: That is a quote. You are not figuring anything out.", "isCorrect": false },
@@ -113,6 +133,8 @@ const elaData = [
     "questionNumber": 11,
     "question": "What are context clues?",
     "hint": "Think of a detective. A detective finds clues to solve a puzzle.",
+    "image": "img/questions/ela-context.svg",
+    "imageAlt": "A sentence with a hidden word and a detective",
     "answerOptions": [
       { "text": "Help to find a book in the library.", "rationale": "Explanation: That is not it. Context clues help you with words.", "isCorrect": false },
       { "text": "Hints in the words around a hard word. They help you know what it means.", "rationale": "Explanation: Context clues are hints near a new word. They help you learn what it means.", "isCorrect": true },
@@ -124,6 +146,8 @@ const elaData = [
     "questionNumber": 12,
     "question": "An adjective is a word that tells what something is like. Which word in this sentence is an adjective? 'The fluffy cat napped on the rug.'",
     "hint": "Ask: What kind of cat is it?",
+    "image": "img/questions/ela-adjective.svg",
+    "imageAlt": "A fluffy cat on a rug",
     "answerOptions": [
       { "text": "Cat", "rationale": "Explanation: A cat is an animal. It is a noun.", "isCorrect": false },
       { "text": "Fluffy", "rationale": "Explanation: Fluffy tells what the cat is like. It is an adjective.", "isCorrect": true },
@@ -135,6 +159,8 @@ const elaData = [
     "questionNumber": 13,
     "question": "An adverb tells how someone does an action. Which word in this sentence is an adverb? 'The student walked quietly down the hall.'",
     "hint": "Ask: How did the student walk? Many adverbs end in 'ly.'",
+    "image": "img/questions/ela-adverb.svg",
+    "imageAlt": "A person walking and a hush face",
     "answerOptions": [
       { "text": "Quietly", "rationale": "Explanation: Quietly tells how the student walked. It is an adverb.", "isCorrect": true },
       { "text": "Walked", "rationale": "Explanation: Walked is the action. It is a verb.", "isCorrect": false },
@@ -146,6 +172,8 @@ const elaData = [
     "questionNumber": 14,
     "question": "What is a supporting detail?",
     "hint": "Think of a table. The legs hold up the top. The top is the main idea.",
+    "image": "img/questions/ela-detail.svg",
+    "imageAlt": "A table: the top says main idea, the legs have question marks",
     "answerOptions": [
       { "text": "A fact or example that tells more about the main idea.", "rationale": "Explanation: Details hold up the main idea. They tell you more about it.", "isCorrect": true },
       { "text": "The first sentence of each paragraph.", "rationale": "Explanation: The first sentence often tells the main idea. It is not always a detail.", "isCorrect": false },
@@ -157,6 +185,8 @@ const elaData = [
     "questionNumber": 15,
     "question": "An opinion is what a person thinks or feels. Not all people agree. Which sentence is an opinion?",
     "hint": "Could some people disagree with it? Then it is an opinion.",
+    "image": "img/questions/ela-opinion.svg",
+    "imageAlt": "A flower, a love-it face and a thinking face",
     "answerOptions": [
       { "text": "Connecticut is a state.", "rationale": "Explanation: This is a fact. You can check it on a map.", "isCorrect": false },
       { "text": "The sun comes up in the east.", "rationale": "Explanation: This is a fact. You can see it each morning.", "isCorrect": false },
@@ -168,6 +198,8 @@ const elaData = [
     "questionNumber": 16,
     "question": "What are homophones?",
     "hint": "Think of 'eight' and 'ate.' Say them out loud.",
+    "image": "img/questions/ela-homophone.svg",
+    "imageAlt": "The words eight and ate",
     "answerOptions": [
       { "text": "Words that mean the opposite.", "rationale": "Explanation: Those are antonyms, like hot and cold.", "isCorrect": false },
       { "text": "Words that sound the same but are spelled in a different way and mean different things.", "rationale": "Explanation: Homophones sound alike, like sea and see. But they are spelled and used in a different way.", "isCorrect": true },
@@ -179,6 +211,8 @@ const elaData = [
     "questionNumber": 17,
     "question": "What is the conflict in a story?",
     "hint": "Think: What goes wrong for the character?",
+    "image": "img/questions/ela-conflict.svg",
+    "imageAlt": "A child facing a dragon",
     "answerOptions": [
       { "text": "The place where the story happens.", "rationale": "Explanation: That is the setting.", "isCorrect": false },
       { "text": "The main problem the characters must face.", "rationale": "Explanation: The conflict is the big problem. The story is about how it gets fixed.", "isCorrect": true },
@@ -190,6 +224,8 @@ const elaData = [
     "questionNumber": 18,
     "question": "What is the theme of a story?",
     "hint": "Think: What does the author want you to learn?",
+    "image": "img/questions/ela-theme.svg",
+    "imageAlt": "A book with an arrow to a light bulb",
     "answerOptions": [
       { "text": "The name of the main character.", "rationale": "Explanation: That is a name. It is not the theme.", "isCorrect": false },
       { "text": "The big lesson or message of the story.", "rationale": "Explanation: A theme is a lesson, like 'be kind' or 'never give up.'", "isCorrect": true },
@@ -201,6 +237,8 @@ const elaData = [
     "questionNumber": 19,
     "question": "What does point of view mean in a story?",
     "hint": "Does the story use 'I' and 'me'? Or does it use 'he' and 'she'?",
+    "image": "img/questions/ela-point-of-view.svg",
+    "imageAlt": "A girl saying I, me, my",
     "answerOptions": [
       { "text": "Who is telling the story.", "rationale": "Explanation: Point of view tells who tells the story. It can be a character ('I') or someone outside ('he' or 'she').", "isCorrect": true },
       { "text": "How much the book costs.", "rationale": "Explanation: That is the price.", "isCorrect": false },
@@ -212,6 +250,8 @@ const elaData = [
     "questionNumber": 20,
     "question": "What is a compound word?",
     "hint": "Think of 'rain' + 'bow' = 'rainbow.'",
+    "image": "img/questions/ela-compound.svg",
+    "imageAlt": "Rain plus bow equals rainbow",
     "answerOptions": [
       { "text": "A long word that is hard to spell.", "rationale": "Explanation: Long words are not always compound words.", "isCorrect": false },
       { "text": "A word with two or more beats, like 'happy.'", "rationale": "Explanation: 'Happy' has two beats. But it is not made of two words.", "isCorrect": false },
@@ -223,6 +263,8 @@ const elaData = [
     "questionNumber": 21,
     "question": "A prefix is a part added to the start of a word. The word 'preheat' has the prefix 'pre.' What does 'pre' mean?",
     "hint": "Think about what you do to an oven when you bake.",
+    "image": "img/questions/ela-prefix.svg",
+    "imageAlt": "pre plus heat",
     "answerOptions": [
       { "text": "Before", "rationale": "Explanation: 'Pre' means before. To preheat is to heat before you bake.", "isCorrect": true },
       { "text": "Again", "rationale": "Explanation: The prefix 're' means again, like in 'redo.'", "isCorrect": false },
@@ -234,6 +276,8 @@ const elaData = [
     "questionNumber": 22,
     "question": "A suffix is a part added to the end of a word. The word 'painful' has the suffix 'ful.' What does 'painful' mean?",
     "hint": "Think of 'helpful.' A helpful kid gives lots of help.",
+    "image": "img/questions/ela-suffix.svg",
+    "imageAlt": "help plus ful",
     "answerOptions": [
       { "text": "Full of pain", "rationale": "Explanation: The suffix 'ful' means full of. Painful means full of pain.", "isCorrect": true },
       { "text": "With no pain", "rationale": "Explanation: The suffix 'less' means with no, like in 'painless.'", "isCorrect": false },
@@ -245,6 +289,8 @@ const elaData = [
     "questionNumber": 23,
     "question": "Who is the person telling the story to the reader?",
     "hint": "This voice tells you what happens and how the characters feel.",
+    "image": "img/questions/ela-narrator.svg",
+    "imageAlt": "A book and a speaking head",
     "answerOptions": [
       { "text": "The Narrator", "rationale": "Explanation: The narrator is the voice that tells the story.", "isCorrect": true },
       { "text": "The Author", "rationale": "Explanation: The author wrote the book. The narrator is the voice that tells it.", "isCorrect": false },
@@ -256,6 +302,8 @@ const elaData = [
     "questionNumber": 24,
     "question": "A play is a story that actors act out. How is a play different from a story in a book?",
     "hint": "Think about what the actors say. Think about how they know where to move.",
+    "image": "img/questions/ela-play.svg",
+    "imageAlt": "Two actors on a stage with red curtains",
     "answerOptions": [
       { "text": "A play has lines for each actor to say and notes on how to move. A book story has paragraphs.", "rationale": "Explanation: A play is made to be acted out. So it has lines to say (dialogue) and notes for actors (stage directions).", "isCorrect": true },
       { "text": "A play never has any characters.", "rationale": "Explanation: Plays and stories both have characters.", "isCorrect": false },
@@ -267,6 +315,8 @@ const elaData = [
     "questionNumber": 25,
     "question": "Which kind of word must ALWAYS start with a capital letter?",
     "hint": "Think about proper nouns. A proper noun names one special person, place, or thing.",
+    "image": "img/questions/ela-capital.svg",
+    "imageAlt": "A big capital A and a small a",
     "answerOptions": [
       { "text": "Names of people, places, and days of the week", "rationale": "Explanation: Names like Joe, Bridgeport, and Monday are proper nouns. They always get a capital letter.", "isCorrect": true },
       { "text": "Each word in a sentence", "rationale": "Explanation: No. Only the first word and names get a capital letter.", "isCorrect": false },
@@ -278,6 +328,8 @@ const elaData = [
     "questionNumber": 26,
     "question": "What does a pronoun do in a sentence?",
     "hint": "Think of words like 'he,' 'she,' 'it,' and 'they.'",
+    "image": "img/questions/ela-pronoun.svg",
+    "imageAlt": "The words he, she, it and they",
     "answerOptions": [
       { "text": "It takes the place of a noun. Then we do not say the same name again and again.", "rationale": "Explanation: We do not have to say 'Mr. O' five times. We can say 'he.'", "isCorrect": true },
       { "text": "It tells how big or small a thing is.", "rationale": "Explanation: Words that tell what a thing is like are adjectives.", "isCorrect": false },
@@ -289,6 +341,8 @@ const elaData = [
     "questionNumber": 27,
     "question": "How is a 'Right There' question different from an inference question?",
     "hint": "One answer is hidden. The other one is right in front of you!",
+    "image": "img/questions/ela-right-there.svg",
+    "imageAlt": "A finger pointing at a book, and a magnifying glass",
     "answerOptions": [
       { "text": "A 'Right There' answer is in the words of the book. For an inference, you must use clues.", "rationale": "Explanation: 'Right There' means you can point to the answer in the book.", "isCorrect": true },
       { "text": "An inference answer is always on the first page.", "rationale": "Explanation: No. You can make an inference on any page.", "isCorrect": false },

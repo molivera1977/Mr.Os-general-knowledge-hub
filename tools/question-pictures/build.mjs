@@ -393,4 +393,232 @@ write('math-quads', m(
   const G = [140, 60], Hh = [80, 260], I = [420, 240];
   write('math-tri-scalene', m(shape(`${G} ${Hh} ${I}`) + ticks(...G, ...Hh, 1) + ticks(...Hh, ...I, 2) + ticks(...I, ...G, 3)));
 }
+
+// ── CIVICS (drawings) ─────────────────────────────────
+// Pictures help without naming the answer: no building, paper or person is
+// labeled with the word a question asks for.
+const NAVY = '#1f3a68', CREAM = '#fbf3df', STONE = '#f4f1ea', STONE_LINE = '#8d8574', GREEN_BILL = '#cfe3c4';
+const EMOJI = '"Apple Color Emoji","Noto Color Emoji","Segoe UI Emoji",sans-serif';
+const emo = (x, y, ch, size = 48) => `<text x="${r(x)}" y="${r(y)}" font-size="${size}" text-anchor="middle" font-family='${EMOJI}'>${ch}</text>`;
+const c = body => svg(body, '#ffffff');
+const sky = (body, top = '#e8f3fb') => svg(`<rect width="${W}" height="${H}" rx="14" fill="${top}"/>` + body, top);
+
+const columns = (x0, x1, yTop, yBot, n, w = 10) => {
+  let s = ''; const step = (x1 - x0) / (n - 1);
+  for (let i = 0; i < n; i++) s += `<rect x="${r(x0 + i * step - w / 2)}" y="${yTop}" width="${w}" height="${yBot - yTop}" fill="#fff" stroke="${STONE_LINE}" stroke-width="1.5"/>`;
+  return s;
+};
+const windows = (x0, y, n, gap, w = 14, h = 20) => Array.from({ length: n }, (_, i) =>
+  `<rect x="${x0 + i * gap}" y="${y}" width="${w}" height="${h}" rx="2" fill="#9cc3e2" stroke="${STONE_LINE}" stroke-width="1"/>`).join('');
+const lawn = `<rect x="0" y="250" width="${W}" height="50" fill="#a8d88f"/>`;
+
+// The White House (south side): wide body, round portico with columns, flag.
+const whiteHouse = () =>
+  lawn + `<rect x="70" y="140" width="340" height="110" fill="#fff" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  `<rect x="62" y="130" width="356" height="12" fill="#fff" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  windows(84, 160, 5, 26) + windows(316, 160, 4, 24) + windows(84, 205, 5, 26) + windows(316, 205, 4, 24) +
+  `<path d="M190 250 V 135 Q 240 105 290 135 V 250 Z" fill="#fff" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  columns(200, 280, 140, 250, 6, 8) +
+  `<rect x="186" y="122" width="108" height="10" fill="#fff" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  `<line x1="240" y1="122" x2="240" y2="70" stroke="#666" stroke-width="3"/>` +
+  `<rect x="240" y="70" width="40" height="24" fill="#b22234"/><rect x="240" y="70" width="17" height="12" fill="#3c3b6e"/>` +
+  `<rect x="240" y="77" width="40" height="3" fill="#fff"/><rect x="240" y="85" width="40" height="3" fill="#fff"/>`;
+
+// The Capitol: two wings, a columned middle, a big dome on a drum.
+const capitol = () =>
+  lawn + `<rect x="30" y="185" width="420" height="65" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  columns(50, 170, 192, 250, 7, 7) + columns(310, 430, 192, 250, 7, 7) +
+  `<rect x="170" y="165" width="140" height="85" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  `<polygon points="165,165 240,135 315,165" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  columns(182, 298, 170, 250, 8, 8) +
+  `<rect x="185" y="105" width="110" height="32" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  columns(192, 288, 108, 137, 9, 5) +
+  `<path d="M190 106 Q 190 38 240 34 Q 290 38 290 106 Z" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  `<path d="M205 104 Q 206 52 240 46" fill="none" stroke="${STONE_LINE}" stroke-width="1.5"/><path d="M275 104 Q 274 52 240 46" fill="none" stroke="${STONE_LINE}" stroke-width="1.5"/>` +
+  `<rect x="232" y="18" width="16" height="18" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>`;
+
+// A courthouse: steps, columns, a triangle roof, and the scales of justice.
+const courthouse = () =>
+  `<rect x="90" y="240" width="300" height="12" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  `<rect x="100" y="228" width="280" height="12" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  `<rect x="110" y="110" width="260" height="118" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  columns(126, 354, 118, 228, 8, 12) +
+  `<rect x="104" y="100" width="272" height="12" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  `<polygon points="100,100 240,45 380,100" fill="${STONE}" stroke="${STONE_LINE}" stroke-width="2"/>` +
+  emo(240, 95, '⚖️', 34);
+
+// An old paper with lines of writing (no words a child could read off).
+const parchment = (x, y, w, h, extra = '') => {
+  let lines = '';
+  for (let i = 0; i < Math.floor((h - 50) / 18); i++) {
+    const ly = y + 34 + i * 18, len = w - 50 - (i % 3) * 18;
+    lines += `<path d="M${x + 25} ${ly} q 10 -5 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0" fill="none" stroke="#8a6d3b" stroke-width="2" stroke-dasharray="${len} 400"/>`;
+  }
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${CREAM}" stroke="#b08d4f" stroke-width="3"/>` +
+    `<ellipse cx="${x + w / 2}" cy="${y}" rx="${w / 2 + 8}" ry="9" fill="#efdcae" stroke="#b08d4f" stroke-width="3"/>` +
+    `<ellipse cx="${x + w / 2}" cy="${y + h}" rx="${w / 2 + 8}" ry="9" fill="#efdcae" stroke="#b08d4f" stroke-width="3"/>` + lines + extra;
+};
+const quill = (x, y) => `<path d="M${x} ${y} C ${x + 40} ${y - 70}, ${x + 80} ${y - 110}, ${x + 110} ${y - 130} C ${x + 70} ${y - 80}, ${x + 40} ${y - 40}, ${x} ${y} Z" fill="#fff" stroke="#555" stroke-width="2"/>` +
+  `<line x1="${x}" y1="${y}" x2="${x - 10}" y2="${y + 14}" stroke="#333" stroke-width="3"/>`;
+const person = (x, y) => emo(x, y, '🧑‍💼', 64);
+const askBadge = (x, y) => qBubble(x, y);
+
+write('civ-mayor', sky(
+  [[40, 120, 60], [105, 80, 50], [160, 140, 70], [235, 60, 60], [300, 110, 55], [360, 90, 70]].map(([x, h, w]) =>
+    `<rect x="${x}" y="${250 - h - 60}" width="${w}" height="${h + 60}" fill="#c9d6e3" stroke="#7d93ab" stroke-width="2"/>` +
+    Array.from({ length: Math.floor((h + 40) / 26) }, (_, k) => `<rect x="${x + 10}" y="${250 - h - 48 + k * 26}" width="${w - 20}" height="12" fill="#fff6c8"/>`).join('')).join('') +
+  lawn + person(240, 286) + askBadge(290, 230) + label(240, 40, 'Our city', 22)));
+
+{
+  const proj = d3.geoConicEqualArea().parallels([40, 43]).rotate([73, 0]).fitExtent([[40, 30], [300, 270]], CT);
+  const path = d3.geoPath(proj).digits(1);
+  const [hx, hy] = proj(PLACES.hartford);
+  write('civ-governor', sky(`<path d="${path(CT)}" fill="${FOCUS}" stroke="${FOCUS_LINE}" stroke-width="3"/>` +
+    star(hx, hy, 14) + label(170, 250, 'Connecticut', 20) + person(390, 200) + askBadge(430, 110)));
+}
+{
+  const proj = usProj(20); proj.fitExtent([[10, 30], [330, 270]], { type: 'FeatureCollection', features: LOWER48 });
+  const path = d3.geoPath(proj).digits(1);
+  write('civ-president', sky(paths(LOWER48, path, FOCUS, '#fff', 0.8) + person(400, 200) + askBadge(440, 110)));
+}
+write('civ-constitution', c(parchment(130, 40, 220, 220) + quill(360, 260)));
+// Balance scale: power kept even.
+write('civ-balance', c(
+  `<rect x="232" y="70" width="16" height="170" fill="#b08d4f"/><rect x="180" y="238" width="120" height="16" rx="6" fill="#8a6d3b"/>` +
+  `<rect x="90" y="70" width="300" height="10" rx="5" fill="#8a6d3b"/><circle cx="240" cy="72" r="12" fill="#f6c453" stroke="#8a6d3b" stroke-width="3"/>` +
+  `<line x1="110" y1="80" x2="85" y2="170" stroke="#555" stroke-width="2"/><line x1="110" y1="80" x2="135" y2="170" stroke="#555" stroke-width="2"/>` +
+  `<line x1="370" y1="80" x2="345" y2="170" stroke="#555" stroke-width="2"/><line x1="370" y1="80" x2="395" y2="170" stroke="#555" stroke-width="2"/>` +
+  `<path d="M70 170 Q 110 200 150 170 Z" fill="#f6c453" stroke="#8a6d3b" stroke-width="3"/><path d="M330 170 Q 370 200 410 170 Z" fill="#f6c453" stroke="#8a6d3b" stroke-width="3"/>`));
+write('civ-capitol', sky(capitol()));
+write('civ-white-house', sky(whiteHouse()));
+write('civ-court', sky(courthouse()));
+write('civ-ballot', c(
+  `<rect x="140" y="140" width="200" height="130" rx="8" fill="#3c6fb6" stroke="${NAVY}" stroke-width="3"/>` +
+  `<rect x="150" y="128" width="180" height="16" rx="4" fill="${NAVY}"/><rect x="200" y="132" width="80" height="6" rx="3" fill="#111"/>` +
+  `<g transform="rotate(-8 240 80)"><rect x="190" y="20" width="100" height="125" rx="4" fill="#fff" stroke="#888" stroke-width="2"/>` +
+  [45, 75, 105].map((y, i) => `<rect x="203" y="${y}" width="18" height="18" fill="#fff" stroke="#333" stroke-width="2"/>` +
+    `<line x1="230" y1="${y + 9}" x2="275" y2="${y + 9}" stroke="#bbb" stroke-width="5" stroke-linecap="round"/>` +
+    (i === 1 ? `<path d="M206 ${y + 9} l5 6 l10 -14" fill="none" stroke="${RED}" stroke-width="4" stroke-linecap="round"/>` : '')).join('') + `</g>` +
+  emo(240, 230, '⭐', 40)));
+// Birthday cake with a ? where the number would be.
+const cake = (extra = '') => `<rect x="130" y="190" width="220" height="70" rx="10" fill="#f6c6d0" stroke="#c0607a" stroke-width="3"/>` +
+  `<rect x="160" y="140" width="160" height="55" rx="10" fill="#fde2e7" stroke="#c0607a" stroke-width="3"/>` +
+  `<path d="M130 200 q 18 16 36 0 t 36 0 t 36 0 t 36 0 t 36 0 t 36 0" fill="none" stroke="#fff" stroke-width="6"/>` +
+  [200, 240, 280].map(x => `<rect x="${x - 4}" y="105" width="8" height="35" fill="#7fb3e0"/><path d="M${x} 90 q 8 10 0 16 q -8 -6 0 -16" fill="#f6a623"/>`).join('') +
+  `<rect x="${W / 2 - 50}" y="270" width="100" height="10" rx="5" fill="#ccc"/>` + extra;
+write('civ-cake', c(cake(qBubble(395, 120))));
+const burst = (x, y, rad, col) => Array.from({ length: 12 }, (_, i) => { const t = i * Math.PI / 6;
+  return `<line x1="${r(x + rad * 0.3 * Math.cos(t))}" y1="${r(y + rad * 0.3 * Math.sin(t))}" x2="${r(x + rad * Math.cos(t))}" y2="${r(y + rad * Math.sin(t))}" stroke="${col}" stroke-width="4" stroke-linecap="round"/>` +
+    `<circle cx="${r(x + rad * 1.15 * Math.cos(t))}" cy="${r(y + rad * 1.15 * Math.sin(t))}" r="3.5" fill="${col}"/>`; }).join('');
+write('civ-birthday', sky(burst(95, 95, 55, '#ff6b6b') + burst(385, 85, 50, '#ffd43b') + burst(400, 225, 35, '#74c0fc') + burst(80, 230, 35, '#b197fc') +
+  `<rect x="160" y="130" width="160" height="140" rx="10" fill="#fff" stroke="#999" stroke-width="2"/><rect x="160" y="130" width="160" height="40" rx="10" fill="${RED}"/>` +
+  `<text x="240" y="160" font-size="22" font-weight="700" text-anchor="middle" fill="#fff">???</text>` +
+  `<text x="240" y="235" font-size="64" font-weight="700" text-anchor="middle" fill="${INK}">?</text>`, '#1f2b4d'));
+write('civ-timeline', c(
+  `<line x1="60" y1="170" x2="420" y2="170" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>` +
+  `<circle cx="70" cy="170" r="12" fill="${RED}"/><circle cx="410" cy="170" r="12" fill="#1f78c8"/>` +
+  label(70, 225, '1776', 30) + label(410, 225, '2026', 30) + emo(70, 135, '🎉', 40) + emo(410, 135, '🎂', 40) +
+  `<path d="M90 115 Q 240 40 390 115" fill="none" stroke="#8a8a8a" stroke-width="3" stroke-dasharray="8 6"/>` +
+  label(240, 70, '? years', 28, RED)));
+write('civ-dollar', c(
+  `<rect x="40" y="70" width="400" height="170" rx="10" fill="${GREEN_BILL}" stroke="#4d7a3a" stroke-width="4"/>` +
+  `<rect x="54" y="84" width="372" height="142" rx="6" fill="none" stroke="#4d7a3a" stroke-width="2"/>` +
+  `<ellipse cx="240" cy="155" rx="55" ry="65" fill="#e6f0dc" stroke="#4d7a3a" stroke-width="3"/>` +
+  `<text x="240" y="178" font-size="64" font-weight="700" text-anchor="middle" fill="#4d7a3a">?</text>` +
+  ['1'].map(t => `<text x="80" y="122" font-size="34" font-weight="700" text-anchor="middle" fill="#2f5524">${t}</text><text x="400" y="122" font-size="34" font-weight="700" text-anchor="middle" fill="#2f5524">${t}</text>` +
+    `<text x="80" y="212" font-size="34" font-weight="700" text-anchor="middle" fill="#2f5524">${t}</text><text x="400" y="212" font-size="34" font-weight="700" text-anchor="middle" fill="#2f5524">${t}</text>`).join('')));
+write('civ-term', c(
+  emo(80, 175, '🗳️', 70) + emo(400, 175, '🗳️', 70) + label(80, 235, 'Vote', 22) + label(400, 235, 'Vote again', 22) +
+  arrow(130, 155, 345, 155, '#1f78c8') + label(240, 125, '? years', 28, RED)));
+write('civ-law', sky(
+  `<polygon points="${poly(8, 150, 140, 80, -67.5)}" fill="#c0392b" stroke="#fff" stroke-width="6"/>` +
+  `<text x="150" y="155" font-size="40" font-weight="700" text-anchor="middle" fill="#fff">STOP</text>` +
+  `<rect x="146" y="218" width="8" height="70" fill="#777"/>` +
+  `<rect x="290" y="60" width="130" height="160" rx="8" fill="#fff" stroke="${INK}" stroke-width="5"/>` +
+  `<text x="355" y="105" font-size="22" font-weight="700" text-anchor="middle" fill="${INK}">SPEED</text>` +
+  `<text x="355" y="132" font-size="22" font-weight="700" text-anchor="middle" fill="${INK}">LIMIT</text>` +
+  `<text x="355" y="195" font-size="58" font-weight="700" text-anchor="middle" fill="${INK}">25</text>` +
+  `<rect x="351" y="220" width="8" height="68" fill="#777"/>`));
+write('civ-ten-rights', c(parchment(120, 30, 240, 240).replace(/<path d="M[^"]*q 10 -5[^>]*>/g, '') +
+  Array.from({ length: 10 }, (_, i) => `<text x="150" y="${70 + i * 20}" font-size="15" font-weight="700" fill="#6b4f1d">${i + 1}.</text>` +
+    `<line x1="175" y1="${65 + i * 20}" x2="${320 - (i % 3) * 20}" y2="${65 + i * 20}" stroke="#8a6d3b" stroke-width="3" stroke-linecap="round"/>`).join('')));
+write('civ-council', c(
+  `<ellipse cx="240" cy="190" rx="170" ry="55" fill="#b5835a" stroke="#7a5230" stroke-width="3"/>` +
+  [[100, 150], [170, 128], [240, 120], [310, 128], [380, 150]].map(([x, y]) => emo(x, y, '🧑', 46)).join('') +
+  [[130, 270], [240, 285], [350, 270]].map(([x, y]) => emo(x, y, '🧑', 46)).join('') +
+  label(240, 40, 'Our city', 22)));
+write('civ-1776-paper', c(parchment(80, 50, 220, 200) + quill(300, 250) + emo(390, 150, '🔔', 70) + label(390, 225, '1776', 26)));
+{
+  const DC = PLACES.dc;
+  const proj = usProj(20); proj.fitExtent([[10, 20], [W - 10, H - 20]], { type: 'FeatureCollection', features: LOWER48 });
+  const path = d3.geoPath(proj).digits(1);
+  const [x, y] = proj(DC);
+  write('civ-dc', sky(paths(LOWER48, path, LAND, LAND_LINE, 0.8) + star(x, y, 13) +
+    arrow(x - 70, y - 60, x - 12, y - 10, RED) + emo(x - 95, y - 60, '🏠', 40) + qBubble(x - 140, y - 80) +
+    star(40, 272, 11) + label(56, 279, '= Washington, D.C.', 17, INK, 'start')));
+}
+// The flag again, for the two flag questions (stars, stripes).
+fs.copyFileSync(`${OUT}/geo-us-flag.svg`, `${OUT}/civ-flag.svg`);
+
+// ── LANGUAGE ARTS (small scenes) ──────────────────────
+const card = (x, y, w, h, fill = '#f4f0ff', stroke = '#8a6dd8') => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="14" fill="${fill}" stroke="${stroke}" stroke-width="3"/>`;
+const word = (x, y, t, size = 30, color = INK) => `<text x="${r(x)}" y="${r(y)}" font-size="${size}" font-weight="700" text-anchor="middle" fill="${color}">${t}</text>`;
+const plus = (x, y) => word(x, y, '+', 44, '#8a6dd8');
+const eq = (x, y) => word(x, y, '=', 44, '#8a6dd8');
+
+write('ela-noun', c([[85, '👧', 'person'], [240, '🏫', 'place'], [395, '⚽', 'thing']].map(([x, e, t]) =>
+  card(x - 68, 70, 136, 170) + emo(x, 168, e, 74) + word(x, 222, t, 24)).join('')));
+write('ela-verb', sky(`<rect x="250" y="190" width="150" height="60" fill="none"/>` +
+  [255, 285, 315, 345, 375].map(x => `<rect x="${x}" y="185" width="14" height="70" rx="3" fill="#c98b4f" stroke="#7a5230" stroke-width="2"/>`).join('') +
+  `<rect x="248" y="200" width="145" height="10" fill="#c98b4f"/><rect x="248" y="230" width="145" height="10" fill="#c98b4f"/>` +
+  `<path d="M120 220 Q 320 20 440 220" fill="none" stroke="#1f78c8" stroke-width="5" stroke-dasharray="12 8"/>` +
+  emo(300, 120, '🐕', 70) + lawn));
+write('ela-main-idea', c(emo(240, 140, '☂️', 120) +
+  [130, 240, 350].map(x => card(x - 45, 190, 90, 70, '#fff4d6', '#e0a800') + word(x, 233, '•••', 26, '#9a6b00')).join('')));
+write('ela-fact', c(emo(160, 185, '🦜', 120) + emo(320, 160, '🔍', 90) + emo(385, 230, '✅', 50)));
+write('ela-synonym', c(card(40, 90, 160, 120) + word(120, 145, 'small', 32) + emo(120, 195, '🐭', 40) + eq(240, 165) +
+  card(280, 90, 160, 120) + word(360, 145, 'tiny', 32) + emo(360, 195, '🐜', 40)));
+write('ela-antonym', c(card(40, 90, 160, 120, '#fde2d6', '#d35400') + word(120, 145, 'hot', 34) + emo(120, 195, '🔥', 40) + word(240, 165, '↔', 44, '#8a6dd8') +
+  card(280, 90, 160, 120, '#dceefc', '#1f78c8') + word(360, 145, 'cold', 34) + emo(360, 195, '❄️', 40)));
+write('ela-simile', c(emo(110, 170, '🌙', 90) + emo(370, 170, '🍪', 90) +
+  `<rect x="180" y="125" width="120" height="70" rx="35" fill="#f4f0ff" stroke="#8a6dd8" stroke-width="3"/>` + word(240, 150, 'like', 24, '#6c3fc4') + word(240, 182, 'as', 24, '#6c3fc4')));
+write('ela-setting', sky(emo(150, 200, '🏰', 140) + emo(380, 90, '🌙', 60) + emo(390, 230, '🕰️', 60) + emo(80, 80, '📍', 50), '#dfe7f7'));
+write('ela-plot', c([[85, '1'], [240, '2'], [395, '3']].map(([x, n], i) => card(x - 60, 80, 120, 140) + word(x, 168, n, 64, '#6c3fc4') +
+  (i < 2 ? arrow(x + 64, 150, x + 92, 150, RED, 5) : '')).join('')));
+write('ela-inference', c(emo(80, 170, '🔍', 80) + plus(160, 165) + emo(240, 170, '🧠', 80) + eq(320, 165) + emo(400, 170, '💡', 80)));
+write('ela-context', c(card(30, 110, 420, 90, '#fff', '#8a6dd8') +
+  `<line x1="60" y1="155" x2="190" y2="155" stroke="#bbb" stroke-width="10" stroke-linecap="round"/>` +
+  `<rect x="205" y="132" width="90" height="44" rx="8" fill="#FFD44D"/><text x="250" y="164" font-size="30" font-weight="700" text-anchor="middle" fill="${INK}">???</text>` +
+  `<line x1="310" y1="155" x2="420" y2="155" stroke="#bbb" stroke-width="10" stroke-linecap="round"/>` + emo(400, 95, '🕵️', 60)));
+write('ela-adjective', c(`<ellipse cx="240" cy="235" rx="150" ry="30" fill="#c0392b" opacity="0.8"/>` + emo(240, 220, '🐈', 140)));
+write('ela-adverb', c(`<rect x="0" y="230" width="${W}" height="70" fill="#e9e2d0"/>` + emo(200, 220, '🚶', 120) + emo(330, 120, '🤫', 70)));
+write('ela-detail', c(
+  `<rect x="90" y="90" width="300" height="34" rx="6" fill="#f6c453" stroke="#9a6b00" stroke-width="3"/>` + word(240, 116, 'main idea', 22) +
+  [120, 240, 360].map(x => `<rect x="${x - 12}" y="124" width="24" height="120" fill="#c98b4f" stroke="#7a5230" stroke-width="2"/>` + qBubble(x, 205).replace(/r="22"/, 'r="18"')).join('')));
+write('ela-opinion', c(emo(150, 200, '🌼', 120) + emo(330, 150, '😍', 70) + emo(410, 230, '🤔', 60) +
+  `<path d="M270 110 Q 330 60 390 110" fill="none" stroke="#bbb" stroke-width="3"/>`));
+write('ela-homophone', c(card(40, 80, 160, 140) + word(120, 135, 'eight', 32) + word(120, 195, '8', 48, '#6c3fc4') +
+  emo(240, 170, '👂', 50) +
+  card(280, 80, 160, 140) + word(360, 135, 'ate', 32) + emo(360, 200, '🍽️', 50)));
+write('ela-conflict', sky(emo(130, 210, '🧒', 110) + emo(240, 140, '⚡', 60) + emo(360, 210, '🐉', 120)));
+write('ela-theme', c(emo(140, 180, '📖', 110) + arrow(220, 160, 290, 160, RED, 6) + emo(350, 180, '💡', 110)));
+write('ela-point-of-view', c(emo(130, 220, '👧', 120) +
+  `<path d="M190 70 h 230 a 20 20 0 0 1 20 20 v 60 a 20 20 0 0 1 -20 20 h -180 l -30 30 v -30 a 20 20 0 0 1 -20 -20 v -60 a 20 20 0 0 1 20 -20 z" fill="#fff" stroke="#8a6dd8" stroke-width="3"/>` +
+  word(305, 130, 'I … me … my', 26)));
+write('ela-compound', c(emo(70, 165, '🌧️', 70) + word(70, 225, 'rain', 26) + plus(150, 160) + emo(230, 165, '🎀', 70) + word(230, 225, 'bow', 26) +
+  eq(305, 160) + emo(395, 165, '🌈', 80) + word(395, 225, 'rainbow', 24)));
+write('ela-prefix', c(card(40, 100, 140, 90, '#fff4d6', '#e0a800') + word(110, 157, 'pre', 38) + plus(210, 160) +
+  card(240, 100, 140, 90) + word(310, 157, 'heat', 38) + emo(430, 165, '🔥', 50)));
+write('ela-suffix', c(card(40, 100, 140, 90) + word(110, 157, 'help', 38) + plus(210, 160) +
+  card(240, 100, 140, 90, '#fff4d6', '#e0a800') + word(310, 157, 'ful', 38) + emo(430, 165, '🤝', 50)));
+write('ela-narrator', c(emo(150, 200, '📖', 130) + emo(330, 140, '🗣️', 90)));
+write('ela-play', c(
+  `<rect x="30" y="40" width="420" height="230" rx="10" fill="#4a2a2a"/>` +
+  `<path d="M30 40 Q 120 60 130 270 H 30 Z" fill="#b22234"/><path d="M450 40 Q 360 60 350 270 H 450 Z" fill="#b22234"/>` +
+  `<rect x="30" y="230" width="420" height="40" fill="#8a5a2b"/>` + emo(205, 225, '🧑', 70) + emo(285, 225, '👧', 70) + emo(240, 110, '🎭', 50)));
+write('ela-capital', c(word(160, 200, 'A', 150, '#6c3fc4') + word(330, 200, 'a', 110, '#8a8a8a')));
+write('ela-pronoun', c([[90, 'he'], [190, 'she'], [290, 'it'], [390, 'they']].map(([x, t], i) =>
+  `<circle cx="${x}" cy="${i % 2 ? 175 : 125}" r="48" fill="#f4f0ff" stroke="#8a6dd8" stroke-width="3"/>` + word(x, (i % 2 ? 175 : 125) + 11, t, 30)).join('')));
+write('ela-right-there', c(emo(140, 190, '📖', 130) + emo(190, 120, '👆', 60) + emo(350, 190, '🔍', 90) + emo(410, 110, '🧩', 50)));
+
 console.log(fs.readdirSync(OUT).length + ' pictures');

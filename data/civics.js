@@ -3,6 +3,8 @@ const civicsData = [
     "questionNumber": 1,
     "question": "Each city has a leader. People vote for this leader. What do we call the leader of a city like Bridgeport?",
     "hint": "This person runs the city. The office is at City Hall.",
+    "image": "img/questions/civ-mayor.svg",
+    "imageAlt": "Tall city buildings and a person with a question mark",
     "answerOptions": [
       { "text": "The Mayor", "rationale": "Explanation: A Mayor is the leader of a city or town.", "isCorrect": true },
       { "text": "The Governor", "rationale": "Explanation: A Governor leads a whole state, not one city.", "isCorrect": false },
@@ -14,6 +16,8 @@ const civicsData = [
     "questionNumber": 2,
     "question": "Each state has a leader. People vote for this leader. What do we call the leader of a state like Connecticut?",
     "hint": "This person works in Hartford. Hartford is our state capital.",
+    "image": "img/questions/civ-governor.svg",
+    "imageAlt": "Map of Connecticut and a person with a question mark",
     "answerOptions": [
       { "text": "The Governor", "rationale": "Explanation: The Governor is the leader of a state.", "isCorrect": true },
       { "text": "The Mayor", "rationale": "Explanation: A Mayor leads just one city, not a whole state.", "isCorrect": false },
@@ -25,6 +29,8 @@ const civicsData = [
     "questionNumber": 3,
     "question": "People vote for one leader for the whole United States. What is this leader called?",
     "hint": "This person lives in the White House.",
+    "image": "img/questions/civ-president.svg",
+    "imageAlt": "Map of the United States and a person with a question mark",
     "answerOptions": [
       { "text": "The President", "rationale": "Explanation: The President is the leader of the whole country.", "isCorrect": true },
       { "text": "The King", "rationale": "Explanation: The United States does not have a king.", "isCorrect": false },
@@ -36,6 +42,8 @@ const civicsData = [
     "questionNumber": 4,
     "question": "Our country has one most important paper. It tells how our government works. What is it called?",
     "hint": "It starts with the words \"We the People.\"",
+    "image": "img/questions/civ-constitution.svg",
+    "imageAlt": "An old paper with writing and a feather pen",
     "answerOptions": [
       { "text": "The Constitution", "rationale": "Explanation: The Constitution is the top law of our country. It sets the rules for the government.", "isCorrect": true },
       { "text": "The Declaration of Independence", "rationale": "Explanation: This paper said we were free from Great Britain. It does not set the rules for the government.", "isCorrect": false },
@@ -47,6 +55,8 @@ const civicsData = [
     "questionNumber": 5,
     "question": "Our government is split into parts. Each part is called a branch. This way, no one has too much power. How many branches are there?",
     "hint": "One branch makes laws. One branch carries out laws. One branch has the courts.",
+    "image": "img/questions/civ-balance.svg",
+    "imageAlt": "A balance scale with both sides even",
     "answerOptions": [
       { "text": "Three", "rationale": "Explanation: There are three branches. They are the Legislative, Executive, and Judicial branches.", "isCorrect": true },
       { "text": "Two", "rationale": "Explanation: There are two big political parties. But there are three branches.", "isCorrect": false },
@@ -58,6 +68,8 @@ const civicsData = [
     "questionNumber": 6,
     "question": "Laws are rules for everyone. Which branch of the government writes new laws and votes on them?",
     "hint": "This branch is Congress. Congress has two parts: the Senate and the House of Representatives.",
+    "image": "img/questions/civ-capitol.svg",
+    "imageAlt": "A large white building with a dome",
     "answerOptions": [
       { "text": "The Legislative Branch", "rationale": "Explanation: \"Legislate\" means to make laws. This branch is Congress. It writes the laws.", "isCorrect": true },
       { "text": "The Executive Branch", "rationale": "Explanation: This branch carries out the laws. It does not write them.", "isCorrect": false },
@@ -69,6 +81,8 @@ const civicsData = [
     "questionNumber": 7,
     "question": "The President is the leader of one branch. Which branch does the President lead?",
     "hint": "This branch makes sure the laws are carried out.",
+    "image": "img/questions/civ-white-house.svg",
+    "imageAlt": "A white house with columns and a flag on top",
     "answerOptions": [
       { "text": "The Executive Branch", "rationale": "Explanation: The President is the head of the Executive Branch.", "isCorrect": true },
       { "text": "The Legislative Branch", "rationale": "Explanation: Congress is this branch. The President does not lead it.", "isCorrect": false },
@@ -80,6 +94,8 @@ const civicsData = [
     "questionNumber": 8,
     "question": "The Judicial Branch is made of courts. What is the name of the top court in the United States?",
     "hint": "It has nine judges. They are called Justices.",
+    "image": "img/questions/civ-court.svg",
+    "imageAlt": "A courthouse with columns and scales on the roof",
     "answerOptions": [
       { "text": "The Supreme Court", "rationale": "Explanation: The Supreme Court is the top court in the country.", "isCorrect": true },
       { "text": "The People's Court", "rationale": "Explanation: This is a TV show. It is not a real government court.", "isCorrect": false },
@@ -91,6 +107,8 @@ const civicsData = [
     "questionNumber": 9,
     "question": "A ballot is a paper where you mark your choice. People fill out a ballot to pick their leaders. What do we call this?",
     "hint": "This most often happens on a Tuesday in November.",
+    "image": "img/questions/civ-ballot.svg",
+    "imageAlt": "A paper with a check mark going into a box",
     "answerOptions": [
       { "text": "Voting in an Election", "rationale": "Explanation: In an election, people vote. That is how they pick their leaders.", "isCorrect": true },
       { "text": "Taking a Census", "rationale": "Explanation: A census is when the government counts all the people. It does not pick leaders.", "isCorrect": false },
@@ -102,6 +120,8 @@ const civicsData = [
     "questionNumber": 10,
     "question": "How old do you have to be to vote for President?",
     "hint": "It is the age when the law says you are an adult.",
+    "image": "img/questions/civ-cake.svg",
+    "imageAlt": "A birthday cake with a question mark",
     "answerOptions": [
       { "text": "18 years old", "rationale": "Explanation: The Constitution says citizens who are 18 or older can vote.", "isCorrect": true },
       { "text": "16 years old", "rationale": "Explanation: At 16, you can learn to drive in most states. But you cannot vote yet.", "isCorrect": false },
@@ -113,6 +133,8 @@ const civicsData = [
     "questionNumber": 11,
     "question": "What is the birthday of the United States?",
     "hint": "We have fireworks and cookouts on this day. It is in the summer.",
+    "image": "img/questions/civ-birthday.svg",
+    "imageAlt": "Fireworks and a calendar page with a question mark",
     "answerOptions": [
       { "text": "July 4, 1776", "rationale": "Explanation: On July 4, 1776, leaders said yes to the Declaration of Independence. That is when our country was born.", "isCorrect": true },
       { "text": "December 25, 1776", "rationale": "Explanation: December 25 is Christmas. It is not our country's birthday.", "isCorrect": false },
@@ -124,6 +146,8 @@ const civicsData = [
     "questionNumber": 12,
     "question": "Our country was born in 1776. How old did it turn in 2026?",
     "hint": "Take 2026. Subtract 1776.",
+    "image": "img/questions/civ-timeline.svg",
+    "imageAlt": "A line from 1776 to 2026 with question mark years",
     "answerOptions": [
       { "text": "250 years old", "rationale": "Explanation: 2026 minus 1776 is 250. The United States has its 250th birthday in 2026!", "isCorrect": true },
       { "text": "200 years old", "rationale": "Explanation: The United States turned 200 back in 1976.", "isCorrect": false },
@@ -135,6 +159,8 @@ const civicsData = [
     "questionNumber": 13,
     "question": "Who was the very first President of the United States?",
     "hint": "He was a famous army leader. His face is on the one-dollar bill and the quarter.",
+    "image": "img/questions/civ-dollar.svg",
+    "imageAlt": "A one-dollar bill with a question mark where the face goes",
     "answerOptions": [
       { "text": "George Washington", "rationale": "Explanation: George Washington was the first President. He served from 1789 to 1797.", "isCorrect": true },
       { "text": "Abraham Lincoln", "rationale": "Explanation: Abraham Lincoln was the 16th President, not the first.", "isCorrect": false },
@@ -179,6 +205,8 @@ const civicsData = [
     "questionNumber": 17,
     "question": "A term is the time a leader serves after one win. How many years is one term for a President?",
     "hint": "It is the same as the number of years in high school.",
+    "image": "img/questions/civ-term.svg",
+    "imageAlt": "A vote, then an arrow with question mark years, then a vote again",
     "answerOptions": [
       { "text": "4 years", "rationale": "Explanation: One term is 4 years. A President can win two terms at most. That is 8 years.", "isCorrect": true },
       { "text": "8 years", "rationale": "Explanation: 8 years is two terms. One term is just 4 years.", "isCorrect": false },
@@ -190,6 +218,8 @@ const civicsData = [
     "questionNumber": 18,
     "question": "What is a law?",
     "hint": "Think of the rules in your class. Now think of rules for a whole city, state, or country.",
+    "image": "img/questions/civ-law.svg",
+    "imageAlt": "A stop sign and a speed limit sign",
     "answerOptions": [
       { "text": "A rule made by the government that everyone must follow.", "rationale": "Explanation: Laws keep people safe. They protect our rights.", "isCorrect": true },
       { "text": "An idea that people can choose to ignore.", "rationale": "Explanation: You cannot ignore a law. If you break a law, there is a cost.", "isCorrect": false },
@@ -201,6 +231,8 @@ const civicsData = [
     "questionNumber": 19,
     "question": "An amendment is a change added to the Constitution. The first 10 amendments protect things like free speech. What do we call them?",
     "hint": "It is a list of freedoms. It was added to the Constitution.",
+    "image": "img/questions/civ-ten-rights.svg",
+    "imageAlt": "An old paper with a list numbered 1 to 10",
     "answerOptions": [
       { "text": "The Bill of Rights", "rationale": "Explanation: The Bill of Rights is the first 10 amendments. It protects the freedoms of every American.", "isCorrect": true },
       { "text": "The Rules of Law", "rationale": "Explanation: That is not the name. The first 10 amendments are the Bill of Rights.", "isCorrect": false },
@@ -212,6 +244,8 @@ const civicsData = [
     "questionNumber": 20,
     "question": "A city makes its own laws too. Who makes the laws for Bridgeport?",
     "hint": "This is a group of people from our city. People vote for them. They work with the Mayor.",
+    "image": "img/questions/civ-council.svg",
+    "imageAlt": "A group of people around a table",
     "answerOptions": [
       { "text": "The City Council", "rationale": "Explanation: The City Council makes the laws for our city.", "isCorrect": true },
       { "text": "The Supreme Court", "rationale": "Explanation: The Supreme Court is a court for the whole country. It does not make city laws.", "isCorrect": false },
@@ -223,6 +257,8 @@ const civicsData = [
     "questionNumber": 21,
     "question": "The United States flag has 50 white stars. What do the stars stand for?",
     "hint": "Think of how many parts make up our country today.",
+    "image": "img/questions/civ-flag.svg",
+    "imageAlt": "The flag of our country",
     "answerOptions": [
       { "text": "The 50 states.", "rationale": "Explanation: Each star stands for one state. There are 50 states.", "isCorrect": true },
       { "text": "The 50 first colonies.", "rationale": "Explanation: There were only 13 first colonies, not 50. The stripes stand for them.", "isCorrect": false },
@@ -234,6 +270,8 @@ const civicsData = [
     "questionNumber": 22,
     "question": "Long ago, England ruled our land. Then leaders wrote a famous paper. It said we were now a free country. What is this paper called?",
     "hint": "We remember this paper every year on the Fourth of July.",
+    "image": "img/questions/civ-1776-paper.svg",
+    "imageAlt": "An old paper, a feather pen, a bell and the year 1776",
     "answerOptions": [
       { "text": "The Declaration of Independence", "rationale": "Explanation: This paper told the world we were free from Great Britain.", "isCorrect": true },
       { "text": "The US Constitution", "rationale": "Explanation: The Constitution set the rules for the new government. It came later.", "isCorrect": false },
@@ -245,6 +283,8 @@ const civicsData = [
     "questionNumber": 23,
     "question": "The United States flag has 13 red and white stripes. What do the stripes stand for?",
     "hint": "Think of the very start of our country.",
+    "image": "img/questions/civ-flag.svg",
+    "imageAlt": "The flag of our country",
     "answerOptions": [
       { "text": "The 13 first colonies.", "rationale": "Explanation: A colony is land ruled by another country. Our country began as 13 colonies. Each stripe stands for one.", "isCorrect": true },
       { "text": "The 13 states we have today.", "rationale": "Explanation: We have 50 states today, not 13.", "isCorrect": false },
@@ -267,6 +307,8 @@ const civicsData = [
     "questionNumber": 25,
     "question": "Where does the President of the United States live and work?",
     "hint": "Its address is 1600 Pennsylvania Avenue. It is in Washington, D.C.",
+    "image": "img/questions/civ-dc.svg",
+    "imageAlt": "Map of the United States with a star on Washington, D.C.",
     "answerOptions": [
       { "text": "The White House", "rationale": "Explanation: The President lives and works in the White House. Every President but George Washington has lived there.", "isCorrect": true },
       { "text": "The U.S. Capitol", "rationale": "Explanation: Congress works in the Capitol. The President does not live there.", "isCorrect": false },
