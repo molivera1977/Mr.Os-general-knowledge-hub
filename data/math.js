@@ -3,6 +3,8 @@ const mathData = [
     "questionNumber": 1,
     "question": "Some shapes can fold into two halves that match. What do we call the fold line?",
     "hint": "Fold a paper in half. Do the two sides match?",
+    "image": "img/questions/math-symmetry.svg",
+    "imageAlt": "A heart with a dashed line down the middle",
     "answerOptions": [
       { "text": "A line of symmetry", "rationale": "Explanation: Fold on a line of symmetry. The two sides match.", "isCorrect": true },
       { "text": "A parallel line", "rationale": "Explanation: Parallel lines are two lines that never touch.", "isCorrect": false },
@@ -14,6 +16,8 @@ const mathData = [
     "questionNumber": 2,
     "question": "You walk all the way around the edge of a park. What are you measuring?",
     "hint": "You go around the outside. You do not go in the middle.",
+    "image": "img/questions/math-perimeter.svg",
+    "imageAlt": "A path going all the way around the edge of a park",
     "answerOptions": [
       { "text": "The perimeter", "rationale": "Explanation: Perimeter is the length all the way around the outside.", "isCorrect": true },
       { "text": "The area", "rationale": "Explanation: Area is the flat space inside a shape.", "isCorrect": false },
@@ -25,6 +29,8 @@ const mathData = [
     "questionNumber": 3,
     "question": "You want to cover a whole floor with a rug. What are you measuring?",
     "hint": "The rug covers the inside of the floor. It is not just the edge.",
+    "image": "img/questions/math-area.svg",
+    "imageAlt": "A floor covered with squares",
     "answerOptions": [
       { "text": "The area", "rationale": "Explanation: Area is the flat space inside a shape.", "isCorrect": true },
       { "text": "The perimeter", "rationale": "Explanation: Perimeter is only the edge around the outside.", "isCorrect": false },
@@ -36,6 +42,8 @@ const mathData = [
     "questionNumber": 4,
     "question": "A fraction shows part of a whole, like 3/4. What do we call the top number?",
     "hint": "The top number tells how many parts you have.",
+    "image": "img/questions/math-numerator.svg",
+    "imageAlt": "A circle with 3 of 4 parts colored and the fraction 3 over 4",
     "answerOptions": [
       { "text": "The numerator", "rationale": "Explanation: The numerator is the top number. In 3/4, it is 3.", "isCorrect": true },
       { "text": "The denominator", "rationale": "Explanation: The denominator is the bottom number.", "isCorrect": false },
@@ -47,6 +55,8 @@ const mathData = [
     "questionNumber": 5,
     "question": "A fraction shows part of a whole, like 3/4. What do we call the bottom number?",
     "hint": "The bottom number tells how many equal parts make the whole.",
+    "image": "img/questions/math-denominator.svg",
+    "imageAlt": "A circle with 3 of 4 parts colored and the fraction 3 over 4",
     "answerOptions": [
       { "text": "The denominator", "rationale": "Explanation: The denominator is on the bottom. D is for down! In 3/4, it is 4.", "isCorrect": true },
       { "text": "The numerator", "rationale": "Explanation: The numerator is the top number.", "isCorrect": false },
@@ -58,6 +68,8 @@ const mathData = [
     "questionNumber": 6,
     "question": "How many days are in one week?",
     "hint": "Count the days: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday.",
+    "image": "img/questions/math-week.svg",
+    "imageAlt": "The days of the week on a calendar",
     "answerOptions": [
       { "text": "7 days", "rationale": "Explanation: One week has 7 days.", "isCorrect": true },
       { "text": "5 days", "rationale": "Explanation: 5 is just the school days. A full week has 7.", "isCorrect": false },
@@ -91,6 +103,8 @@ const mathData = [
     "questionNumber": 9,
     "question": "How many seconds are in one minute?",
     "hint": "Watch the fast hand on a clock. Count the ticks as it goes all the way around.",
+    "image": "img/questions/math-clock-seconds.svg",
+    "imageAlt": "A clock with a thin red second hand",
     "answerOptions": [
       { "text": "60 seconds", "rationale": "Explanation: One minute has 60 seconds.", "isCorrect": true },
       { "text": "100 seconds", "rationale": "Explanation: Time does not count by 100. It counts by 60.", "isCorrect": false },
@@ -102,6 +116,8 @@ const mathData = [
     "questionNumber": 10,
     "question": "How many minutes are in one hour?",
     "hint": "It is the same number as the seconds in one minute.",
+    "image": "img/questions/math-clock.svg",
+    "imageAlt": "A clock",
     "answerOptions": [
       { "text": "60 minutes", "rationale": "Explanation: One hour has 60 minutes.", "isCorrect": true },
       { "text": "100 minutes", "rationale": "Explanation: Time does not count by 100. It counts by 60.", "isCorrect": false },
@@ -113,6 +129,8 @@ const mathData = [
     "questionNumber": 11,
     "question": "You add two numbers. What is the math word for the answer?",
     "hint": "Look at 5 + 4 = 9. Which word means the answer when you add?",
+    "image": "img/questions/math-sum.svg",
+    "imageAlt": "5 plus 4 equals 9, with the 9 circled",
     "answerOptions": [
       { "text": "The sum", "rationale": "Explanation: When you add, the answer is the sum. 5 + 4 = 9, so 9 is the sum.", "isCorrect": true },
       { "text": "The difference", "rationale": "Explanation: The difference is the answer when you subtract.", "isCorrect": false },
@@ -124,6 +142,8 @@ const mathData = [
     "questionNumber": 12,
     "question": "You subtract one number from another. What is the math word for the answer?",
     "hint": "Look at 9 − 4 = 5. Which word means the answer when you take away?",
+    "image": "img/questions/math-difference.svg",
+    "imageAlt": "9 minus 4 equals 5, with the 5 circled",
     "answerOptions": [
       { "text": "The difference", "rationale": "Explanation: When you subtract, the answer is the difference. 9 − 4 = 5, so 5 is the difference.", "isCorrect": true },
       { "text": "The sum", "rationale": "Explanation: The sum is the answer when you add.", "isCorrect": false },
@@ -135,6 +155,8 @@ const mathData = [
     "questionNumber": 13,
     "question": "You multiply two numbers. What is the math word for the answer?",
     "hint": "Look at 3 × 4 = 12. Which word means the answer when you multiply?",
+    "image": "img/questions/math-product.svg",
+    "imageAlt": "3 times 4 equals 12, with the 12 circled",
     "answerOptions": [
       { "text": "The product", "rationale": "Explanation: When you multiply, the answer is the product. 3 × 4 = 12, so 12 is the product.", "isCorrect": true },
       { "text": "The difference", "rationale": "Explanation: The difference is the answer when you subtract.", "isCorrect": false },
@@ -146,6 +168,8 @@ const mathData = [
     "questionNumber": 14,
     "question": "You divide one number by another. What is the math word for the answer?",
     "hint": "Look at 12 ÷ 3 = 4. Which word means the answer when you divide?",
+    "image": "img/questions/math-quotient.svg",
+    "imageAlt": "12 divided by 3 equals 4, with the 4 circled",
     "answerOptions": [
       { "text": "The quotient", "rationale": "Explanation: When you divide, the answer is the quotient. 12 ÷ 3 = 4, so 4 is the quotient.", "isCorrect": true },
       { "text": "The product", "rationale": "Explanation: The product is the answer when you multiply.", "isCorrect": false },
@@ -168,6 +192,8 @@ const mathData = [
     "questionNumber": 16,
     "question": "How many inches are in one foot?",
     "hint": "Look at a ruler. Count the big numbers on it.",
+    "image": "img/questions/math-ruler.svg",
+    "imageAlt": "A ruler that is 1 foot long",
     "answerOptions": [
       { "text": "12 inches", "rationale": "Explanation: One foot has 12 inches. A ruler is one foot long.", "isCorrect": true },
       { "text": "10 inches", "rationale": "Explanation: A foot is not 10 inches. It is 12 inches.", "isCorrect": false },
@@ -179,6 +205,8 @@ const mathData = [
     "questionNumber": 17,
     "question": "How many feet are in one yard?",
     "hint": "A yardstick is the same as some rulers in a row. Each ruler is 1 foot. How many rulers?",
+    "image": "img/questions/math-yardstick.svg",
+    "imageAlt": "A yardstick above rulers placed end to end",
     "answerOptions": [
       { "text": "3 feet", "rationale": "Explanation: One yard is 3 feet. That is 12 + 12 + 12 = 36 inches.", "isCorrect": true },
       { "text": "12 feet", "rationale": "Explanation: 12 is the inches in a foot, not the feet in a yard.", "isCorrect": false },
@@ -223,6 +251,8 @@ const mathData = [
     "questionNumber": 21,
     "question": "We measure angles in degrees. This angle looks like an L. It is 90 degrees. What is it called?",
     "hint": "Look at the corner of a sheet of paper.",
+    "image": "img/questions/math-angle-right.svg",
+    "imageAlt": "A square corner angle",
     "answerOptions": [
       { "text": "A right angle", "rationale": "Explanation: A right angle is 90 degrees. It is like the corner of a room.", "isCorrect": true },
       { "text": "An acute angle", "rationale": "Explanation: An acute angle is smaller than 90 degrees.", "isCorrect": false },
@@ -234,6 +264,8 @@ const mathData = [
     "questionNumber": 22,
     "question": "An angle is smaller than 90 degrees. What is it called?",
     "hint": "Think of it as a small, cute angle.",
+    "image": "img/questions/math-angle-acute.svg",
+    "imageAlt": "A small, narrow angle",
     "answerOptions": [
       { "text": "An acute angle", "rationale": "Explanation: An acute angle is sharp. It is smaller than 90 degrees.", "isCorrect": true },
       { "text": "An obtuse angle", "rationale": "Explanation: An obtuse angle is bigger than 90 degrees.", "isCorrect": false },
@@ -245,6 +277,8 @@ const mathData = [
     "questionNumber": 23,
     "question": "An angle is wider than a right angle. It is more than 90 degrees. What is it called?",
     "hint": "This angle is wide open, like a book laid back.",
+    "image": "img/questions/math-angle-obtuse.svg",
+    "imageAlt": "A wide-open angle",
     "answerOptions": [
       { "text": "An obtuse angle", "rationale": "Explanation: An obtuse angle is wide. It is more than 90 degrees.", "isCorrect": true },
       { "text": "An acute angle", "rationale": "Explanation: An acute angle is smaller than 90 degrees.", "isCorrect": false },
@@ -256,6 +290,8 @@ const mathData = [
     "questionNumber": 24,
     "question": "Two lines stay the same space apart. They never cross or touch, like train tracks. What are they called?",
     "hint": "Look at the words. Which one has two lines side by side in it, like ll?",
+    "image": "img/questions/math-parallel.svg",
+    "imageAlt": "Two lines side by side, like train tracks",
     "answerOptions": [
       { "text": "Parallel lines", "rationale": "Explanation: Parallel lines go the same way. They never cross.", "isCorrect": true },
       { "text": "Perpendicular lines", "rationale": "Explanation: Perpendicular lines cross. They make a 90-degree angle.", "isCorrect": false },
@@ -267,6 +303,8 @@ const mathData = [
     "questionNumber": 25,
     "question": "Two lines cross. They make a 90-degree right angle. What are they called?",
     "hint": "They make a shape like a + sign or a T.",
+    "image": "img/questions/math-perpendicular.svg",
+    "imageAlt": "Two lines that cross to make a square corner",
     "answerOptions": [
       { "text": "Perpendicular lines", "rationale": "Explanation: Perpendicular lines cross and make four right angles.", "isCorrect": true },
       { "text": "Parallel lines", "rationale": "Explanation: Parallel lines never cross.", "isCorrect": false },
@@ -278,6 +316,8 @@ const mathData = [
     "questionNumber": 26,
     "question": "How many sides does a triangle have?",
     "hint": "Think of a tricycle. How many wheels does it have?",
+    "image": "img/questions/math-triangle.svg",
+    "imageAlt": "A triangle",
     "answerOptions": [
       { "text": "3", "rationale": "Explanation: A triangle has 3 sides and 3 angles.", "isCorrect": true },
       { "text": "4", "rationale": "Explanation: A shape with 4 sides is a quadrilateral.", "isCorrect": false },
@@ -289,6 +329,8 @@ const mathData = [
     "questionNumber": 27,
     "question": "A square has 4 sides. So does a rectangle. What do we call ANY closed shape with 4 sides?",
     "hint": "Quad means four. Look for that word part.",
+    "image": "img/questions/math-quads.svg",
+    "imageAlt": "A square, a rectangle and two other 4-sided shapes",
     "answerOptions": [
       { "text": "A quadrilateral", "rationale": "Explanation: Any closed shape with 4 sides is a quadrilateral.", "isCorrect": true },
       { "text": "A pentagon", "rationale": "Explanation: A pentagon has 5 sides.", "isCorrect": false },
@@ -300,6 +342,8 @@ const mathData = [
     "questionNumber": 28,
     "question": "How many sides does a pentagon have?",
     "hint": "Home plate in baseball is a pentagon. Picture it and count the sides.",
+    "image": "img/questions/math-pentagon.svg",
+    "imageAlt": "A pentagon",
     "answerOptions": [
       { "text": "5", "rationale": "Explanation: A pentagon has 5 sides.", "isCorrect": true },
       { "text": "6", "rationale": "Explanation: A hexagon has 6 sides.", "isCorrect": false },
@@ -311,6 +355,8 @@ const mathData = [
     "questionNumber": 29,
     "question": "How many sides does a hexagon have?",
     "hint": "Hexagon has an X in it. Which number word also has an X?",
+    "image": "img/questions/math-hexagon.svg",
+    "imageAlt": "A hexagon",
     "answerOptions": [
       { "text": "6", "rationale": "Explanation: A hexagon has 6 sides. Six has an X, like hexagon.", "isCorrect": true },
       { "text": "5", "rationale": "Explanation: A pentagon has 5 sides.", "isCorrect": false },
@@ -322,6 +368,8 @@ const mathData = [
     "questionNumber": 30,
     "question": "How many sides does an octagon have?",
     "hint": "Think of an octopus. How many legs does it have?",
+    "image": "img/questions/math-octagon.svg",
+    "imageAlt": "An octagon",
     "answerOptions": [
       { "text": "8", "rationale": "Explanation: An octagon has 8 sides. A stop sign is an octagon.", "isCorrect": true },
       { "text": "6", "rationale": "Explanation: A hexagon has 6 sides.", "isCorrect": false },
@@ -333,6 +381,8 @@ const mathData = [
     "questionNumber": 31,
     "question": "A triangle has ALL three sides the same length. What is it called?",
     "hint": "Listen for a word that sounds like equal.",
+    "image": "img/questions/math-tri-equilateral.svg",
+    "imageAlt": "A triangle with marks showing all 3 sides the same",
     "answerOptions": [
       { "text": "An equilateral triangle", "rationale": "Explanation: An equilateral triangle has all sides equal. All its angles are equal too.", "isCorrect": true },
       { "text": "An isosceles triangle", "rationale": "Explanation: An isosceles triangle has just 2 sides the same.", "isCorrect": false },
@@ -344,6 +394,8 @@ const mathData = [
     "questionNumber": 32,
     "question": "A triangle has exactly TWO sides the same length. What is it called?",
     "hint": "It is not the one with all 3 sides the same. It is not the one with no sides the same.",
+    "image": "img/questions/math-tri-isosceles.svg",
+    "imageAlt": "A triangle with marks showing 2 sides the same",
     "answerOptions": [
       { "text": "An isosceles triangle", "rationale": "Explanation: An isosceles triangle has 2 sides the same length.", "isCorrect": true },
       { "text": "An equilateral triangle", "rationale": "Explanation: An equilateral triangle has all 3 sides the same, not just 2.", "isCorrect": false },
@@ -355,6 +407,8 @@ const mathData = [
     "questionNumber": 33,
     "question": "A triangle has NO sides the same length. What is it called?",
     "hint": "Every side is a different size. Which name is left?",
+    "image": "img/questions/math-tri-scalene.svg",
+    "imageAlt": "A triangle with marks showing every side is different",
     "answerOptions": [
       { "text": "A scalene triangle", "rationale": "Explanation: A scalene triangle has 3 sides that are all different.", "isCorrect": true },
       { "text": "An equilateral triangle", "rationale": "Explanation: An equilateral triangle has all sides the same.", "isCorrect": false },

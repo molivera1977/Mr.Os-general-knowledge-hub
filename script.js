@@ -247,6 +247,7 @@ function loadQuestion() {
     const questionEl = document.getElementById('question-text');
     fillWords(questionEl, q.question);
     addSpeaker(questionEl, 'Read the question to me');
+    showQuestionPicture(q);
 
     fillWords(document.getElementById('hint-text'), q.hint);
     addSpeaker(document.getElementById('hint-text'), 'Read the hint to me');
@@ -312,6 +313,46 @@ function submitAnswer() {
     // The explanation and Next sit under the choices; bring them on screen.
     next.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+
+/* A map or math picture beside the question (data: "image", "imageAlt").
+   Tapping it opens it big; tapping again closes it. */
+function showQuestionPicture(q) {
+    const card = document.querySelector('.question-card');
+    const old = card.querySelector('.q-pic');
+    if (old) old.remove();
+    card.classList.toggle('has-pic', !!q.image);
+    if (!q.image) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'q-pic';
+    btn.title = 'Make the picture bigger';
+    btn.setAttribute('aria-label', `Make the picture bigger: ${q.imageAlt || 'picture'}`);
+    const img = document.createElement('img');
+    img.src = q.image;
+    img.alt = q.imageAlt || '';
+    const zoom = document.createElement('span');
+    zoom.className = 'q-pic-zoom';
+    zoom.setAttribute('aria-hidden', 'true');
+    zoom.textContent = '🔍';
+    btn.append(img, zoom);
+    btn.onclick = () => openPicture(q.image, q.imageAlt);
+    card.appendChild(btn);
+}
+
+function openPicture(src, alt) {
+    const box = document.getElementById('pic-zoom');
+    const img = document.getElementById('pic-zoom-img');
+    img.src = src;
+    img.alt = alt || '';
+    box.hidden = false;
+    document.getElementById('pic-zoom-close').focus();
+}
+
+function closePicture() {
+    document.getElementById('pic-zoom').hidden = true;
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePicture(); });
 
 function showStreak() {
     const badge = document.getElementById('streak');

@@ -1,0 +1,12 @@
+{
+  "name": "gk-question-pictures",
+  "private": true,
+  "description": "Builds img/questions/*.svg. Run: npm install; download the three Natural Earth files (v5.1.2 geojson: ne_110m_admin_0_countries, ne_50m_rivers_lake_centerlines, ne_50m_lakes) into ./ne; node build.mjs ../../img/questions; then from the repo root: node tools/question-pictures/attach.js",
+  "dependencies": {
+    "d3-geo": "3.1.1",
+    "topojson-client": "3.1.0",
+    "topojson-simplify": "3.0.3",
+    "us-atlas": "3.0.1",
+    "world-atlas": "2.0.2"
+  }
+}

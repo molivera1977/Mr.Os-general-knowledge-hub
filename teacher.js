@@ -72,6 +72,13 @@ function renderTeacherReview() {
         const card = el('div', 'teacher-card');
         card.appendChild(el('div', 'teacher-qnum', `Q${q.questionNumber != null ? q.questionNumber : i + 1}`));
         card.appendChild(el('p', 'teacher-question', q.question));
+        if (q.image) {
+            const pic = document.createElement('img');
+            pic.className = 'teacher-pic';
+            pic.src = q.image;
+            pic.alt = q.imageAlt || '';
+            card.appendChild(pic);
+        }
 
         const opts = el('ul', 'teacher-options');
         q.answerOptions.forEach(opt => {
