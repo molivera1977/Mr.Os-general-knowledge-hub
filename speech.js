@@ -12,7 +12,7 @@
  * that never reports still gets a highlight paced by a timer.
  */
 
-const READ_RATE = 0.92;   // rate for a read the student asks for (feedback_tts_voice_per_device)
+const READ_RATE = 0.82;   // rate for a read the student asks for (Marcos 10/26: "I like the 0.82. It's clear and easy to listen to.")
 const PACE_BASE = 0.92;   // the 58 ms-a-letter pacing below was measured at this rate
 
 const FRACTION_NAMES = {
