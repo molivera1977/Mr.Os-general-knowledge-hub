@@ -13,6 +13,25 @@
  */
 
 const READ_RATE = 0.82;   // rate for a read the student asks for (Marcos 10/26: "I like the 0.82. It's clear and easy to listen to.")
+/* THE SAME VOICE AS QPS (Marcos 10/28, on Parts of Speech HQ: "why can't this site talk like QPS" · "the reading
+   speed also sounds different on QPS"; after the fix: "i like the sound and pacing of the read aloud"): every reading
+   asks for English and uses the device's own default English voice, picked the way the QPS Literacy Hub picks it
+   (qps-literacy-hub/readaloud.js). Asking only for "en-US" let the browser choose a different voice, which sounds
+   different at the same 0.82. A device that lists no voices yet still gets English. */
+let _enVoice = null;
+function englishVoice() {
+    if (_enVoice) return _enVoice;
+    const all = (window.speechSynthesis && speechSynthesis.getVoices && speechSynthesis.getVoices()) || [];
+    const isEn = v => /^en([-_]|$)/i.test((v && v.lang) || ''), us = v => /^en[-_]US$/i.test(v.lang || '');
+    _enVoice = all.find(v => v.default && isEn(v)) || all.find(v => us(v) && v.localService) || all.find(us) || all.find(isEn) || null;
+    return _enVoice;                         // null until the device lists its voices (Chrome lists them late): asked again next time
+}
+function english(u) {
+    u.lang = 'en-US';
+    const v = englishVoice();
+    if (v) { try { u.voice = v; } catch (e) { /* a voice the browser won't take: en-US still asks for English */ } }
+    return u;
+}
 const PACE_BASE = 0.92;   // the 58 ms-a-letter pacing below was measured at this rate
 
 const FRACTION_NAMES = {
@@ -100,7 +119,7 @@ const gkSpeech = {
         };
 
         const u = new SpeechSynthesisUtterance(text);
-        u.lang = 'en-US';
+        english(u);
         u.rate = READ_RATE;
         let heard = false;
         u.onboundary = e => {
