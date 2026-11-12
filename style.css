@@ -334,9 +334,26 @@ body {
 .teacher-rationale { font-size: 14px; font-weight: normal; color: #555; margin: 4px 0 0 28px; }
 .teacher-hint { font-size: 14px; color: #8e6c00; background: #fff8e1; border-radius: 8px; padding: 6px 10px; margin: 10px 0 0; }
 
+/* 🖨️ Print (Marcos 11/12: "can we make the printed version fit more then just one question on each page?"): only the
+   answer key, small and tight — its title first, then several questions to a page (a picture sits small at the right),
+   never one cut in two. */
+.key-print-head { display: none; }
 @media print {
-    body { background: #fff; padding: 0; }
-    #app-container { box-shadow: none; max-width: none; padding: 0; }
-    .teacher-actions, .teacher-tabs, .teacher-toggle { display: none; }
-    .teacher-card { border: 1px solid #999; border-left: 4px solid #333; }
+    @page { size: letter; margin: 0.5in; }
+    body { background: #fff; padding: 0; min-height: 0; }
+    #app-container { box-shadow: none; max-width: none; padding: 0; border-radius: 0; }
+    .teacher-toolbar, .teacher-tabs, .teacher-toggle, .teacher-count { display: none; }
+    .key-print-head { display: block; text-align: left; margin: 0 0 8px; padding-bottom: 6px; border-bottom: 2px solid #333; }
+    .key-print-head h1 { margin: 0; font-size: 16pt; line-height: 1.2; color: #000; }
+    .key-print-head p { margin: 3px 0 0; font-size: 10pt; color: #333; }
+    .teacher-card { border: 1px solid #999; border-left: 3px solid #333; border-radius: 6px; padding: 5px 10px; margin: 0 0 6px; overflow: hidden; }
+    .teacher-qnum { float: left; font-size: 8pt; padding: 1px 6px; margin: 2px 6px 0 0; background: #333; }
+    .teacher-question { font-size: 11pt; line-height: 1.3; margin: 0 0 4px; }
+    .teacher-pic { float: right; width: 1.3in; max-height: 1.3in; object-fit: contain; margin: 0 0 4px 10px; padding: 2px; border-radius: 4px; }
+    .teacher-options { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; clear: left; }
+    .teacher-options li, .teacher-options li.wrong { font-size: 10pt; line-height: 1.3; padding: 1px 6px; margin: 0; border: 1px solid transparent; background: none; }
+    .teacher-options li.correct { border: 1px solid #2ecc71; background: none; }
+    .teacher-mark { margin-right: 5px; }
+    .teacher-rationale { font-size: 9pt; line-height: 1.3; margin: 1px 0 0 22px; }
+    .teacher-hint { font-size: 9pt; padding: 2px 6px; margin: 4px 0 0; }
 }

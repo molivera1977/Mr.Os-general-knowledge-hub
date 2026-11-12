@@ -67,6 +67,11 @@ function renderTeacherReview() {
 
     const list = document.getElementById('teacher-questions');
     list.innerHTML = '';
+    // On paper only, first thing: what this is (Marcos 11/4: "every print version should have a title")
+    const head = el('div', 'key-print-head');
+    head.appendChild(el('h1', null, `General Knowledge Hub Answer Key — ${label.replace(/^\S+\s+/, '')}`));
+    head.appendChild(el('p', null, `Mr. O's 4th Grade · ${questions.length} questions · the right answer has a ✅ · students see them in a random order`));
+    list.appendChild(head);
 
     questions.forEach((q, i) => {
         const card = el('div', 'teacher-card');
