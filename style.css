@@ -137,6 +137,7 @@ body {
     padding: 20px; cursor: zoom-out;
 }
 .pic-zoom[hidden] { display: none; }
+#guest-start[hidden] { display: none; }   /* .btn sets a display of its own; only the teacher/admin guest link shows this button */
 .pic-zoom img { max-width: min(92vw, 1000px); max-height: 78vh; width: auto; height: auto; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
 .pic-zoom img[src$=".svg"] { width: min(92vw, 1000px, calc(78vh * 1.6)); }
 .btn-note { margin: 2px 0 0; font-size: 16px; color: #4a5563; }

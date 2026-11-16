@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="style.css?v=gk-print1">
+    <link rel="stylesheet" href="style.css?v=gk-print1-staff1">
 </head>
 <body>
 
@@ -31,6 +31,9 @@
             <button id="resume-btn" class="btn btn-submit" style="width: auto; margin: 0; padding: 10px 20px;" onclick="resumeQuiz()">Resume My Quiz</button>
             <button class="btn btn-ela" style="width: auto; margin: 0; padding: 10px 20px; background: #7f8c8d;" onclick="deleteProgress()">Start Fresh Instead</button>
         </div>
+
+        <!-- the teacher/admin guest link only (share.js shows it, beside its Teacher / admin guest card): the quizzes as a student -->
+        <button type="button" id="guest-start" class="btn btn-submit" hidden data-guest-start onclick="guestPickSubject()">🎒 Student guest</button>
 
         <div class="subject-buttons">
             <button class="btn btn-geo" onclick="confirmStart('geography')">🌍 Geography</button>
@@ -142,7 +145,7 @@
 
 </div>
 
-<script src="share.js?v=3"></script>
+<script src="share.js?v=9"></script>
 <!-- the recorded voice (Ava, Inference Practice's and Math Module 4's): every line the hub can say, made ahead from a harvest
      of speech.js's own readings; kokoro-voice.js plays them in place of the device voice (Marcos 11/15: "Do RAD and the
      General Knowledge Hub tonight"). The list = site-tests gk-kokoro.spec.js (KOKORO_LIST), recorded by
@@ -157,7 +160,7 @@
 <script src="speech.js?v=gk-fresh1-r82-voice1"></script>
 <script src="script.js?v=gk-pics2"></script>
 <script src="saving.js?v=20261013sh2-roster24"></script>
-<script src="teacher.js?v=gk-print1"></script>
+<script src="teacher.js?v=gk-print1-staff1"></script>
 
 </body>
 </html>

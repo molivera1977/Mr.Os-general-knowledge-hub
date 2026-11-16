@@ -15,9 +15,11 @@ const TEACHER_SUBJECTS = [
 let teacherSubject = 'geography';
 
 function openTeacherMode() {
-    const pin = prompt("Teacher PIN:");
-    if (pin === null) return;
-    if (pin !== TEACHER_PIN) { alert("Incorrect PIN."); return; }
+    if (!window.SHARE_TEACHER) {   // the teacher/admin guest link opens it with no PIN (below)
+        const pin = prompt("Teacher PIN:");
+        if (pin === null) return;
+        if (pin !== TEACHER_PIN) { alert("Incorrect PIN."); return; }
+    }
 
     document.getElementById('welcome-screen').style.display = 'none';
     document.getElementById('teacher-screen').style.display = 'block';
@@ -99,3 +101,34 @@ function renderTeacherReview() {
         list.appendChild(card);
     });
 }
+
+/* THE TEACHER/ADMIN GUEST LINK (share.js v9, Marcos 11/16: "do it for GK hub"). It arrives on this page with share.js's
+   two big buttons in place of the four subjects: 🎒 Student guest shows the subjects (the quizzes the way a student takes
+   them, as Guest), 🧑‍🏫 Teacher / admin guest opens Teacher Mode, the answer key, with no PIN; ← Back comes back to the
+   two buttons. The cards' lines are this hub's own (SHARE_CARDS): its Teacher Mode is the answer key, nothing more.
+   The student guest link (?share=mro) and the students' page are unchanged. Nothing is saved or sent (share.js). */
+function studentParts() {
+    return document.querySelectorAll('#welcome-screen .subject-buttons, #welcome-screen [onclick="toggleScores()"]');
+}
+function guestPickSubject() {
+    const row = document.querySelector('.guest-choice');
+    if (row) row.style.display = 'none';
+    studentParts().forEach(el => { el.style.display = ''; });
+}
+(function teacherGuest() {
+    if (!window.SHARE_TEACHER) return;
+    studentParts().forEach(el => { el.style.display = 'none'; });
+    const pinLink = document.querySelector('.btn-teacher-link');
+    if (pinLink) pinLink.style.display = 'none';
+    window.SHARE_OPEN_TEACHER = () => openTeacherMode();
+    window.SHARE_CARDS = {
+        student: [
+            ['\u{1F513}', 'Every quiz open', 'No sign-in. All four subjects.'],
+            ['\u2714\uFE0F', 'The right answer and why', 'After each question, and the score at the end.'],
+            ['\u{1F6E1}\uFE0F', 'Nothing is saved', 'No scores go to Mr. O.']
+        ],
+        teacher: [
+            ['\u2705', 'Answer key', 'All four quizzes, every question: the right answer and why, and the hint. Printable.']
+        ]
+    };
+})();
