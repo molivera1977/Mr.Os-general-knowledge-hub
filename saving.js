@@ -124,6 +124,7 @@ function signIn(name) {
         : name;
     document.getElementById('student-bar').style.display = 'flex';
     displayScores();
+    if (window.GKAssign) GKAssign.signedIn(name);   // 📌 their quizzes from Mr. O (assign.js; it reads this tab's sign-in itself)
 }
 
 function signOut() {
@@ -134,6 +135,7 @@ function signOut() {
     document.getElementById('score-history').style.display = 'none';
     resetLoginForm();
     displayScores();
+    if (window.GKAssign) GKAssign.signedOut();
 }
 
 function resetLoginForm() {

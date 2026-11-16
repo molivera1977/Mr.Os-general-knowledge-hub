@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="style.css?v=gk-print1-staff1">
+    <link rel="stylesheet" href="style.css?v=gk-print1-staff1-assign1">
 </head>
 <body>
 
@@ -24,6 +24,18 @@
             <span>👋 Hi, <strong id="student-name-display"></strong>! Your quizzes are saved for Mr. O.</span>
             <button class="btn-switch" onclick="signOut()">Not you?</button>
         </div>
+
+        <!-- 📌 A quiz from Mr. O (assign.js, Marcos 11/16): in place of the subjects until it is done -->
+        <section id="assign-banner" class="assign-banner" hidden aria-live="polite">
+            <p class="assign-checking">⏳ Checking for work from Mr. O…</p>
+            <div class="assign-body" hidden>
+                <p class="assign-eyebrow">📌 Assignment from Mr. O</p>
+                <div class="assign-quiz"><span class="assign-icon" aria-hidden="true"></span><p class="speak-row assign-what"></p></div>
+                <p class="speak-row assign-goal"></p>
+                <p class="speak-row assign-more"></p>
+                <button type="button" class="btn btn-submit assign-go" onclick="GKAssign.start()">▶️ Start</button>
+            </div>
+        </section>
 
         <!-- Resume Section -->
         <div id="resume-section" style="display: none; background: #f1c40f; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #f39c12;">
@@ -88,6 +100,7 @@
                 </div>
             </div>
             <p id="name-error" class="login-error"></p>
+            <p id="assign-checking-signin" class="assign-checking-signin" hidden>⏳ Checking for work from Mr. O…</p>
             <button class="btn btn-submit" style="width: 100%; font-size: 22px; margin-top: 5px;" onclick="submitName()">
                 ✅ Sign In &amp; Start Quiz!
             </button>
@@ -133,8 +146,12 @@
             <p id="final-score" class="final-score"></p>
             <p id="final-grade" class="final-grade"></p>
         </div>
-        <button class="btn btn-home" onclick="goHome()">📚 Back to the Subjects</button>
-        <p class="btn-note">Pick another quiz. You stay signed in.</p>
+        <!-- a quiz from Mr. O (assign.js): one line about it, and the buttons say where they go -->
+        <div id="assign-result" class="assign-result" hidden>
+            <p class="speak-row assign-result-line"></p>
+        </div>
+        <button id="result-home-btn" class="btn btn-home" onclick="goHome()">📚 Back to the Subjects</button>
+        <p id="result-home-note" class="btn-note">Pick another quiz. You stay signed in.</p>
     </div>
 
     <!-- A question picture, shown big (tap anywhere to close) -->
@@ -158,8 +175,10 @@
 <script src="data/math.js?v=gk-pics1"></script>
 <script src="data/ela.js?v=gk-pics2"></script>
 <script src="speech.js?v=gk-fresh1-r82-voice1"></script>
-<script src="script.js?v=gk-pics2"></script>
-<script src="saving.js?v=20261013sh2-roster24"></script>
+<script src="script.js?v=gk-pics2-assign1"></script>
+<script src="saving.js?v=20261013sh2-roster24-assign1"></script>
+<!-- 📌 quizzes Mr. O assigns from the Teacher Dashboard (11/16): after saving.js (the roster, the sheet, the sign-in) -->
+<script src="assign.js?v=3"></script>
 <script src="teacher.js?v=gk-print1-staff1"></script>
 
 </body>

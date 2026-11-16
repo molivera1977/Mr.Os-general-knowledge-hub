@@ -21,6 +21,7 @@ let selectedOptionObj = null;
 let selectedButton = null;
 let studentName = "";
 
+let assignNow = null;           // 📌 the assignment this quiz is for (assign.js), or null = a quiz they picked
 let answered = false;           // the current question has been checked
 let streak = 0;                 // right answers in a row (for the 🔥 badge)
 
@@ -39,12 +40,23 @@ window.onload = function () {
 
 // --- 1. Student Sign-In (shown after subject is picked) ---
 
-function submitName() {
+async function submitName() {
+    if (GKAssign.busy()) return;               // still checking for work from Mr. O
     if (!attemptLogin()) return;
+    const subject = pendingSubject, who = studentName;
+    // 📌 a quiz from Mr. O comes first: the picked one if it IS that quiz, otherwise its banner
+    const a = await GKAssign.atSignIn();
+    // ← Back or "Not you?" while it checked: they left the sign-in, so nothing starts
+    if (document.getElementById('name-screen').style.display === 'none' || studentName !== who) return;
     document.getElementById('name-screen').style.display = 'none';
+    if (a) {
+        if (a.subject === subject) GKAssign.start();
+        else goHome();
+        return;
+    }
 
     // Now actually start the quiz with the subject that was chosen
-    startQuiz(pendingSubject);
+    startQuiz(subject);
 }
 
 function cancelName() {
@@ -78,7 +90,9 @@ function shuffleArray(array) {
 function checkForProgress() {
     const saved = JSON.parse(localStorage.getItem('savedQuizProgress'));
     const resumeSection = document.getElementById('resume-section');
-    if (saved) {
+    if (GKAssign.locked()) {                   // 📌 a quiz from Mr. O: its banner stands in for this
+        resumeSection.style.display = 'none';
+    } else if (saved) {
         resumeSection.style.display = 'block';
         document.getElementById('resume-btn').innerText = `Resume ${saved.subject} Quiz (Q${saved.index + 1})`;
     } else {
@@ -93,7 +107,8 @@ function saveProgress() {
         index: currentQuestionIndex,
         currentScore: score,
         studentName: studentName,
-        gkSession: gkSession
+        gkSession: gkSession,
+        assign: assignNow
     };
     localStorage.setItem('savedQuizProgress', JSON.stringify(progress));
 }
@@ -117,7 +132,8 @@ function resumeQuiz() {
     currentQuiz = saved.quizArray;
     currentQuestionIndex = saved.index;
     score = saved.currentScore;
-    if (saved.studentName) signIn(saved.studentName);
+    assignNow = saved.assign || null;
+    if (saved.studentName && saved.studentName !== studentName) signIn(saved.studentName);
     gkSession = saved.gkSession ? { ...saved.gkSession, activeSince: null } : null;
     if (!gkSession) gkBeginSession(SUBJECT_KEYS[currentSubjectName]);
     else gkResumeClock();
@@ -175,18 +191,19 @@ function showNameScreen(subject) {
     document.getElementById('welcome-screen').style.display = 'none';
     document.getElementById('name-screen').style.display = 'block';
 
-    // Auto-focus the input
-    setTimeout(() => document.getElementById('student-name-input').focus(), 100);
+    // Auto-focus the name list (11/16: it asked for 'student-name-input', a box the sign-in no longer has — that threw)
+    setTimeout(() => document.getElementById('name-select').focus(), 100);
 }
 
 // --- 4. Core Quiz Engine ---
 
-function startQuiz(subject) {
+function startQuiz(subject, assignment = null) {
     if (!quizData[subject] || quizData[subject].length === 0) {
         alert("Questions not found!");
         return;
     }
 
+    assignNow = assignment;
     currentQuiz = shuffleArray(quizData[subject]);
     currentQuestionIndex = 0;
     score = 0;
@@ -436,6 +453,8 @@ function showResults() {
 
     saveScoreToHistory(percentage, grade);
     gkSubmit(true);
+    GKAssign.afterQuiz(assignNow, percentage);   // 📌 marks a quiz from Mr. O done; the buttons under the score
+    assignNow = null;
 }
 
 // --- 7. Local Score History ---
@@ -488,6 +507,7 @@ function goHome() {
     document.getElementById('welcome-screen').style.display = 'block';
     document.getElementById('score-history').style.display = 'none';
     checkForProgress();
+    GKAssign.renderWelcome();   // 📌 an open quiz from Mr. O: its banner, not the subjects
 }
 
 function deleteProgressSilently() {
