@@ -7,7 +7,7 @@
 
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzv8CWv1yyi8NeH04now9UxVL4IZm5yMqqsEGMcgGdrcAOWVB-aSp5siTvSSJXIUpzFMA/exec';
 const LOGIN_KEY = 'gk_student_v1';
-const PARTIAL_EVERY = 5; // save an in-progress row every 5 answers
+// 📍 Right Now (Marcos 11/20: "Yes, those three"): a row at EVERY question now (it was every 5th answer) — see gkSubmit
 
 const GAME_KEYS = {
     geography: 'gk-geography',
@@ -154,6 +154,7 @@ function gkBeginSession(subjectKey) {
         subject: subjectKey,
         started,
         missed: [],
+        events: [],                                 // every answer, for the dashboard's 📍 Right Now
         answered: 0,
         sent: false,
         activeMs: 0,                                // time on the page only
@@ -209,17 +210,55 @@ function gkRecordAnswer(isCorrect, question, pickedText) {
         const entry = `${qid}${question.question} (picked: ${pickedText})`;
         if (!gkSession.missed.includes(entry)) gkSession.missed.push(entry);
     }
-    if (gkSession.answered % PARTIAL_EVERY === 0) gkSubmit(false);
+    // the box on the dashboard: the same id as the miss ("Q12"); the row goes out as the next question comes up
+    gkLog('answer', { id: question.questionNumber != null ? `Q${question.questionNumber}` : `Q${currentQuestionIndex + 1}`, ok: !!isCorrect });
 }
 
-function gkSubmit(done) {
-    if (!gkSession || gkSession.sent || !studentName || gkSession.answered === 0) return;
+function gkLog(kind, extra) {
+    if (!gkSession) return;
+    if (!gkSession.events) gkSession.events = [];   // a quiz saved before 11/20
+    gkSession.events.push({ at: new Date().toISOString(), e: kind, q: currentQuestionIndex + 1, on: gkActiveSeconds(), ...extra });
+    if (gkSession.events.length > 200) gkSession.events.splice(0, gkSession.events.length - 200);
+}
+
+/* ONE ROW AT A TIME, IN ORDER (copied from vocab-practice's sendRow, 11/13). With a row at every question, a slow
+   in-progress row could land after the finished one and turn "Complete" back into In Progress (the sheet writes over
+   the try's row with no lock). Each row leaves only when the one before it was answered (or after SEND_WAIT_MS); an
+   in-progress row still waiting is replaced by the newer one, and the finished row drops it. A row made as the page
+   closes (pagehide) goes at once, as before: a waiting fetch would never start once the page is gone. */
+const SEND_WAIT_MS = 20000;
+let sheetLine = Promise.resolve();
+let rowWaiting = null;   // an in-progress row made but not sent yet
+function gkSendRow(body, now) {
+    const text = JSON.stringify(body);
+    const post = t => fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', keepalive: true,
+        headers: { 'Content-Type': 'application/json' }, body: t }).catch(() => {});
+    if (now) { if (rowWaiting) { rowWaiting.text = null; rowWaiting = null; } return post(text); }   // the page is closing
+    if (rowWaiting && !body.done) { rowWaiting.text = text; return rowWaiting.sent; }
+    if (rowWaiting) { rowWaiting.text = null; rowWaiting = null; }
+    const row = { text };
+    const go = () => {
+        if (rowWaiting === row) rowWaiting = null;
+        if (row.text == null) return;
+        return post(row.text);
+    };
+    row.sent = sheetLine.then(go);
+    if (!body.done) rowWaiting = row;
+    sheetLine = Promise.race([row.sent, new Promise(r => setTimeout(r, SEND_WAIT_MS))]);
+    return row.sent;
+}
+
+// A row as each question comes up (the first one too, so a student shows on the dashboard the moment they start)
+function gkMarkQuestion() { gkSubmit(false, { marker: true }); }
+
+function gkSubmit(done, opts = {}) {
+    if (!gkSession || gkSession.sent || !studentName) return;
+    if (gkSession.answered === 0 && !opts.marker) return;   // closed before any answer: nothing to save
     if (done) { gkPauseClock(); gkSession.sent = true; }
     const total = currentQuiz.length;
-    fetch(SHEET_URL, {
-        method: 'POST', mode: 'no-cors', keepalive: true,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+    // where the student is now rides at the end of this row's copy of the log (never in gkSession.events)
+    const log = (gkSession.events || []).concat(done ? [] : [{ e: 'on', q: currentQuestionIndex + 1, of: total }]);
+    gkSendRow({
             action:         'submit',
             game:           GAME_KEYS[gkSession.subject],
             sessionId:      gkSession.id,
@@ -233,9 +272,9 @@ function gkSubmit(done) {
             done:           done,
             elapsed:        gkActiveSeconds(),
             tabSwitches:    0,
-            wrongQuestions: gkSession.missed.join(' | ')
-        })
-    }).catch(() => {});
+            wrongQuestions: gkSession.missed.join(' | '),
+            events:         JSON.stringify(log)
+        }, !!opts.now);
 }
 
 // Closing the tab mid-quiz still saves what they did (as in-progress,
@@ -244,7 +283,7 @@ window.addEventListener('pagehide', () => {
     if (!quizIsOpen()) return;
     gkPauseClock();
     gkPersistClock();
-    gkSubmit(false);
+    gkSubmit(false, { now: true });
 });
 
 // ── Stay signed in for this tab ──

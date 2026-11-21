@@ -276,6 +276,7 @@ function loadQuestion() {
         btn.onclick = () => selectOption(option, btn);
         container.appendChild(btn);
     });
+    gkMarkQuestion();   // 📍 Right Now (11/20): a row as each question comes up, with every answer so far (saving.js)
 }
 
 function selectOption(option, btn) {
