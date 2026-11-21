@@ -1,7 +1,7 @@
 /**
  * Mr. O's 4th Grade General Knowledge Hub - Logic Engine
  * Features: Shuffling, TTS Highlighting, Progress Saving, Grading,
- *           Student Sign-In (after subject pick) + saving to Mr. O's
+ *           Student Sign-In (the first screen, 11/20) + saving to Mr. O's
  *           Google Sheet — see saving.js
  */
 
@@ -14,7 +14,6 @@ const quizData = {
 
 let currentQuiz = [];
 let currentSubjectName = "";
-let pendingSubject = "";        // holds the subject chosen before name is entered
 let currentQuestionIndex = 0;
 let score = 0;
 let selectedOptionObj = null;
@@ -38,33 +37,44 @@ window.onload = function () {
     checkForProgress();
 };
 
-// --- 1. Student Sign-In (shown after subject is picked) ---
+// --- 1. Student Sign-In — the FIRST screen (11/20/2026) ---
+// Marcos 11/20: "It showed as assigned on my dashboard but when they logged in nothing popped up" → "shouldn't they
+// have to log in BEFORE they pick a subject". The hub used to open on the subjects and ask for a name after a pick,
+// so the first screen could not show Mr. O's quiz, and the opening page's Resume (this Chromebook's unfinished quiz)
+// signed a kid in from that old quiz and skipped the assignment (a kid finished an old 10/30 Math quiz on 11/20; it
+// did not count). Now: sign in → Mr. O's quiz (the banner) in place of the subjects when one is open, otherwise the
+// subjects; the resume box is only ever the signed-in kid's own unfinished quiz.
 
 async function submitName() {
     if (GKAssign.busy()) return;               // still checking for work from Mr. O
     if (!attemptLogin()) return;
-    const subject = pendingSubject, who = studentName;
-    // 📌 a quiz from Mr. O comes first: the picked one if it IS that quiz, otherwise its banner
-    const a = await GKAssign.atSignIn();
-    // ← Back or "Not you?" while it checked: they left the sign-in, so nothing starts
-    if (document.getElementById('name-screen').style.display === 'none' || studentName !== who) return;
-    document.getElementById('name-screen').style.display = 'none';
-    if (a) {
-        if (a.subject === subject) GKAssign.start();
-        else goHome();
-        return;
-    }
-
-    // Now actually start the quiz with the subject that was chosen
-    startQuiz(subject);
+    await GKAssign.atSignIn();                 // ⏳ Checking for work from Mr. O… (10 s at most)
+    showFirstScreen();                         // signed out meanwhile → the sign-in screen again
 }
 
-function cancelName() {
-    // Back button — return to subject selection without starting
-    document.getElementById('name-screen').style.display = 'none';
-    document.getElementById('welcome-screen').style.display = 'block';
+/* The sign-in screen (nobody signed in on this tab). */
+function showSignIn() {
+    ['welcome-screen', 'quiz-screen', 'result-screen', 'teacher-screen'].forEach(id => { document.getElementById(id).style.display = 'none'; });
+    document.getElementById('name-screen').style.display = 'block';
     resetLoginForm();
-    pendingSubject = "";
+    setTimeout(() => document.getElementById('name-select').focus(), 100);
+}
+
+/* Where the hub starts: the sign-in screen, or — signed in — the subjects (or Mr. O's quiz in their place). */
+function showFirstScreen() {
+    if (!studentName) { showSignIn(); return; }
+    ['name-screen', 'quiz-screen', 'result-screen', 'teacher-screen'].forEach(id => { document.getElementById(id).style.display = 'none'; });
+    document.getElementById('welcome-screen').style.display = 'block';
+    checkForProgress();
+    if (window.GKAssign) GKAssign.renderWelcome();   // 📌 an open quiz from Mr. O: its banner, not the subjects
+}
+
+/* This Chromebook's unfinished quiz (one is kept), if it is the signed-in kid's own; another kid's is never offered. */
+function ownSavedTry() {
+    try {
+        const s = JSON.parse(localStorage.getItem('savedQuizProgress'));
+        return s && studentName && s.studentName === studentName ? s : null;
+    } catch (e) { return null; }
 }
 
 // --- 2. Randomization ---
@@ -88,9 +98,9 @@ function shuffleArray(array) {
 // --- 3. Progress & Resume Logic ---
 
 function checkForProgress() {
-    const saved = JSON.parse(localStorage.getItem('savedQuizProgress'));
+    const saved = ownSavedTry();               // their own only (11/20)
     const resumeSection = document.getElementById('resume-section');
-    if (GKAssign.locked()) {                   // 📌 a quiz from Mr. O: its banner stands in for this
+    if (window.GKAssign && GKAssign.locked()) {   // 📌 a quiz from Mr. O: its banner stands in for this
         resumeSection.style.display = 'none';
     } else if (saved) {
         resumeSection.style.display = 'block';
@@ -125,7 +135,7 @@ function deleteProgress() {
 }
 
 function resumeQuiz() {
-    const saved = JSON.parse(localStorage.getItem('savedQuizProgress'));
+    const saved = ownSavedTry();               // never another kid's quiz, never signing in as them (11/20)
     if (!saved) return;
 
     currentSubjectName = saved.subject;
@@ -133,7 +143,6 @@ function resumeQuiz() {
     currentQuestionIndex = saved.index;
     score = saved.currentScore;
     assignNow = saved.assign || null;
-    if (saved.studentName && saved.studentName !== studentName) signIn(saved.studentName);
     gkSession = saved.gkSession ? { ...saved.gkSession, activeSince: null } : null;
     if (!gkSession) gkBeginSession(SUBJECT_KEYS[currentSubjectName]);
     else gkResumeClock();
@@ -155,7 +164,7 @@ function resumeQuiz() {
 }
 
 function confirmStart(subject) {
-    if (localStorage.getItem('savedQuizProgress')) {
+    if (ownSavedTry()) {                       // their own unfinished quiz (another kid's left here never blocks them)
         const pin = prompt("You have an unfinished quiz! Teacher PIN required to start a new one:");
         if (pin === "9377") {
             localStorage.removeItem('savedQuizProgress');
@@ -169,30 +178,9 @@ function confirmStart(subject) {
 }
 
 function showNameScreen(subject) {
-    // Already signed in this tab — go straight to the quiz
-    if (studentName) {
-        startQuiz(subject);
-        return;
-    }
-    pendingSubject = subject;
-
-    // Update subtitle to show which quiz they picked
-    const labels = {
-        geography: "🌍 Geography Quiz",
-        civics: "🏛️ Civics & Government Quiz",
-        math: "➕ Math Quiz",
-        ela: "📚 Language Arts Quiz"
-    };
-    document.getElementById('name-screen-subtitle').innerText =
-        `You picked: ${labels[subject]} — Sign in so Mr. O can see your score!`;
-
-    resetLoginForm();
-
-    document.getElementById('welcome-screen').style.display = 'none';
-    document.getElementById('name-screen').style.display = 'block';
-
-    // Auto-focus the name list (11/16: it asked for 'student-name-input', a box the sign-in no longer has — that threw)
-    setTimeout(() => document.getElementById('name-select').focus(), 100);
+    // Signed in (the sign-in comes first, 11/20) — the quiz; nobody signed in — the sign-in screen
+    if (studentName) startQuiz(subject);
+    else showSignIn();
 }
 
 // --- 4. Core Quiz Engine ---
@@ -503,11 +491,8 @@ function clearScores() {
 }
 
 function goHome() {
-    document.getElementById('result-screen').style.display = 'none';
-    document.getElementById('welcome-screen').style.display = 'block';
     document.getElementById('score-history').style.display = 'none';
-    checkForProgress();
-    GKAssign.renderWelcome();   // 📌 an open quiz from Mr. O: its banner, not the subjects
+    showFirstScreen();          // the subjects (📌 Mr. O's quiz in their place while one is open) · nobody signed in: the sign-in
 }
 
 function deleteProgressSilently() {

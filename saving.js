@@ -136,6 +136,7 @@ function signOut() {
     resetLoginForm();
     displayScores();
     if (window.GKAssign) GKAssign.signedOut();
+    showSignIn();   // "Not you?" → the sign-in screen (the hub's first screen since 11/20)
 }
 
 function resetLoginForm() {
@@ -256,4 +257,5 @@ window.addEventListener('pagehide', () => {
         signIn('Guest');
         document.querySelectorAll('[onclick="signOut()"]').forEach(el => { el.style.display = 'none'; });
     } else if (saved && known) signIn(saved);
+    showFirstScreen();   // the sign-in screen first (11/20); signed in already on this tab → the subjects
 })();

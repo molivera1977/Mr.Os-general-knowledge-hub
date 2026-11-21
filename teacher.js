@@ -22,6 +22,7 @@ function openTeacherMode() {
     }
 
     document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('name-screen').style.display = 'none';   // it opens from the sign-in screen (11/20)
     document.getElementById('teacher-screen').style.display = 'block';
     renderTeacherTabs();
     renderTeacherReview();
@@ -31,7 +32,7 @@ function openTeacherMode() {
 function closeTeacherMode() {
     window.speechSynthesis.cancel();
     document.getElementById('teacher-screen').style.display = 'none';
-    document.getElementById('welcome-screen').style.display = 'block';
+    showFirstScreen();   // back where it was opened: the sign-in screen, or (signed in · a guest link) the subjects
     window.scrollTo(0, 0);
 }
 
